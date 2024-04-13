@@ -1,13 +1,12 @@
 import React from "react";
 import MyNavbar from "../components/Navbar";
+import { MySidebar } from "../components/SideBar";
+import WrapBar from "../components/WrapBar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      <div className="navbar">
-        <MyNavbar />
-      </div>
-      <div></div>
-    </div>
+    <WrapBar>
+      hello
+    </WrapBar>
   );
 }

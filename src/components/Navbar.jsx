@@ -6,7 +6,7 @@ import { CiSearch } from "react-icons/ci";
 export default function MyNavbar() {
   return (
     <div className=" w-full">
-      <div className="h-24 w-full shadow-md  grid grid-cols-5 items-center justify-center align-baseline">
+      <div className="h-full w-full shadow-md  grid grid-cols-5 items-center justify-center align-baseline">
         <div className=" pl-28 h-full flex gap-1 items-center  select-none col-span-2">
           <img src={Logo} alt="" className=" block h-20" />
           <div className="madimi-one-regular text-3xl text-blue-300">
