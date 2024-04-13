@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../assets/images/books.png";
 import { Button, Input } from "@material-tailwind/react";
-import { CiSearch } from "react-icons/ci";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function MyNavbar() {
   return (
@@ -29,9 +29,9 @@ export default function MyNavbar() {
               size="sm"
               color={true ? "gray" : "blue-gray"}
               disabled={false}
-              className="!absolute right-1 top-[2.8px] rounded flex items-center justify-center bg-blue-300"
+              className="!absolute right-1 top-[3px] rounded flex items-center justify-center bg-blue-300"
             >
-              <CiSearch className=" text-lg text-white " />
+              <MagnifyingGlassIcon className=" text-lg text-white h-4 w-4 " />
             </Button>
           </div>
         </div>

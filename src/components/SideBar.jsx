@@ -1,60 +1,41 @@
 import {
-  Card,
-  Typography,
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
 } from "@material-tailwind/react";
 import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
+  HomeIcon,
+  CalendarDaysIcon,
   Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
+  Squares2X2Icon,
+  BuildingStorefrontIcon,
 } from "@heroicons/react/24/solid";
 
 export function MySidebar() {
   return (
-    <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] pr-4 pl-2">
-      <div className="mb-2 p-4">
-        <Typography variant="h5" color="blue-gray">
-          Sidebar
-        </Typography>
-      </div>
+    <div className=" h-96 w-full max-w-[20rem] pt-5 pr-5 pl-0">
       <List>
         <ListItem>
           <ListItemPrefix>
-            <PresentationChartBarIcon className="h-5 w-5" />
+            <HomeIcon className="h-5 w-5" />
           </ListItemPrefix>
           Home
         </ListItem>
         <ListItem>
           <ListItemPrefix>
-            <ShoppingBagIcon className="h-5 w-5" />
+            <Squares2X2Icon className="h-5 w-5" />
           </ListItemPrefix>
           Explore
         </ListItem>
         <ListItem>
           <ListItemPrefix>
-            <InboxIcon className="h-5 w-5" />
+            <CalendarDaysIcon className="h-5 w-5" />
           </ListItemPrefix>
           Events
-          <ListItemSuffix>
-            <Chip
-              value="14"
-              size="sm"
-              variant="ghost"
-              color="blue-gray"
-              className="rounded-full"
-            />
-          </ListItemSuffix>
         </ListItem>
         <ListItem>
           <ListItemPrefix>
-            <UserCircleIcon className="h-5 w-5" />
+            <BuildingStorefrontIcon className="h-5 w-5" />
           </ListItemPrefix>
           Store
         </ListItem>
@@ -65,6 +46,6 @@ export function MySidebar() {
           Settings
         </ListItem>
       </List>
-    </Card>
+    </div>
   );
 }
