@@ -13,7 +13,7 @@ export default function WrapBar(props) {
           <div className="sidebar w-1/6 h-full">
             <MySidebar />
           </div>
-          <div>{props.children}</div>
+          <div className=" w-5/6 h-full pr-3">{props.children}</div>
         </div>
       </div>
     </div>

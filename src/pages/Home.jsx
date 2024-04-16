@@ -4,9 +4,5 @@ import { MySidebar } from "../components/SideBar";
 import WrapBar from "../components/WrapBar";
 
 export default function Home() {
-  return (
-    <WrapBar>
-      hello
-    </WrapBar>
-  );
+  return <></>;
 }
