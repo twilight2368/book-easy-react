@@ -36,9 +36,9 @@ export default function Explore() {
           </div>
         </div>
         <div className=" col-span-2">
-          <div className=" min-h-96">
-            <List>
-              <h2 className=" m-3 font-black text-xl montserrat-font text-gray-900 ">
+          <div className=" min-h-96 pr-10">
+            <List className="nunito-font">
+              <h2 className=" m-3 font-black text-xl nunito-font text-gray-900 ">
                 Filter:
               </h2>
               <ListItem ripple={false} className="py-1 pr-1 pl-4">
