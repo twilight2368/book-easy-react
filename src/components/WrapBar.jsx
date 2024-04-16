@@ -5,7 +5,7 @@ import { MySidebar } from "./SideBar";
 export default function WrapBar(props) {
   return (
     <div>
-      <div className="min-h-screen">
+      <div className="min-h-screen mb-40">
         <div className="navbar h-24 w-full">
           <MyNavbar />
         </div>

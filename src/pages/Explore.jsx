@@ -6,14 +6,37 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 import React from "react";
+import BookDisplay from "../components/books/BookDisplay";
 
 export default function Explore() {
   return (
     <div>
-      <div className=" w-full grid grid-cols-9">
-        <div className=" col-span-7"> hi </div>
+      <div className=" w-full grid grid-cols-10 mt-6">
+        <div className=" col-span-8 px-10 mt-4">
+          <div className=" w-full h-full grid grid-cols-3 gap-10">
+            <div>
+              <BookDisplay />
+            </div>
+            <div>
+              <BookDisplay />
+            </div>
+            <div>
+              <BookDisplay />
+            </div>
+
+            <div>
+              <BookDisplay />
+            </div>
+            <div>
+              <BookDisplay />
+            </div>
+            <div>
+              <BookDisplay />
+            </div>
+          </div>
+        </div>
         <div className=" col-span-2">
-          <Card className=" min-h-96">
+          <div className=" min-h-96">
             <List>
               <h2 className=" m-3 font-black text-xl montserrat-font text-gray-900 ">
                 Filter:
@@ -49,7 +72,7 @@ export default function Explore() {
                 </ListItemSuffix>
               </ListItem>
             </List>
-          </Card>
+          </div>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ import {
 
 export function MySidebar() {
   return (
-    <div className=" h-96 w-full max-w-[20rem] pt-5 pr-5 pl-0">
+    <div className=" h-96 w-full max-w-[20rem] pt-5 pr-5 pl-5">
       <List>
         <ListItem>
           <ListItemPrefix>
