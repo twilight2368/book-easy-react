@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import WrapBar from "./components/WrapBar";
 import Explore from "./pages/Explore";
+import Event from "./pages/Event";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route path="/" element={<></>} />
             <Route path="/home" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
+            <Route path="/events" element={<Event />} />
           </Routes>
         </WrapBar>
       </BrowserRouter>

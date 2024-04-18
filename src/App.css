@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .montserrat-font{
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
