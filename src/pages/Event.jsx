@@ -1,5 +1,6 @@
 import React from "react";
 import Post from "../components/posts/Post";
+import EventCalendar from "../components/calendar/EventCalendar";
 
 export default function Event() {
   return (
@@ -13,7 +14,9 @@ export default function Event() {
             <Post />
           </div>
         </div>
-        <div className=" col-span-4">1</div>
+        <div className=" col-span-4 flex flex-col items-center ">
+          <EventCalendar />
+        </div>
       </div>
     </div>
   );
