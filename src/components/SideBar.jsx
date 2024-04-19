@@ -13,7 +13,7 @@ import { StarIcon } from "@heroicons/react/24/outline";
 
 export function MySidebar() {
   return (
-    <div className=" h-96 w-full max-w-[20rem] h-full bg-secondary pt-5 pr-5 pl-5">
+    <div className="min-h-96 w-full max-w-[20rem] bg-secondary pt-5 pr-5 pl-5">
       <List>
         <Link to="home">
           <ListItem>

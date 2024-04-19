@@ -5,7 +5,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function MyNavbar() {
   return (
-    <div className=" w-full bg-white">
+    <div className=" w-full bg-white fixed top-0 z-50">
       <div className="h-full w-full shadow-md  grid grid-cols-5 items-center justify-center align-baseline">
         <div className=" pl-28 h-full flex gap-1 items-center  select-none col-span-2">
           <img src={Logo} alt="" className=" block h-20" />

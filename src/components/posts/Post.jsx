@@ -16,7 +16,7 @@ import React from "react";
 export default function Post() {
   return (
     <div>
-      <Card className="w-full min-w-96 min-h-96">
+      <Card className="w-full min-w-96 min-h-96 ">
         <div className=" py-3 px-5 flex gap-2">
           <div className=" flex items-center justify-center">
             <Avatar
@@ -35,7 +35,7 @@ export default function Post() {
             </IconButton>
           </div>
         </div>
-        <div className=" h-20 w-full overflow-y-hidden px-5 text-sm text-pretty mb-3 ">
+        <div className=" h-32 w-full overflow-y-hidden px-5 text-sm text-pretty mb-3 ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quasi,
           sequi odio est neque doloremque a veniam quis facilis? Culpa,
           asperiores facere. Voluptas quia totam similique suscipit! Rem, quos
@@ -44,7 +44,7 @@ export default function Post() {
           corrupti, sunt nobis provident. Natus libero exercitationem, in hic
           eligendi quia ullam repellat!
         </div>
-        <div className=" h-96 w-full px-5 mb-3">
+        <div className=" h-96 w-full px-5 mb-5">
           <img
             className="h-96 w-full rounded-lg object-cover object-center"
             src="https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"

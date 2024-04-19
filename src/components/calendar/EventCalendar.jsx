@@ -6,7 +6,7 @@ export default function EventCalendar() {
   return (
     <div>
       <Calendar
-        className="w-11/12 bg-white text-center nunito-font px-5 pt-3 pb-5  rounded-xl shadow-md"
+        className="w-full bg-white text-center nunito-font px-5 pt-3 pb-5  rounded-xl shadow-md"
         tileClassName={({ date, view }) => {
           // Add a custom class for the current date
           if (date.getDate() === today.getDate() && view === "month") {

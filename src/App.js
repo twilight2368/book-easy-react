@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import WrapBar from "./components/WrapBar";
 import Explore from "./pages/Explore";
 import Event from "./pages/Event";
+import InterestBooks from "./pages/InterestBooks";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/events" element={<Event />} />
+            <Route path="/interest" element={<InterestBooks />} />
           </Routes>
         </WrapBar>
       </BrowserRouter>
