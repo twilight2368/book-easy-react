@@ -5,6 +5,8 @@ import WrapBar from "./components/WrapBar";
 import Explore from "./pages/Explore";
 import Event from "./pages/Event";
 import InterestBooks from "./pages/InterestBooks";
+import BookDetail from "./components/BookDetail";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -12,14 +14,16 @@ function App() {
       <BrowserRouter>
         <WrapBar>
           <Routes>
-            <Route path="/" element={<></>} />
+            <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/events" element={<Event />} />
             <Route path="/interest" element={<InterestBooks />} />
+            <Route path="/book/:id" element={<BookDetail />} />
           </Routes>
         </WrapBar>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }
