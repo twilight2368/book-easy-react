@@ -33,6 +33,10 @@ export default function Home() {
           <h2 className="pl-5 font-black text-2xl">Books</h2>
           <BookListHorizontal />
         </div>
+        <div className="w-full pl-5 mb-5 min-h-full">
+          <h2 className="pl-5 font-black text-2xl">Books</h2>
+          <BookListHorizontal />
+        </div>
       </div>
     </>
   );
