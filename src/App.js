@@ -1,19 +1,30 @@
 import "./App.css";
-import Home from "./pages/Home";
-import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BookDetail from "./components/BookDetail"
+import Home from "./pages/Home";
+
+import WrapBar from "./components/WrapBar";
+import Explore from "./pages/Explore";
+import Event from "./pages/Event";
+import InterestBooks from "./pages/InterestBooks";
+import BookDetail from "./components/BookDetail";
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Routes>
-        <Route path = "/" element = {<Home/>}/>
-        
-        <Route path = "/book/:id" element = {<BookDetail />}/>
-      </Routes>
-      </BrowserRouter>
-      <Footer/>
+        <WrapBar>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/events" element={<Event />} />
+            <Route path="/interest" element={<InterestBooks />} />
+            <Route path="/book/:id" element={<BookDetail />} />
+          </Routes>
+        </WrapBar>
+        </BrowserRouter>
+      <Footer />
     </div>
   );
 }
