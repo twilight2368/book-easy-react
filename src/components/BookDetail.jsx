@@ -12,9 +12,7 @@ return(
   <div>
   <Helmet>
       <title>Details</title>
-  </Helmet>
-  <MyNavbar/>
-  
+  </Helmet>  
   <div className="w-full mx-auto mb-32 mt-16 flex flex-col items-left bg-white rounded-lg border shadow-md md:flex-row md:max-w-5xl hover:bg-gray-100 dark:border-white-700 dark:bg-white-800 dark:hover:bg-gray-700">
       <img className="object-cover w-full h-full rounded-t-lg md:h-full md:w-full md:rounded-none md:rounded-l-lg" src={ Pic } alt="" />
       
