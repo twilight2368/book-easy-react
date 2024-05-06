@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+
 import WrapBar from "./components/WrapBar";
 import Explore from "./pages/Explore";
 import Event from "./pages/Event";
@@ -22,7 +23,7 @@ function App() {
             <Route path="/book/:id" element={<BookDetail />} />
           </Routes>
         </WrapBar>
-      </BrowserRouter>
+        </BrowserRouter>
       <Footer />
     </div>
   );
