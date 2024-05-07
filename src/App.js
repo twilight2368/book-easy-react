@@ -8,6 +8,7 @@ import Event from "./pages/Event";
 import InterestBooks from "./pages/InterestBooks";
 import BookDetail from "./components/BookDetail";
 import Footer from "./components/Footer";
+import MyBooks from "./pages/MyBooks";
 
 function App() {
   return (
@@ -20,11 +21,11 @@ function App() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/events" element={<Event />} />
             <Route path="/interest" element={<InterestBooks />} />
+            <Route path="/mybook/:user" element={<MyBooks />}></Route>
             <Route path="/book/:id" element={<BookDetail />} />
           </Routes>
         </WrapBar>
-        </BrowserRouter>
-      <Footer />
+      </BrowserRouter>
     </div>
   );
 }
