@@ -1,6 +1,7 @@
 import React from "react";
 import Post from "../components/posts/Post";
 import EventCalendar from "../components/calendar/EventCalendar";
+import { AddEventDiag } from "../components/add-event/AddEventDiag";
 
 export default function Event() {
   return (

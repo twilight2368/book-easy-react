@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemPrefix } from "@material-tailwind/react";
+import { List, ListItem, ListItemPrefix, Button } from "@material-tailwind/react";
 import {
   HomeIcon,
   CalendarDaysIcon,
@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import Home from "../pages/Home";
 import { StarIcon } from "@heroicons/react/24/outline";
+import { AddEventDiag } from "./add-event/AddEventDiag";
 
 export function MySidebar() {
   return (
@@ -63,6 +64,10 @@ export function MySidebar() {
             Settings
           </ListItem>
         </Link>
+        <Button className="h-12 bg-blue-500 montserrat-font my-1">
+          Post
+        </Button>
+        <AddEventDiag />
       </List>
     </div>
   );
