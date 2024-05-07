@@ -47,7 +47,7 @@ export function MySidebar() {
             Interest
           </ListItem>
         </Link>
-        <Link to="interest">
+        <Link to="mybook/1">
           <ListItem>
             <ListItemPrefix>
               <BookOpenIcon className="h-5 w-5" />
