@@ -34,7 +34,7 @@ export function AddBookDiag() {
             </div>
             <div>
               <button onClick={handleOpen} className=" flex justify-center items-center">
-                <XMarkIcon className="h-6 w-6 text-gray-500 duration-300 hover:text-red-300" />
+                <XMarkIcon className="h-8 w-8 p-1 rounded-full text-gray-500 duration-300 hover:text-red-800 hover:bg-red-200 active:scale-75" />
               </button>
             </div>
           </div>
@@ -90,7 +90,7 @@ export function AddBookDiag() {
               className=" flex justify-center items-center"
               required
             />
-            <Button variant="gradient" color="blue" onClick={handleOpen}>
+            <Button variant="gradient" color="blue" onClick={handleOpen} className=" mt-3">
               Confirm
             </Button>
           </CardBody>

@@ -10,7 +10,7 @@ export default function MyBooks() {
         <div className=" w-full text-center">
           <h2 className=" text-2xl font-bold mb-3">My books</h2>
         </div>
-        <div className=" w-full h-16 mb-3 flex flex-row ">
+        <div className=" w-full h-16 mb-5 flex flex-row ">
           <div className=" flex flex-row items-center w-10/12">
             <Checkbox
               defaultChecked
