@@ -1,10 +1,7 @@
 import React from "react";
-import "../App.css";
 import Pic from "./2767052.jpg";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
-import MyNavbar from "./Navbar";
-import { Button } from "@material-tailwind/react";
 
 const BookDetail = () => {
   return (
