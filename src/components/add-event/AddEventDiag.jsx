@@ -8,20 +8,21 @@ import {
   Typography,
   Input,
   Textarea,
-  Popover,
-  PopoverHandler,
-  PopoverContent
 } from "@material-tailwind/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
 export function AddEventDiag() {
   const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState()
   const handleOpen = () => setOpen((cur) => !cur);
 
   return (
     <>
-      <Button onClick={handleOpen} className="h-12 bg-blue-500 montserrat-font my-1">
-        Add event
+      <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
+        <div className="flex justify-center items-center">
+          <PlusIcon className="h-5 w-5 mr-2"/>
+          <div className="font-black">
+            Create new event
+          </div>
+        </div>
       </Button>
       <Dialog
         size="xl"

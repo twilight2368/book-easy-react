@@ -3,6 +3,8 @@ import {
   HandThumbUpIcon,
   HeartIcon,
   StarIcon,
+  PencilIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 import {
   Avatar,
@@ -10,6 +12,10 @@ import {
   Card,
   CardHeader,
   IconButton,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
 } from "@material-tailwind/react";
 import React from "react";
 
@@ -29,11 +35,25 @@ export default function Post() {
             <div className=" font-bold text-black">@user_name</div>
             <div className=" text-xs ">1 hour ago</div>
           </div>
-          <div className="flex justify-center items-center ">
-            <IconButton className=" h-10 w-10 " variant="text">
-              <EllipsisVerticalIcon className=" h-5 w-5 text-gray-500 " />
-            </IconButton>
-          </div>
+          <Menu>
+            <MenuHandler>
+              <div className="flex justify-center items-center ">
+                <IconButton className=" h-10 w-10 " variant="text">
+                  <EllipsisVerticalIcon className=" h-5 w-5 text-gray-500 " />
+                </IconButton>
+              </div>
+            </MenuHandler>
+            <MenuList>
+              <MenuItem className="flex items-center">
+                <PencilIcon className="h-4 w-4 mr-2"/>
+                Edit
+              </MenuItem>
+              <MenuItem className="flex items-center">
+                <TrashIcon className="h-4 w-4 mr-2"/>
+                Delete
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </div>
         <div className=" h-32 w-full overflow-y-hidden px-5 text-sm text-pretty mb-3 ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quasi,

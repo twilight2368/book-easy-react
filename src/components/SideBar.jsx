@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom";
 import Home from "../pages/Home";
 import { StarIcon } from "@heroicons/react/24/outline";
-import { AddEventDiag } from "./add-event/AddEventDiag";
 
 export function MySidebar() {
   return (
@@ -67,7 +66,6 @@ export function MySidebar() {
         <Button className="h-12 bg-blue-500 montserrat-font my-1">
           Post
         </Button>
-        <AddEventDiag />
       </List>
     </div>
   );
