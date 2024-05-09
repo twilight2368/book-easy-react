@@ -1,10 +1,8 @@
 import React from "react";
-import "../App.css"
+
 import Pic from "./2767052.jpg"
 import Helmet from 'react-helmet'
 import {Link} from 'react-router-dom'
-import MyNavbar from "./Navbar";
-import { Button} from "@material-tailwind/react";
 
 const BookDetail = () =>{
 
@@ -13,9 +11,8 @@ return(
   <Helmet>
       <title>Details</title>
   </Helmet>
-  <MyNavbar/>
   
-  <div className="w-full mx-auto mb-32 mt-16 flex flex-col items-left bg-white rounded-lg border shadow-md md:flex-row md:max-w-5xl hover:bg-gray-100 dark:border-white-700 dark:bg-white-800 dark:hover:bg-gray-700">
+  <div className="w-full mx-auto mb-32 mt-16 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-5xl hover:bg-gray-100 dark:border-white-700 dark:bg-white-800 dark:hover:bg-gray-700">
       <img className="object-cover w-full h-full rounded-t-lg md:h-full md:w-full md:rounded-none md:rounded-l-lg" src={ Pic } alt="" />
       
       <div className="px-10 pb-10">
