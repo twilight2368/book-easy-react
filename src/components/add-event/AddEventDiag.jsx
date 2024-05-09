@@ -13,8 +13,6 @@ import {
   PopoverContent
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { TimePicker } from "react-time-picker";
-import { format } from "date-fns";
 export function AddEventDiag() {
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState()
