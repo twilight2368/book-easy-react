@@ -1,0 +1,45 @@
+.book-display:hover .book-name-display {
+  @apply h-1/6;
+}
+
+.book-name-display {
+  @apply h-0;
+  @apply duration-300;
+}
+
+.star-icon-display {
+  @apply opacity-0;
+  @apply duration-300;
+}
+
+.book-display:hover .star-icon-display {
+  @apply opacity-100;
+}
+
+.star-icon {
+  @apply duration-200;
+}
+
+.star-icon-display:hover .star-icon {
+  @apply fill-blue-300;
+  @apply text-blue-300;
+  @apply scale-125;
+}
+
+.trash-icon-display {
+  @apply opacity-0;
+  @apply duration-300;
+}
+
+.book-display:hover .trash-icon-display {
+  @apply opacity-100;
+}
+
+.trash-icon {
+  @apply duration-200;
+}
+
+.trash-icon-display:hover .trash-icon {
+  @apply text-red-400;
+  @apply scale-110;
+}
