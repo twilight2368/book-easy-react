@@ -14,7 +14,7 @@ export default function Event() {
             <Post />
           </div>
         </div>
-        <div className=" col-span-3 flex flex-col items-center pr-16 ">
+        <div className="col-span-3 flex flex-col items-center pr-16 ">
           <EventCalendar />
         </div>
       </div>
