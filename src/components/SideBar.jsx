@@ -63,9 +63,6 @@ export function MySidebar() {
             Settings
           </ListItem>
         </Link>
-        <Button className="h-12 bg-blue-500 montserrat-font my-1">
-          Post
-        </Button>
       </List>
     </div>
   );

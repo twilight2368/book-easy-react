@@ -5,10 +5,10 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function MyNavbar() {
   return (
-    <div className=" w-full bg-white fixed top-0 z-50 h-24">
+    <div className=" w-full bg-white fixed top-0 z-50 h-20">
       <div className="h-full w-full shadow-md  grid grid-cols-5 items-center justify-center align-baseline">
         <div className=" pl-28 h-full flex gap-1 items-center  select-none col-span-2">
-          <img src={Logo} alt="" className=" block h-20" />
+          <img src={Logo} alt="" className=" block h-12" />
           <div className="madimi-one-regular text-3xl text-blue-300">
             Book Exchange
           </div>

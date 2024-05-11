@@ -4,11 +4,12 @@ import Home from "./pages/Home";
 
 import WrapBar from "./components/WrapBar";
 import Explore from "./pages/Explore";
-import Event from "./pages/Event";
+import Events from "./pages/Events";
 import InterestBooks from "./pages/InterestBooks";
 import BookDetail from "./components/BookDetail";
 import Footer from "./components/Footer";
 import MyBooks from "./pages/MyBooks";
+import EventDetails from "./pages/EventDetails";
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
-            <Route path="/events" element={<Event />} />
+            <Route path="/events" element={<Events />} />
             <Route path="/interest" element={<InterestBooks />} />
             <Route path="/mybook/:user" element={<MyBooks />}></Route>
             <Route path="/book/:id" element={<BookDetail />} />
+            <Route path="/event/:id" element={<EventDetails />} />
           </Routes>
         </WrapBar>
       </BrowserRouter>

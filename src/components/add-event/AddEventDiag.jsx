@@ -51,36 +51,56 @@ export function AddEventDiag() {
             <div className=" flex gap-2 w-full">
               <div className=" h-full w-full">
                 <Typography className="mb-2" variant="h6">
-                  Date
+                  Start date
                 </Typography>
                 <input
                   type="date"
-                  name="date"
-                  id="date"
+                  name="startDate"
+                  id="startDate"
                   className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
                 />
               </div>
               <div className=" h-full w-full">
                 <Typography className="mb-2" variant="h6">
-                  Time
+                  Start time
                 </Typography>
                 <input
                   type="time"
-                  name="time"
-                  id="time"
+                  name="startTime"
+                  id="startTime"
+                  className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
+                />
+              </div>
+            </div>
+            <div className=" flex gap-2 w-full">
+              <div className=" h-full w-full">
+                <Typography className="mb-2" variant="h6">
+                  End date
+                </Typography>
+                <input
+                  type="date"
+                  name="endDate"
+                  id="endDate"
+                  className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
+                />
+              </div>
+              <div className=" h-full w-full">
+                <Typography className="mb-2" variant="h6">
+                  End time
+                </Typography>
+                <input
+                  type="time"
+                  name="endTime"
+                  id="endTime"
                   className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
                 />
               </div>
             </div>
             <Typography className="-mb-2" variant="h6">
-              Location
+              Description
             </Typography>
-            <Input label="Location" size="lg" required />
-            <Typography className="-mb-2" variant="h6">
-              Details
-            </Typography>
-            <Textarea label="Details" />
-            <Typography className="-mb-2" variant="h6">
+            <Textarea label="Description" />
+            {/* <Typography className="-mb-2" variant="h6">
               Cover image
             </Typography>
             <Input
@@ -90,7 +110,7 @@ export function AddEventDiag() {
               accept="image/png, image/jpeg"
               className=" flex justify-center items-center"
               required
-            />
+            /> */}
             <Button variant="gradient" color="blue" onClick={handleOpen}>
               Create event
             </Button>
