@@ -15,23 +15,36 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          
           <Route path="/login" element={<LoginSignup />} />
+          <Route path="/" element={<WrapBarLayout />}>
+            <Route index element={<Home />} />
+            <Route path="home" element={<Home />} />
+            <Route path="explore" element={<Explore />} />
+            <Route path="events" element={<Event />} />
+            <Route path="interest" element={<InterestBooks />} />
+            <Route path="mybook/:user" element={<MyBooks />} />
+            <Route path="book/:id" element={<BookDetail />} />
+          </Route>
         </Routes>
-
-        <WrapBar>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/events" element={<Event />} />
-            <Route path="/interest" element={<InterestBooks />} />
-            <Route path="/mybook/:user" element={<MyBooks />}></Route>
-            <Route path="/book/:id" element={<BookDetail />} />
-            <Route path="/setting" element={<SettingPage />} />
-          </Routes>
-        </WrapBar>
       </BrowserRouter>
     </div>
+  );
+}
+
+function WrapBarLayout() {
+  return (
+    <WrapBar>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/events" element={<Event />} />
+        <Route path="/interest" element={<InterestBooks />} />
+        <Route path="/mybook/:user" element={<MyBooks />} />
+        <Route path="/book/:id" element={<BookDetail />} />
+      </Routes>
+    </WrapBar>
   );
 }
 
