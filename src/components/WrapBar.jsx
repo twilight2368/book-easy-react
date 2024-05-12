@@ -14,7 +14,7 @@ export default function WrapBar(props) {
           <div className="sidebar fixed w-1/6 h-full bg-secondary">
             <MySidebar />
           </div>
-          <div className=" w-1/6 h-full bg-secondary"></div>
+          <div className=" w-1/6 h-screen bg-secondary"></div>
           <div className=" w-5/6 pl-3  pr-3 pt-5 bg-secondary">
             <div className=" min-h-screen mb-40">{props.children}</div>
             <div>
