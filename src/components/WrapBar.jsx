@@ -7,7 +7,7 @@ export default function WrapBar(props) {
   return (
     <div>
       <div className="min-h-screen bg-secondary">
-        <div className="navbar h-24 w-full bg-secondary">
+        <div className="navbar h-20 w-full bg-secondary">
           <MyNavbar />
         </div>
         <div className=" flex flex-cols w-full wrapbar-height overflow-y-auto ">
