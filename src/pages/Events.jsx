@@ -31,11 +31,11 @@ export default function Events() {
             <Post />
           </div>
         </div>
-        <div className=" sticky col-span-3 w-full flex flex-col items center">
+        <div className=" sticky col-span-3 w-full flex flex-col gap-4">
           <div className=" relative col-span-3 flex flex-col items-center pr-16 ">
             <EventCalendar />
           </div>
-          <div className=" relative -left-12 w-full flex items-center mt-4">
+          <div className=" relative -left-12 w-full flex items-center">
             <Button
               className={filter === 1 ? "mr-2 bg-white text-blue-500 shadow-none" : " mr-2 bg-blue-500"}
               onClick={() => setFilter(1)}
@@ -55,7 +55,7 @@ export default function Events() {
               My events
             </Button>
           </div>
-          <div className=" relative -left-12 w-[396px] mt-4">
+          <div className=" relative -left-12 w-[396px]">
             <EventList />
           </div>
         </div>

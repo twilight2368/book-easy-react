@@ -1,11 +1,14 @@
 import { StarIcon } from '@heroicons/react/24/outline'
 import { Button, Card } from '@material-tailwind/react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const EventListEvent = () => {
+  const id = 1;
+
   return (
-    <div>
-      <Card className=" w-full h-36 flex flex-row items-center gap-2 p-4 my-2">
+    <Link to={`/events/${id}`}>
+      <Card className=" w-full h-36 flex flex-row items-center gap-2 p-4 mb-2 duration-150 hover:bg-black/5">
         <div className=" w-36 h-full">
           <div className=" w-full h-full rounded-md overflow-hidden">
             <img
@@ -26,7 +29,7 @@ const EventListEvent = () => {
           </Button>
         </div>
       </Card>
-    </div>
+    </Link>
   )
 }
 
