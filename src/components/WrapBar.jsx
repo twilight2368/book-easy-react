@@ -3,6 +3,7 @@ import MyNavbar from "./Navbar";
 import { MySidebar } from "./SideBar";
 import "./wrapbar.css";
 import Footer from "./Footer";
+import ChatMain from "./chat/ChatMain";
 export default function WrapBar(props) {
   return (
     <div>
@@ -23,6 +24,7 @@ export default function WrapBar(props) {
           </div>
         </div>
       </div>
+      <ChatMain/>
     </div>
   );
 }

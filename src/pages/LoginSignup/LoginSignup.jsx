@@ -10,7 +10,7 @@ const LoginSignup = () => {
     setAction('');
   };
   return (
-  <div className='w-full h-screen grid lg:grid-cols-1 sm:grid-cols-2 bg-gradient-to-r from-cyan-500 to-blue-500 p-7'>
+  <div className='w-full h-screen grid lg:grid-cols-1 sm:grid-cols-2 bg-gradient-to-r from-cyan-500 to-blue-500 p-7 absolute z-50'>
     <div className={`wrapper${action}`}>
 
       <div className="form-box login">

@@ -1,0 +1,14 @@
+.information{
+    @apply text-blue-300;
+}
+.success{
+    @apply text-green-300;
+}
+
+.error{
+    @apply text-red-300
+}
+
+.warning{
+    @apply text-orange-300
+}
