@@ -8,16 +8,14 @@ import Event from "./pages/Event";
 import InterestBooks from "./pages/InterestBooks";
 import MyBooks from "./pages/MyBooks";
 import BookDetail from "./pages/BookDetail/BookDetail";
+import SettingPage from "./pages/setting-user/SettingPage";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          
           <Route path="/login" element={<LoginSignup />} />
-
-          
           <Route path="/" element={<WrapBarLayout />}>
             <Route index element={<Home />} />
             <Route path="home" element={<Home />} />
@@ -26,6 +24,7 @@ function App() {
             <Route path="interest" element={<InterestBooks />} />
             <Route path="mybook/:user" element={<MyBooks />} />
             <Route path="book/:id" element={<BookDetail />} />
+            <Route path="setting" element={<SettingPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

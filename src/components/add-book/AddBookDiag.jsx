@@ -88,7 +88,6 @@ export function AddBookDiag() {
               type="file"
               accept="image/png, image/jpeg"
               className=" flex justify-center items-center"
-              required
             />
             <Button variant="gradient" color="blue" onClick={handleOpen} className=" mt-3">
               Confirm

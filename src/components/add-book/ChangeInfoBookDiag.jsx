@@ -93,7 +93,6 @@ export function ChangeBookInfoDiag(props) {
               type="file"
               accept="image/png, image/jpeg"
               className=" flex justify-center items-center"
-              required
             />
             <Button
               variant="gradient"
