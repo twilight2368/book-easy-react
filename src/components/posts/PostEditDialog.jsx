@@ -15,7 +15,7 @@ const PostEditDialog = (props) => {
         <div className=" flex flex-row items-center">
           <div className=" w-11/12">
             <Typography variant="h4" color="blue-gray" className="ml-5">
-              Edit event
+              Edit post
             </Typography>
           </div>
           <div>
@@ -24,54 +24,15 @@ const PostEditDialog = (props) => {
             </button>
           </div>
         </div>
-        <CardBody className="flex flex-col gap-4 max-h-[500px] mb-4 overflow-y-auto scroll-smooth">
+        <CardBody className="flex flex-col gap-4 max-h-[500px] overflow-y-auto scroll-smooth">
           <Typography className="-mb-2" variant="h6">
-            Name
+            Title
           </Typography>
-          <Input label="Name" size="lg" required />
-          <div className=" flex gap-2 w-full">
-            <div className=" h-full w-full">
-              <Typography className="mb-2" variant="h6">
-                Date
-              </Typography>
-              <input
-                type="date"
-                name="date"
-                id="date"
-                className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
-              />
-            </div>
-            <div className=" h-full w-full">
-              <Typography className="mb-2" variant="h6">
-                Time
-              </Typography>
-              <input
-                type="time"
-                name="time"
-                id="time"
-                className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
-              />
-            </div>
-          </div>
+          <Input label="Title" size="lg" required />
           <Typography className="-mb-2" variant="h6">
-            Location
+            Content
           </Typography>
-          <Input label="Location" size="lg" required />
-          <Typography className="-mb-2" variant="h6">
-            Details
-          </Typography>
-          <Textarea label="Details" />
-          <Typography className="-mb-2" variant="h6">
-            Cover image
-          </Typography>
-          <Input
-            label="Image"
-            size="lg"
-            type="file"
-            accept="image/png, image/jpeg"
-            className=" flex justify-center items-center"
-            required
-          />
+          <Textarea label="Content "/>
           <Button variant="gradient" color="blue" onClick={handleOpen}>
             Finish
           </Button>

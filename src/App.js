@@ -24,7 +24,7 @@ function App() {
             <Route path="/interest" element={<InterestBooks />} />
             <Route path="/mybook/:user" element={<MyBooks />}></Route>
             <Route path="/book/:id" element={<BookDetail />} />
-            <Route path="/event/:id" element={<EventDetails />} />
+            <Route path="/events/:id" element={<EventDetails />} />
           </Routes>
         </WrapBar>
       </BrowserRouter>

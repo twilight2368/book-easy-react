@@ -1,7 +1,7 @@
 import { Button, Card, CardBody, Dialog, Typography } from '@material-tailwind/react'
 import React from 'react'
 
-const PostDeleteDialog = (props) => {
+const EventDeleteDialog = (props) => {
   console.log(props);
   const { open, handleOpen } = props;
   return (
@@ -15,11 +15,11 @@ const PostDeleteDialog = (props) => {
         <div className=" flex flex-row items-center">
           <div className=" w-11/12">
             <Typography variant="h4" color="blue-gray" className="ml-5">
-              Delete post?
+              Delete event?
             </Typography>
             <Typography variant="p" color="blue-gray" className="ml-5 mt-2">
               This action cannot be undone.
-              The post will be removed permanently and will no longer be visible to other users.
+              The event will be removed permanently and will no longer be visible to other users.
             </Typography>
           </div>
         </div>
@@ -36,4 +36,4 @@ const PostDeleteDialog = (props) => {
   )
 }
 
-export default PostDeleteDialog
+export default EventDeleteDialog

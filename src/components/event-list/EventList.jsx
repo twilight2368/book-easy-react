@@ -3,7 +3,7 @@ import EventListEvent from './EventListEvent'
 
 const EventList = () => {
   return (
-    <div className=" w-full flex flex-col">
+    <div className="  min-w-[396px] flex flex-col">
       <EventListEvent />
       <EventListEvent />
       <EventListEvent />

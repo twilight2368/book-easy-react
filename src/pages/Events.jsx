@@ -2,7 +2,7 @@ import React from "react";
 import Post from "../components/posts/Post";
 import EventCalendar from "../components/calendar/EventCalendar";
 import { AddEventDiag } from "../components/add-event/AddEventDiag";
-import { Button, Card } from "@material-tailwind/react";
+import { Avatar, Button, Card } from "@material-tailwind/react";
 import EventList from "../components/event-list/EventList";
 
 export default function Events() {
@@ -12,13 +12,15 @@ export default function Events() {
     <div>
       <div className=" w-full h-full grid grid-cols-9 ">
         <div className=" col-span-6 flex flex-col items-center gap-4">
-          <Card className="w-2/3 flex flex-row items-center min-w-96 ">
-            <div className=" w-full py-3 px-5">
-              <Button className=" w-full h-12 bg-blue-500 montserrat-font my-1">
-                Post
-              </Button>
+          <Card className="w-2/3 min-w-96 flex flex-row items-center gap-2 py-3 px-5">
+            <div className=" flex items-center justify-center">
+              <Avatar
+                className=" h-10 w-10"
+                src="https://docs.material-tailwind.com/img/face-2.jpg"
+                alt="avatar"
+              />
             </div>
-            <div className=" w-full py-3 px-5">
+            <div className=" w-full">
               <AddEventDiag />
             </div>
           </Card>
