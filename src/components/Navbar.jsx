@@ -19,7 +19,7 @@ import NotifyMenu from "./notification-menu/NotifyMenu";
 
 export default function MyNavbar() {
   return (
-    <div className=" w-full bg-white fixed top-0 z-50 h-20">
+    <div className=" w-full bg-white fixed top-0 z-20 h-20">
       <div className="h-full w-full shadow-md  grid grid-cols-5 items-center justify-center align-baseline">
         <div className=" pl-20 h-full flex gap-1 items-center  select-none col-span-2">
           <img src={Logo} alt="" className=" block h-14" />

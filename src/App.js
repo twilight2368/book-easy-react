@@ -16,7 +16,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginSignup />} />
-          <Route path="/" element={<WrapBarLayout />}>
+        </Routes>
+        <WrapBar>
+          <Routes>
             <Route index element={<Home />} />
             <Route path="home" element={<Home />} />
             <Route path="explore" element={<Explore />} />
@@ -25,27 +27,10 @@ function App() {
             <Route path="mybook/:user" element={<MyBooks />} />
             <Route path="book/:id" element={<BookDetail />} />
             <Route path="setting" element={<SettingPage />} />
-          </Route>
-        </Routes>
+          </Routes>
+        </WrapBar>
       </BrowserRouter>
     </div>
   );
 }
-
-function WrapBarLayout() {
-  return (
-    <WrapBar>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/events" element={<Event />} />
-        <Route path="/interest" element={<InterestBooks />} />
-        <Route path="/mybook/:user" element={<MyBooks />} />
-        <Route path="/book/:id" element={<BookDetail />} />
-      </Routes>
-    </WrapBar>
-  );
-}
-
 export default App;
