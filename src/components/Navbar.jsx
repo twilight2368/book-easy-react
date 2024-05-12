@@ -1,6 +1,13 @@
 import React from "react";
 import Logo from "../assets/images/books.png";
-import { Button, Input, Badge } from "@material-tailwind/react";
+import {
+  Button,
+  Input,
+  Badge,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+} from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   ChatBubbleOvalLeftEllipsisIcon,
@@ -8,6 +15,7 @@ import {
 } from "@heroicons/react/24/solid";
 
 import ProfileMenu from "./profile-menu/ProfileMenu";
+import NotifyMenu from "./notification-menu/NotifyMenu";
 
 export default function MyNavbar() {
   return (
@@ -63,16 +71,9 @@ export default function MyNavbar() {
             </>
           ) : (
             <>
-              <div className=" pl-32 pr-8 grid grid-cols-3 gap-3 items-center">
+              <div className=" pl-36 pr-4 grid grid-cols-3 gap-3 items-center">
                 <div className="flex justify-center items-center ">
-                  <Badge color="red">
-                    <Button
-                      variant="text"
-                      className="h-10 w-10 rounded-full bg-blue-gray-100/30 flex justify-center items-center p-1"
-                    >
-                      <BellIcon className=" h-10 w-10 text-blue-300 rounded-full p-0.5" />
-                    </Button>
-                  </Badge>
+                  <NotifyMenu />
                 </div>
                 <div className="flex justify-center items-center ">
                   <Badge color="red">
