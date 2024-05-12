@@ -3,6 +3,8 @@ import BookCover from "./book-cover.jpg";
 import "./bookdisplay.css";
 import { IconButton } from "@material-tailwind/react";
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { ChangeBookInfoDiag } from "../add-book/ChangeInfoBookDiag";
+import { DelBookDiag } from "../add-book/DelBookDiag";
 
 export default function MyBookDisplay(props) {
   return (
@@ -15,14 +17,14 @@ export default function MyBookDisplay(props) {
         <div className=" nunito-font text-xs mb-0.5">Frank Herbert</div>
       </div>
       <div className=" absolute top-2 right-2 trash-icon-display">
-        <IconButton className="bg-black/0">
+        <DelBookDiag>
           <TrashIcon className="h-5 w-5 text-gray-500 trash-icon" />
-        </IconButton>
+        </DelBookDiag>
       </div>
       <div className=" absolute top-2 left-2 pen-icon-display">
-        <IconButton className=" bg-white/0" variant="text">
+        <ChangeBookInfoDiag>
           <PencilSquareIcon className="h-5 w-5 text-gray-500 pen-icon" />
-        </IconButton>
+        </ChangeBookInfoDiag>
       </div>
       {props.borrowed ? (
         <>
