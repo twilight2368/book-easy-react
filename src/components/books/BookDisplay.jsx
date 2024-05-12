@@ -4,7 +4,7 @@ import "./bookdisplay.css";
 import { IconButton } from "@material-tailwind/react";
 import { StarIcon } from "@heroicons/react/24/outline";
 
-export default function BookDisplay() {
+export default function BookDisplay(props) {
   return (
     <div className=" relative w-11/12 h-full duration-300 hover:scale-105 book-display overflow-hidden rounded-md">
       <img src={BookCover} alt="" className=" object-fill h-full w-full" />

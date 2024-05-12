@@ -8,15 +8,16 @@ import Event from "./pages/Event";
 import InterestBooks from "./pages/InterestBooks";
 import MyBooks from "./pages/MyBooks";
 import BookDetail from "./pages/BookDetail/BookDetail";
+import SettingPage from "./pages/setting-user/SettingPage";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Routes>
-        <Route path = "/login" element = {<LoginSignup/>}/>
-      </Routes>
-      
+        <Routes>
+          <Route path="/login" element={<LoginSignup />} />
+        </Routes>
+
         <WrapBar>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -25,7 +26,8 @@ function App() {
             <Route path="/events" element={<Event />} />
             <Route path="/interest" element={<InterestBooks />} />
             <Route path="/mybook/:user" element={<MyBooks />}></Route>
-            <Route path="/book/:id" element={<BookDetail/>} />
+            <Route path="/book/:id" element={<BookDetail />} />
+            <Route path="/setting" element={<SettingPage />} />
           </Routes>
         </WrapBar>
       </BrowserRouter>

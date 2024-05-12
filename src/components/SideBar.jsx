@@ -55,7 +55,7 @@ export function MySidebar() {
             My books
           </ListItem>
         </Link>
-        <Link to="settings">
+        <Link to="setting">
           <ListItem>
             <ListItemPrefix>
               <Cog6ToothIcon className="h-5 w-5" />
