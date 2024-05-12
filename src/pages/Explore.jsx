@@ -1,12 +1,6 @@
-import {
-  List,
-  ListItem,
-  ListItemSuffix,
-  Card,
-  Checkbox,
-} from "@material-tailwind/react";
 import React from "react";
 import BookDisplay from "../components/books/BookDisplay";
+import FilterBookExplore from "../components/FilterBookExplore";
 
 export default function Explore() {
   return (
@@ -38,44 +32,8 @@ export default function Explore() {
             </div>
           </div>
         </div>
-        <div className=" col-span-2">
-          <div className=" min-h-96 pr-10">
-            <List className="nunito-font">
-              <h2 className=" m-3 font-black text-xl nunito-font text-gray-900 ">
-                Filter:
-              </h2>
-              <ListItem ripple={false} className="py-1 pr-1 pl-4">
-                Item One
-                <ListItemSuffix>
-                  <Checkbox variant="text" color="blue-gray"></Checkbox>
-                </ListItemSuffix>
-              </ListItem>
-              <ListItem ripple={false} className="py-1 pr-1 pl-4">
-                Item Two
-                <ListItemSuffix>
-                  <Checkbox variant="text" color="blue-gray"></Checkbox>
-                </ListItemSuffix>
-              </ListItem>
-              <ListItem ripple={false} className="py-1 pr-1 pl-4">
-                Item Three
-                <ListItemSuffix>
-                  <Checkbox variant="text" color="blue-gray"></Checkbox>
-                </ListItemSuffix>
-              </ListItem>
-              <ListItem ripple={false} className="py-1 pr-1 pl-4">
-                Item Three
-                <ListItemSuffix>
-                  <Checkbox variant="text" color="blue-gray"></Checkbox>
-                </ListItemSuffix>
-              </ListItem>
-              <ListItem ripple={false} className="py-1 pr-1 pl-4">
-                Item Three
-                <ListItemSuffix>
-                  <Checkbox variant="text" color="blue-gray"></Checkbox>
-                </ListItemSuffix>
-              </ListItem>
-            </List>
-          </div>
+        <div className=" col-span-2 pt-4 pr-4">
+          <FilterBookExplore />
         </div>
       </div>
     </div>
