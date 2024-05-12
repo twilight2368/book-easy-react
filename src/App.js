@@ -15,7 +15,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          
           <Route path="/login" element={<LoginSignup />} />
           <Route path="/" element={<WrapBarLayout />}>
             <Route index element={<Home />} />
@@ -25,6 +24,7 @@ function App() {
             <Route path="interest" element={<InterestBooks />} />
             <Route path="mybook/:user" element={<MyBooks />} />
             <Route path="book/:id" element={<BookDetail />} />
+            <Route path="setting" element={<SettingPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
