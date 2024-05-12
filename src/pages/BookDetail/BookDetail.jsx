@@ -2,46 +2,37 @@ import React from "react";
 import Pic from "./ex.jpg";
 import Pic2 from "./icons8-plus-24.png"
 import Pic3 from"./icons8-heart-24.png";
-import Pic4 from "./icons8-help-50.png";
-import Pic5 from "./demostration.png";
-import Pic6 from "./icons8-book-50.png";
-import Pic7 from "./icons8-lightning-bolt-48.png";
+import { BookOpenIcon } from "@heroicons/react/24/outline";
+import { BanknotesIcon } from "@heroicons/react/24/outline";
+
 
 const BookDetail = () => {
   return (
-    <div class="space-y-5">
+<div class="space-y-5">
   <div class="max-w-6xl mx-auto px-5 space-y-5">
-    <div class="flex justify-center space-x-10">
-    <button class="flex items-center space-x-3 p-5 rounded-full  bg-blue-100 border-2 border-blue-100 text-blue-500"> 
-        <img class="h-5 w-5" src={Pic6} alt=""/>
-        <div>Offered</div>
-    </button>
-    
-    <button  class="flex items-center space-x-3 p-5 rounded-full bg-pink-100 border-2 border-pink-100 text-pink-500">
-        <img class="h-5 w-5" src= {Pic5} alt=""/>
-        <div>Wanted</div>
-    </button>
-    <button  class="flex items-center space-x-3 p-5 rounded-full bg-yellow-100 border-2 border-yellow-100 text-yellow-600">
-        <img class="h-5 w-5" src={Pic7} alt=""/>
-        <div>The exchange took place</div>
-    </button>
-    <button class="flex items-center space-x-3 p-5 rounded-full bg-gray-200 border-2 border-gray-200 text-gray-400">
-        <img class="h-5 w-5" src={Pic4} alt=""/>
-        <div>Help</div>
-    </button>
-    </div>
-    <div class="border-t-2 border-gray-200"></div>
-
-  
     <div class="flex space-x-10">
-      <img class="w-72 h-full rounded-lg  shadow-lg" src= {Pic} alt="book"/>
+      <div className="flex flex-col space-y-2">
+        <div><img class="w-72 h-96 rounded-lg  shadow-lg" src= {Pic} alt="book"/></div>
+        <div>
+          <button class="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-white text-red-500 w-full h-full justify-center hover:bg-gray-200">
+            <BookOpenIcon className="h-6 w-6"/>
+            <div>Exchange by books</div>
+          </button>
+        </div>
+        <div>
+          <button class="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-red-600 text-white w-full h-full justify-center hover:bg-red-800">
+            <BanknotesIcon className="h-6 w-6"/>
+            <div>Exchange by money</div>
+          </button>
+        </div>
+      </div>
       <div class="flex-1 space-y-0.5">
         <div className="flex h-24 space-x-4">
-          <button class="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-blue-100 text-blue-500 w-1/2 h-1/2 justify-center">
+          <button class="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-blue-100 text-blue-500 w-1/2 h-1/2 justify-center hover:bg-blue-200">
             <img class="h-5 w-5" src= {Pic2} alt="add"/>
             <div>Offer</div>
           </button>
-          <button class="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-pink-100 text-pink-500 w-1/2 h-1/2 justify-center">
+          <button class="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-pink-100 text-pink-500 w-1/2 h-1/2 justify-center hover:bg-pink-200">
             <img class="h-5 w-5" src={Pic3} alt="add-for-wish"/>
             <div >Add to interest</div>
           </button>
