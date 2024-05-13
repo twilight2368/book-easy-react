@@ -9,10 +9,6 @@ import {
   Badge,
 } from "@material-tailwind/react";
 import {
-  UserCircleIcon,
-  Cog6ToothIcon,
-  ArrowRightStartOnRectangleIcon,
-  UserIcon,
   CheckCircleIcon,
   XCircleIcon,
   InformationCircleIcon,

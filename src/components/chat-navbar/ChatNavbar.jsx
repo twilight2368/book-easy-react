@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Typography,
   Button,
   Menu,
   MenuHandler,
@@ -8,16 +7,7 @@ import {
   MenuItem,
   Badge,
 } from "@material-tailwind/react";
-import {
-  UserCircleIcon,
-  Cog6ToothIcon,
-  ArrowRightStartOnRectangleIcon,
-  UserIcon,
-  CheckCircleIcon,
-  XCircleIcon,
-  InformationCircleIcon,
-  ExclamationTriangleIcon,
-} from "@heroicons/react/24/outline";
+
 import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/solid";
 import ChatMain from "../chat/ChatMain";
 
