@@ -9,10 +9,6 @@ import {
   Badge,
 } from "@material-tailwind/react";
 import {
-  UserCircleIcon,
-  Cog6ToothIcon,
-  ArrowRightStartOnRectangleIcon,
-  UserIcon,
   CheckCircleIcon,
   XCircleIcon,
   InformationCircleIcon,
@@ -56,7 +52,7 @@ export default function NotifyMenu() {
           <Button
             variant="text"
             color="blue-gray"
-            className=" rounded-full h-10 w-10 bg-blue-gray-100/30 py-0 pr-0 pl-0 "
+            className=" rounded-full h-10 w-10 bg-blue-100/20 py-0 pr-0 pl-0 "
           >
             <BellIcon className="h-10 w-10 text-blue-300 fill-blue-300  rounded-full p-1.5" />
           </Button>
