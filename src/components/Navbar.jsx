@@ -16,6 +16,7 @@ import {
 
 import ProfileMenu from "./profile-menu/ProfileMenu";
 import NotifyMenu from "./notification-menu/NotifyMenu";
+import ChatNavbar from "./chat-navbar/ChatNavbar";
 
 export default function MyNavbar() {
   return (
@@ -76,14 +77,7 @@ export default function MyNavbar() {
                   <NotifyMenu />
                 </div>
                 <div className="flex justify-center items-center ">
-                  <Badge color="red">
-                    <Button
-                      variant="text"
-                      className="h-10 w-10 rounded-full bg-blue-gray-100/30 flex justify-center items-center p-1"
-                    >
-                      <ChatBubbleOvalLeftEllipsisIcon className=" h-10 w-10 text-blue-300 rounded-full p-0.5" />
-                    </Button>
-                  </Badge>
+                  <ChatNavbar />
                 </div>
                 <div className="flex justify-center items-center ">
                   <ProfileMenu />

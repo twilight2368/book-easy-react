@@ -24,7 +24,6 @@ export default function WrapBar(props) {
           </div>
         </div>
       </div>
-      <ChatMain/>
     </div>
   );
 }
