@@ -10,26 +10,15 @@ export default function Explore() {
       </div>
       <div className=" w-full grid grid-cols-10 mt-4">
         <div className=" col-span-8 px-10 mt-4">
-          <div className=" w-full h-full grid grid-cols-3 gap-10">
-            <div>
-              <BookDisplay />
-            </div>
-            <div>
-              <BookDisplay />
-            </div>
-            <div>
-              <BookDisplay />
-            </div>
-
-            <div>
-              <BookDisplay />
-            </div>
-            <div>
-              <BookDisplay />
-            </div>
-            <div>
-              <BookDisplay />
-            </div>
+          <div className=" w-full h-full grid grid-cols-4 gap-3 gap-y-10">
+            <BookDisplay />
+            <BookDisplay />
+            <BookDisplay />
+            <BookDisplay />
+            <BookDisplay />
+            <BookDisplay />
+            <BookDisplay />
+            <BookDisplay />
           </div>
         </div>
         <div className=" col-span-2 pt-4 pr-4">
