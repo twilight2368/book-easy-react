@@ -13,12 +13,12 @@ export default function BookDisplay(props) {
           <div className=" font-black text-lg nunito-font mt-1">Book name</div>
           <div className=" nunito-font mb-0">Author</div>
         </div>
-        <div className=" absolute top-2 right-2 star-icon-display">
-          <IconButton className="bg-black/75">
-            <StarIcon className="h-5 w-5 fill-white star-icon" />
-          </IconButton>
-        </div>
       </Link>
+      <div className=" absolute top-2 right-2 star-icon-display">
+        <IconButton className="bg-black/75">
+          <StarIcon className="h-5 w-5 fill-white star-icon" />
+        </IconButton>
+      </div>
     </div>
   );
 }

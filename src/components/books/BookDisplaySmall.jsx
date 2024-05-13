@@ -15,12 +15,12 @@ export default function BookDisplaySmall(props) {
           </div>
           <div className=" nunito-font text-xs mb-0.5">Author</div>
         </div>
-        <div className=" absolute top-2 right-2 star-icon-display">
-          <IconButton className="bg-black/75">
-            <StarIcon className="h-5 w-5 fill-white star-icon" />
-          </IconButton>
-        </div>
       </Link>
+      <div className=" absolute top-2 right-2 star-icon-display">
+        <IconButton className="bg-black/75">
+          <StarIcon className="h-5 w-5 fill-white star-icon" />
+        </IconButton>
+      </div>
     </div>
   );
 }
