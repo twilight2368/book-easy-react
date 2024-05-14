@@ -59,7 +59,7 @@ export default function ChatNavbar() {
                   closeMenu();
                   setIsChatOpen(true);
                 }}
-                className={`flex items-center gap-2 h-14 rounded ${!read ? "bg-blue-300/20 text-black font-black hover:font-medium" : ""}`}
+                className={`flex items-center gap-2 h-14 rounded ${!read ? "bg-blue-300/20 text-black font-black" : ""}`}
               >
                 <div>
                   <div className=" mb-1">
