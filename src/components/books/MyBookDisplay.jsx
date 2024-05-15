@@ -11,7 +11,7 @@ export default function MyBookDisplay(props) {
     <div className=" relative w-11/12 h-full duration-300 hover:scale-105 book-display overflow-hidden rounded-md">
       <img src={BookCover} alt="" className=" object-fill h-full w-full" />
       <div className=" absolute bottom-0 bg-black/75 w-full text-white text-center whitespace-nowrap text-nowrap book-name-display">
-        <div className=" font-black text-sm nunito-font mt-0.5 mb-0.5">
+        <div className=" font-black text-sm nunito-font mt-2 mb-0.5">
           Book title
         </div>
         <div className=" nunito-font text-xs mb-0.5">Author</div>
