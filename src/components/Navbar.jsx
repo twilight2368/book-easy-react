@@ -47,7 +47,9 @@ export default function MyNavbar() {
               className="!absolute right-1 top-[3px] rounded flex items-center justify-center bg-blue-300"
               onClick={(e)=>{
                 e.preventDefault();
-                navigate('/search/' + searchParam)
+                if (searchParam.trim().length > 0) {
+                  navigate('/search/' + searchParam.trim())
+                }
               }}
             >
               <MagnifyingGlassIcon className=" text-lg text-white h-4 w-4 " />
