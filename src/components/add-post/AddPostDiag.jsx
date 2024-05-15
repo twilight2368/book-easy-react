@@ -61,24 +61,3 @@ export function AddPostDiag() {
     </>
   );
 }
-
-//todo : require attribute
-/*
- {
-  "id": 0,
-  "ownerId": 0,
-  "name": "string",
-  "author": "string",
-  "publisher": "string",
-  "publishYear": 0,
-  "language": "string",
-  "weight": "string",
-  "size": "string",
-  "pages": 0,
-  "layout": "string",
-  "description": "string",
-  "imagePath": "string",
-  "status": "string",
-  "created": "2024-05-07T08:39:48.062Z"
-}
- */

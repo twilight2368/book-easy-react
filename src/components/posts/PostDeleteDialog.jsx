@@ -2,7 +2,6 @@ import { Button, Card, CardBody, Dialog, Typography } from '@material-tailwind/r
 import React from 'react'
 
 const PostDeleteDialog = (props) => {
-  console.log(props);
   const { open, handleOpen } = props;
   return (
     <Dialog
