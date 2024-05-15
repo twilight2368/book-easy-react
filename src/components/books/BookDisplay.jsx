@@ -10,15 +10,15 @@ export default function BookDisplay(props) {
       <Link to="/book/id">
         <img src={BookCover} alt="" className=" object-fill h-full w-full" />
         <div className=" absolute bottom-0 bg-black/75 w-full text-white text-center whitespace-nowrap text-nowrap book-name-display">
-          <div className=" font-black text-lg nunito-font mt-1">Book name</div>
-          <div className=" nunito-font mb-0">Author</div>
-        </div>
-        <div className=" absolute top-2 right-2 star-icon-display">
-          <IconButton className="bg-black/75">
-            <StarIcon className="h-5 w-5 fill-white star-icon" />
-          </IconButton>
+          <div className=" font-black text-base nunito-font mt-1">Book name</div>
+          <div className=" nunito-font mb-0 text-sm">Author</div>
         </div>
       </Link>
+      <div className=" absolute top-2 right-2 star-icon-display">
+        <IconButton className="bg-black/75">
+          <StarIcon className="h-5 w-5 fill-white star-icon" />
+        </IconButton>
+      </div>
     </div>
   );
 }

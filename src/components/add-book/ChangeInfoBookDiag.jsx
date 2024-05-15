@@ -28,7 +28,7 @@ export function ChangeBookInfoDiag(props) {
         className="bg-transparent shadow-none nunito-font"
       >
         <Card className="mx-auto w-full max-w-[600px] pt-5">
-          <div className=" flex flex-row items-center">
+          <div className=" flex flex-row items-center pb-3">
             <div className=" w-11/12">
               <Typography variant="h4" color="blue-gray" className="ml-5">
                 Change book information

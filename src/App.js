@@ -10,6 +10,7 @@ import MyBooks from "./pages/MyBooks";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import SettingPage from "./pages/setting-user/SettingPage";
 import EventDetails from "./pages/EventDetails";
+import Notfound from "./pages/Notfound/Notfound";
 
 function App() {
   return (
@@ -17,20 +18,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginSignup />} />
+          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/events" element={<Event />} />
+          <Route path="/interest" element={<InterestBooks />} />
+          <Route path="/mybook/:user" element={<MyBooks />} />
+          <Route path="/book/:id" element={<BookDetail />} />
+          <Route path="/setting" element={<SettingPage />} />
+          <Route path="*" element={<Notfound />} />
         </Routes>
-        <WrapBar>
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="home" element={<Home />} />
-            <Route path="explore" element={<Explore />} />
-            <Route path="events" element={<Events />} />
-            <Route path="interest" element={<InterestBooks />} />
-            <Route path="mybook/:user" element={<MyBooks />} />
-            <Route path="book/:id" element={<BookDetail />} />
-            <Route path="setting" element={<SettingPage />} />
-            <Route path="events/:id" element={<EventDetails />} />
-          </Routes>
-        </WrapBar>
       </BrowserRouter>
     </div>
   );
