@@ -11,25 +11,34 @@ import BookDetail from "./pages/BookDetail/BookDetail";
 import SettingPage from "./pages/setting-user/SettingPage";
 import Notfound from "./pages/Notfound/Notfound";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import { useState, React } from "react";
+import { createContext } from "react";
+
+export const MyThemeContext = createContext(false);
 
 function App() {
+ 
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<LoginSignup />} />
-          <Route index element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/events" element={<Event />} />
-          <Route path="/interest" element={<InterestBooks />} />
-          <Route path="/mybook/:user" element={<MyBooks />} />
-          <Route path="/book/:id" element={<BookDetail />} />
-          <Route path="/user/:id" element={<UserProfile />} />
-          <Route path="/setting" element={<SettingPage />} />
-          <Route path="*" element={<Notfound />} />
-        </Routes>
-      </BrowserRouter>
+      <MyThemeContext.Provider value={[darkMode, setDarkMode]}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<LoginSignup />} />
+            <Route index element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/events" element={<Event />} />
+            <Route path="/interest" element={<InterestBooks />} />
+            <Route path="/mybook/:user" element={<MyBooks />} />
+            <Route path="/book/:id" element={<BookDetail />} />
+            <Route path="/user/:id" element={<UserProfile />} />
+            <Route path="/setting" element={<SettingPage />} />
+            <Route path="*" element={<Notfound />} />
+          </Routes>
+        </BrowserRouter>
+      </MyThemeContext.Provider>
     </div>
   );
 }

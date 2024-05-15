@@ -35,9 +35,9 @@ export default function MyNavbar() {
               containerProps={{
                 className: "min-w-0",
               }}
-              onChange={(e)=>{
-                e.preventDefault()
-                setSearchParam(e.target.value)
+              onChange={(e) => {
+                e.preventDefault();
+                setSearchParam(e.target.value);
               }}
             />
             <Button
@@ -45,10 +45,10 @@ export default function MyNavbar() {
               color={true ? "gray" : "blue-gray"}
               disabled={false}
               className="!absolute right-1 top-[3px] rounded flex items-center justify-center bg-blue-300"
-              onClick={(e)=>{
+              onClick={(e) => {
                 e.preventDefault();
                 if (searchParam.trim().length > 0) {
-                  navigate('/search/' + searchParam.trim())
+                  navigate("/search/" + searchParam.trim());
                 }
               }}
             >

@@ -3,12 +3,11 @@ import Logo from "../../assets/images/books.png";
 import NotFoundPic from "../../assets/images/3793096.jpg";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router";
-
 export default function Notfound() {
   const navigate = useNavigate();
   return (
-    <div className="absolute z-50 w-screen h-screen">
-      <div className=" h-24 w-full bg-white shadow-lg flex justify-center items-center gap-2">
+    <div className="w-screen h-screen">
+      <div className="pt-5 h-24 w-full bg-white flex justify-center items-center gap-2">
         <div>
           <img src={Logo} alt="" className=" block h-20 w-auto select-none" />
         </div>

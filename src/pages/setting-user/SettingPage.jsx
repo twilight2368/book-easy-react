@@ -1,8 +1,10 @@
 import { Button, Switch } from "@material-tailwind/react";
-import React from "react";
+import React, { useContext } from "react";
 import WrapBar from "../../components/WrapBar";
+import { MyThemeContext } from "../../App";
 
 export default function SettingPage() {
+  const [darkMode, setDarkMode] = useContext(MyThemeContext);
   return (
     <WrapBar>
       <div className=" pl-5 pt-3 ">
@@ -28,7 +30,15 @@ export default function SettingPage() {
         <div className=" mb-5">
           <h2 className=" text-2xl font-bold mb-2">Dark mode</h2>
           <div className=" pl-1">
-            <Switch label="Dark mode" className=" pl-2 " color="blue" />
+            <Switch
+              label="Dark mode"
+              className=" pl-2 "
+              checked={darkMode}
+              color="blue"
+              onClick={() => {
+                setDarkMode(!darkMode);
+              }}
+            />
           </div>
         </div>
       </div>
