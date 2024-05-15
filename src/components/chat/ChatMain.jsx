@@ -1,6 +1,6 @@
 import { PaperAirplaneIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Button, Card, Input } from "@material-tailwind/react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
 
@@ -65,6 +65,11 @@ export default function ChatMain(props) {
                           ...messagesList,
                           {
                             you_sent: true,
+                            message: messageInput,
+                            date: new Date(),
+                          },
+                          {
+                            you_sent: false,
                             message: messageInput,
                             date: new Date(),
                           },

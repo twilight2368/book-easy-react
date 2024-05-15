@@ -15,7 +15,7 @@ export function MySidebar() {
   return (
     <div className="min-h-96 w-full max-w-[20rem] bg-secondary pt-5 pr-5 pl-5">
       <List>
-        <Link to="home">
+        <Link to="/home">
           <ListItem>
             <ListItemPrefix>
               <HomeIcon className="h-5 w-5" />
@@ -23,7 +23,7 @@ export function MySidebar() {
             Home
           </ListItem>
         </Link>
-        <Link to="explore">
+        <Link to="/explore">
           <ListItem>
             <ListItemPrefix>
               <Squares2X2Icon className="h-5 w-5" />
@@ -31,7 +31,7 @@ export function MySidebar() {
             Explore
           </ListItem>
         </Link>
-        <Link to="events">
+        <Link to="/events">
           <ListItem>
             <ListItemPrefix>
               <CalendarDaysIcon className="h-5 w-5" />
@@ -39,7 +39,7 @@ export function MySidebar() {
             Events
           </ListItem>
         </Link>
-        <Link to="interest">
+        <Link to="/interest">
           <ListItem>
             <ListItemPrefix>
               <StarIcon className="h-5 w-5" />
@@ -47,7 +47,7 @@ export function MySidebar() {
             Interest
           </ListItem>
         </Link>
-        <Link to="mybook/1">
+        <Link to="/mybook/1">
           <ListItem>
             <ListItemPrefix>
               <BookOpenIcon className="h-5 w-5" />
@@ -55,7 +55,7 @@ export function MySidebar() {
             My books
           </ListItem>
         </Link>
-        <Link to="setting">
+        <Link to="/setting">
           <ListItem>
             <ListItemPrefix>
               <Cog6ToothIcon className="h-5 w-5" />

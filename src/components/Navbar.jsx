@@ -1,24 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../assets/images/books.png";
 import {
   Button,
   Input,
-  Badge,
-  Popover,
-  PopoverHandler,
-  PopoverContent,
 } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import {
-  ChatBubbleOvalLeftEllipsisIcon,
-  BellIcon,
-} from "@heroicons/react/24/solid";
 
+import { useNavigate } from "react-router-dom";
 import ProfileMenu from "./profile-menu/ProfileMenu";
 import NotifyMenu from "./notification-menu/NotifyMenu";
 import ChatNavbar from "./chat-navbar/ChatNavbar";
 
 export default function MyNavbar() {
+  const [searchParam, setSearchParam] = useState('');
+  const navigate = useNavigate();
+
   return (
     <div className=" w-full bg-white fixed top-0 z-20 h-20">
       <div className="h-full w-full shadow-md  grid grid-cols-5 items-center justify-center align-baseline">
@@ -39,12 +35,20 @@ export default function MyNavbar() {
               containerProps={{
                 className: "min-w-0",
               }}
+              onChange={(e)=>{
+                e.preventDefault()
+                setSearchParam(e.target.value)
+              }}
             />
             <Button
               size="sm"
               color={true ? "gray" : "blue-gray"}
               disabled={false}
               className="!absolute right-1 top-[3px] rounded flex items-center justify-center bg-blue-300"
+              onClick={(e)=>{
+                e.preventDefault();
+                navigate('/search/' + searchParam)
+              }}
             >
               <MagnifyingGlassIcon className=" text-lg text-white h-4 w-4 " />
             </Button>
