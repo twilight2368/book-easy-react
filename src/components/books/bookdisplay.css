@@ -43,3 +43,21 @@
   @apply text-red-400;
   @apply scale-110;
 }
+
+.pen-icon-display {
+  @apply opacity-0;
+  @apply duration-300;
+}
+
+.book-display:hover .pen-icon-display {
+  @apply opacity-100;
+}
+
+.pen-icon {
+  @apply duration-200;
+}
+
+.pen-icon-display:hover .pen-icon {
+  @apply text-blue-400;
+  @apply scale-110;
+}

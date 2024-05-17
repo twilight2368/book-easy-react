@@ -1,23 +1,30 @@
 import React from "react";
-import BookCover from "./book-cover.jpg";
+import BookCover from "./book-cover-default.png";
 import "./bookdisplay.css";
 import { IconButton } from "@material-tailwind/react";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { ChangeBookInfoDiag } from "../add-book/ChangeInfoBookDiag";
+import { DelBookDiag } from "../add-book/DelBookDiag";
 
 export default function MyBookDisplay(props) {
   return (
     <div className=" relative w-11/12 h-full duration-300 hover:scale-105 book-display overflow-hidden rounded-md">
       <img src={BookCover} alt="" className=" object-fill h-full w-full" />
       <div className=" absolute bottom-0 bg-black/75 w-full text-white text-center whitespace-nowrap text-nowrap book-name-display">
-        <div className=" font-black text-sm nunito-font mt-0.5 mb-0.5">
-          Dune
+        <div className=" font-black text-sm nunito-font mt-2 mb-0.5">
+          Book title
         </div>
-        <div className=" nunito-font text-xs mb-0.5">Frank Herbert</div>
+        <div className=" nunito-font text-xs mb-0.5">Author</div>
       </div>
       <div className=" absolute top-2 right-2 trash-icon-display">
-        <IconButton className="bg-black/75">
+        <DelBookDiag>
           <TrashIcon className="h-5 w-5 text-gray-500 trash-icon" />
-        </IconButton>
+        </DelBookDiag>
+      </div>
+      <div className=" absolute top-2 left-2 pen-icon-display">
+        <ChangeBookInfoDiag>
+          <PencilSquareIcon className="h-5 w-5 text-gray-500 pen-icon" />
+        </ChangeBookInfoDiag>
       </div>
       {props.borrowed ? (
         <>
