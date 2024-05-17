@@ -8,9 +8,10 @@ import {
 import React from "react";
 import PostMenu from "./PostMenu";
 
-export default function Post() {
+export default function Post(props) {
+  const { title, content } = props;
   return (
-    <div>
+    <div className=" w-2/3">
       <Card className="w-full min-w-96 min-h-96 ">
         <div className=" py-3 px-5 flex gap-2">
           <div className=" flex items-center justify-center">
@@ -28,14 +29,11 @@ export default function Post() {
             <PostMenu />
           </div>
         </div>
+        <div className=" w-full px-5 text-lg font-bold text-pretty mb-2">
+          {title}
+        </div>
         <div className=" h-32 w-full overflow-y-hidden px-5 text-sm text-pretty mb-3 ">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quasi,
-          sequi odio est neque doloremque a veniam quis facilis? Culpa,
-          asperiores facere. Voluptas quia totam similique suscipit! Rem, quos
-          rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Maxime, quos eveniet recusandae ullam dolorum fugit sequi tempora
-          corrupti, sunt nobis provident. Natus libero exercitationem, in hic
-          eligendi quia ullam repellat!
+          {content}
         </div>
         <div className=" h-96 w-full px-5 mb-5">
           <img

@@ -2,9 +2,11 @@ import { StarIcon } from '@heroicons/react/24/outline'
 import { Button, Card } from '@material-tailwind/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import getDateShit from '../../utils/getDateShit'
 
-const EventListEvent = () => {
-  const id = 1;
+const EventListEvent = (props) => {
+  const { id, title, datetime } = props;
+  
 
   return (
     <Link to={`/events/${id}`}>
@@ -20,8 +22,10 @@ const EventListEvent = () => {
         </div>
         <div className=" w-full h-full flex flex-col justify-between gap-2">
           <div>
-            <div className="text-md">Sun, May 29 at 10 AM</div>
-            <div className="text-lg font-bold text-black">Light Novel Sharing Day</div>
+            <div className="text-md">
+              {getDateShit(datetime)}
+            </div>
+            <div className="text-lg font-bold text-black">{title}</div>
           </div>
           <Button className=" w-full h-10 flex justify-center items-center" color="blue">
             <StarIcon className=" h-5 pr-2"/>

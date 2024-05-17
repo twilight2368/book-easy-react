@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginSignup from "./pages/LoginSignup/LoginSignup";
 import Home from "./pages/Home";
-import WrapBar from "./components/WrapBar";
 import Explore from "./pages/Explore";
 import Events from "./pages/Events";
 import InterestBooks from "./pages/InterestBooks";
@@ -21,7 +20,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
-          <Route path="/events" element={<Event />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/interest" element={<InterestBooks />} />
           <Route path="/mybook/:user" element={<MyBooks />} />
           <Route path="/book/:id" element={<BookDetail />} />
