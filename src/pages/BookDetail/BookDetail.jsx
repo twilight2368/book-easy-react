@@ -24,14 +24,14 @@ const BookDetail = () => {
               <div className="flex flex-col space-y-2">
                 <Button 
                   className="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-white text-red-500 w-full h-full justify-center hover:bg-gray-200"
-                  onClick={handleOpenExchangeBook}
+                  onClick={handleOpenExchangeMoney}
                 >
                   <BanknotesIcon className="h-6 w-6"/>
                   <div>Exchange with money</div>
                 </Button>
                 <Button 
                   className="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-white text-red-500 w-full h-full justify-center hover:bg-gray-200"
-                  onClick={handleOpenExchangeMoney}
+                  onClick={handleOpenExchangeBook}
                 >
                   <BookOpenIcon className="h-6 w-6"/>
                   <div>Exchange with another book</div>
@@ -39,10 +39,12 @@ const BookDetail = () => {
                 <ExchangeBookDialog
                   open={openExchangeBook}
                   handleOpen={handleOpenExchangeBook}
+                  img={Pic}
                 />
                 <ExchangeMoneyDialog
                   open={openExchangeMoney}
                   handleOpen={handleOpenExchangeMoney}
+                  img={Pic}
                 />
               </div>
             </div>
