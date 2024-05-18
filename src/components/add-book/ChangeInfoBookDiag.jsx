@@ -10,15 +10,17 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-export function AddBookDiag() {
+import { IconButton } from "@material-tailwind/react";
+
+export function ChangeBookInfoDiag(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
   return (
     <>
-      <Button onClick={handleOpen} color="blue" variant="outlined">
-        Add book
-      </Button>
+      <IconButton className=" bg-white/0" variant="text" onClick={handleOpen}>
+        {props.children}
+      </IconButton>
       <Dialog
         size="xl"
         open={open}
@@ -29,11 +31,14 @@ export function AddBookDiag() {
           <div className=" flex flex-row items-center pb-3">
             <div className=" w-11/12">
               <Typography variant="h4" color="blue-gray" className="ml-5">
-                Add book to your list
+                Change book information
               </Typography>
             </div>
             <div>
-              <button onClick={handleOpen} className=" flex justify-center items-center">
+              <button
+                onClick={handleOpen}
+                className=" flex justify-center items-center"
+              >
                 <XMarkIcon className="h-8 w-8 p-1 rounded-full text-gray-500 duration-300 hover:text-red-800 hover:bg-red-200 active:scale-75" />
               </button>
             </div>
@@ -89,7 +94,12 @@ export function AddBookDiag() {
               accept="image/png, image/jpeg"
               className=" flex justify-center items-center"
             />
-            <Button variant="gradient" color="blue" onClick={handleOpen} className=" mt-3">
+            <Button
+              variant="gradient"
+              color="blue"
+              onClick={handleOpen}
+              className=" mt-3"
+            >
               Confirm
             </Button>
           </CardBody>

@@ -4,7 +4,7 @@ import Pic2 from "./icons8-plus-24.png"
 import Pic3 from"./icons8-heart-24.png";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
-import WrapBar from "./components/WrapBar";
+import WrapBar from "../../components/WrapBar";
 
 const BookDetail = () => {
   return (

@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import Signup from "./pages/LoginSignup/Signup";
 import Login from "./pages/LoginSignup/Login";
 import Forgot from "./pages/LoginSignup/Forgot";
@@ -9,18 +10,18 @@ import Event from "./pages/Event";
 import InterestBooks from "./pages/InterestBooks";
 import MyBooks from "./pages/MyBooks";
 import BookDetail from "./pages/BookDetail/BookDetail";
-import WelcomePage from "./pages/WelcomePage/WelcomePage";
+import SettingPage from "./pages/setting-user/SettingPage";
+import Notfound from "./pages/Notfound/Notfound";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path = "/welcome" element = {<WelcomePage/>}/>
-          <Route path="/signup" element={<Signup />} />
-          <Route path = "/login" element= {<Login/>}/>
-          <Route path = "/forgotpassword" element= {<Forgot/>}/>
-          <Route path="/" element={<WrapBarLayout />}>
+        <Routes>  
+            <Route path = "/welcome" element = {<WelcomePage/>}/>
+            <Route path="/signup" element={<Signup />} />
+            <Route path = "/login" element= {<Login/>}/>
+            <Route path = "/forgotpassword" element= {<Forgot/>}/>
             <Route index element={<Home />} />
             <Route path="home" element={<Home />} />
             <Route path="explore" element={<Explore />} />
@@ -28,8 +29,9 @@ function App() {
             <Route path="interest" element={<InterestBooks />} />
             <Route path="mybook/:user" element={<MyBooks />} />
             <Route path="book/:id" element={<BookDetail />} />
-            </Route>
-          </Routes>
+            <Route path="/setting" element={<SettingPage />} />
+            <Route path="*" element={<Notfound />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
