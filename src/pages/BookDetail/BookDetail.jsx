@@ -4,10 +4,11 @@ import Pic2 from "./icons8-plus-24.png"
 import Pic3 from"./icons8-heart-24.png";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
-
+import WrapBar from "./components/WrapBar";
 
 const BookDetail = () => {
   return (
+<WrapBar>
 <div class="space-y-5">
   <div class="max-w-6xl mx-auto px-5 space-y-5">
     <div class="flex space-x-10">
@@ -67,6 +68,7 @@ Vì lý do nào đó, Knox không thích những người phụ nữ phức tạ
     
   </div>
 </div>
+</WrapBar>
   );
 };
 export default BookDetail;
