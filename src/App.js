@@ -12,8 +12,16 @@ import MyBooks from "./pages/MyBooks";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import SettingPage from "./pages/setting-user/SettingPage";
 import Notfound from "./pages/Notfound/Notfound";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import { useState, React } from "react";
+import { createContext } from "react";
+
+export const MyThemeContext = createContext(false);
 
 function App() {
+ 
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
     <div className="App">
       <BrowserRouter>

@@ -1,7 +1,7 @@
 import React from "react";
 import Pic from "./ex.jpg";
-import Pic2 from "./icons8-plus-24.png"
-import Pic3 from"./icons8-heart-24.png";
+import Pic2 from "./icons8-plus-24.png";
+import Pic3 from "./icons8-heart-24.png";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
 import WrapBar from "../../components/WrapBar";
@@ -64,8 +64,7 @@ Vì lý do nào đó, Knox không thích những người phụ nữ phức tạ
           <a  class="hover:underline">Tiểu thuyết</a>
         </div>
       </div>
-    </div>
-    
+    </div> 
   </div>
 </div>
 </WrapBar>

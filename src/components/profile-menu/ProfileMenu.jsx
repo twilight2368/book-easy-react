@@ -13,26 +13,30 @@ import {
   ArrowRightStartOnRectangleIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router";
 
 // profile menu component
 const profileMenuItems = [
   {
     label: "My Profile",
     icon: UserCircleIcon,
+    link: "user",
   },
   {
     label: "Edit Profile",
     icon: Cog6ToothIcon,
+    link: "editprofile",
   },
   {
     label: "Sign Out",
     icon: ArrowRightStartOnRectangleIcon,
+    link: "logout",
   },
 ];
 
 export default function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
+  const navigate = useNavigate();
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
@@ -47,12 +51,19 @@ export default function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
+        {profileMenuItems.map(({ label, icon, link }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
               key={label}
-              onClick={closeMenu}
+              onClick={() => {
+                closeMenu();
+                if (isLastItem) {
+                  //todo: Logout user
+                } else {
+                  navigate("/" + link + "/" + 1);
+                }
+              }}
               className={`flex items-center gap-2 rounded ${
                 isLastItem
                   ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
