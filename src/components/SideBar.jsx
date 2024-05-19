@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { Link } from "react-router-dom";
-import Home from "../pages/Home";
+
 import { StarIcon } from "@heroicons/react/24/outline";
 
 export function MySidebar() {

@@ -43,44 +43,44 @@ export default function ChatMain(props) {
                 })}
               </div>
               <div className="flex flex-row gap-2 border-t-2  p-2 px-3 border-t-blue-300/30">
-                <Input
-                  label="Message"
-                  color="blue"
-                  value={messageInput}
-                  onChange={(e) => {
-                    e.preventDefault();
-                    setMessageInput(e.target.value);
-                  }}
-                />
-                <Button
-                  size="sm"
-                  color="blue"
-                  className=" p-2 "
-                  variant="text"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (messageInput) {
-                      if (messageInput.trim().length !== 0) {
-                        setMessagesList((messagesList) => [
-                          ...messagesList,
-                          {
-                            you_sent: true,
-                            message: messageInput,
-                            date: new Date(),
-                          },
-                          {
-                            you_sent: false,
-                            message: messageInput,
-                            date: new Date(),
-                          },
-                        ]);
-                        setMessageInput("");
+                  <Input
+                    label="Message"
+                    color="blue"
+                    value={messageInput}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setMessageInput(e.target.value);
+                    }}
+                  />
+                  <Button
+                    size="sm"
+                    color="blue"
+                    className=" p-2 "
+                    variant="text"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (messageInput) {
+                        if (messageInput.trim().length !== 0) {
+                          setMessagesList((messagesList) => [
+                            ...messagesList,
+                            {
+                              you_sent: true,
+                              message: messageInput,
+                              date: new Date(),
+                            },
+                            {
+                              you_sent: false,
+                              message: messageInput,
+                              date: new Date(),
+                            },
+                          ]);
+                          setMessageInput("");
+                        }
                       }
-                    }
-                  }}
-                >
-                  <PaperAirplaneIcon className=" h-6 w-6 text-blue-600" />
-                </Button>
+                    }}
+                  >
+                    <PaperAirplaneIcon className=" h-6 w-6 text-blue-600" />
+                  </Button>
               </div>
             </Card>
           </div>
