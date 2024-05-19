@@ -1,10 +1,10 @@
 import { Button, Switch } from "@material-tailwind/react";
 import React, { useContext } from "react";
 import WrapBar from "../../components/WrapBar";
-import { MyThemeContext } from "../../App";
+
 
 export default function SettingPage() {
-  const [darkMode, setDarkMode] = useContext(MyThemeContext);
+
   return (
     <WrapBar>
       <div className=" pl-5 pt-3 ">
