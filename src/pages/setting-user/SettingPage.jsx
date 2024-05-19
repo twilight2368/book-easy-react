@@ -27,20 +27,6 @@ export default function SettingPage() {
             Change password
           </Button>
         </div>
-        <div className=" mb-5">
-          <h2 className=" text-2xl font-bold mb-2">Dark mode</h2>
-          <div className=" pl-1">
-            <Switch
-              label="Dark mode"
-              className=" pl-2 "
-              checked={darkMode}
-              color="blue"
-              onClick={() => {
-                setDarkMode(!darkMode);
-              }}
-            />
-          </div>
-        </div>
       </div>
     </WrapBar>
   );

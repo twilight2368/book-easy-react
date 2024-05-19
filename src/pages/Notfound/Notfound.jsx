@@ -17,9 +17,9 @@ export default function Notfound() {
           </h1>
         </div>
       </div>
-      <div className=" grid grid-cols-2 grid-rows-2 p-32 pr-96">
+      <div className=" grid grid-cols-2 grid-rows-2 pb-32 pl-32 pt-20 pr-80">
         <div className=" row-span-2 flex items-center justify-end">
-          <img src={NotFoundPic} alt="" className=" h-96 w-auto" />
+          <img src={NotFoundPic} alt="" className=" h-96 w-auto " />
         </div>
         <div className=" flex justify-center  items-end pb-5">
           <span className=" text-5xl text-blue-300 font-black">
@@ -31,14 +31,22 @@ export default function Notfound() {
             The link you followed probably broken or the page has been removed
           </div>
           <div className=" mt-5 flex justify-center">
-            <Button className="" variant="outlined" color="blue" onClick={(e)=>{
-                e.preventDefault()
-                navigate("/")
-            }}>
+            <Button
+              className=""
+              variant="outlined"
+              color="blue"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/");
+              }}
+            >
               Back to home
             </Button>
           </div>
         </div>
+      </div>
+      <div className=" w-full text-center pt-5">
+        <p>Copyright © 2024 KTPM. Powered by KTPM.</p>
       </div>
     </div>
   );
