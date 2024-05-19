@@ -3,11 +3,11 @@ import MyNavbar from "./Navbar";
 import { MySidebar } from "./SideBar";
 import "./wrapbar.css";
 import Footer from "./Footer";
-import { MyThemeContext } from "../App";
+
 export default function WrapBar(props) {
-  const [darkMode, setDarkMode] = useContext(MyThemeContext);
+
   return (
-    <div className={`${darkMode ? "dark" : ""}`}>
+    <div>
       <div>
         <div className="min-h-screen bg-secondary">
           <div className="navbar h-20 w-full bg-secondary ">
