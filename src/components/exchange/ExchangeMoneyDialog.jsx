@@ -1,9 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Button, Card, CardBody, Dialog, Input, Textarea, Typography } from '@material-tailwind/react'
+import bookCover from "../../components/books/book-cover-default.png";
+
+const apiUrl = "http://localhost:8080/api/v1";
 
 const ExchangeMoneyDialog = (props) => {
-  const { img, open, handleOpen } = props;
+  const { book, owner, open, handleOpen } = props;
+
+  const [money, setMoney] = useState();
+  const [currency, setCurrency] = useState();
+  const [message, setMessage] = useState();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    console.log(book, owner);
+
+    const body = {
+      bookId: book.id,
+      userId: book.ownerId,
+      exchangeItemType: 'MONEY',
+      moneyItem: {
+        amount: money,
+        unit: currency
+      },
+      message: message
+    }
+    console.log(body);
+
+    const response = await fetch(`${apiUrl}/books/${book.id}/offers`, {
+      method: "POST",
+      headers: { "Content-Type" : "application/json" },
+      body: JSON.stringify(body)
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    setMoney('');
+    setCurrency('');
+    setMessage('');
+
+    handleOpen();
+  }
+
   return (
     <Dialog
       size="xl"
@@ -24,58 +65,60 @@ const ExchangeMoneyDialog = (props) => {
             </button>
           </div>
         </div>
-        <CardBody className="flex flex-col gap-4 max-h-[500px] overflow-y-auto scroll-smooth">
-          <div className=" flex gap-4">
-            <img src={img} className=" w-24"/>
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-2">
-                <Typography className="-mb-2" variant="h6">
-                  Title:
-                </Typography>
-                <div>Một cái gì đó không bao giờ kết thúc</div>
-              </div>
-              <div className="flex gap-2">
-                <Typography className="-mb-2" variant="h6">
-                  Author:
-                </Typography>
-                <div>Lucy Store</div>
-              </div>
-              <div className="flex gap-2">
-                <Typography className="-mb-2" variant="h6">
-                  Publisher:
-                </Typography>
-                <div>Liberum Artis</div>
-              </div>
-              <div className="flex gap-2">
-                <Typography className="-mb-2" variant="h6">
-                  Owner:
-                </Typography>
-                <div>John Doe</div>
+        <form onSubmit={handleSubmit}>
+          <CardBody className="flex flex-col gap-4 max-h-[500px] overflow-y-auto scroll-smooth">
+            <div className=" flex gap-4">
+              <img src={book?.imagePath || bookCover} className=" w-24"/>
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-2">
+                  <Typography className="-mb-2" variant="h6">
+                    Title:
+                  </Typography>
+                  <div>{book?.title}</div>
+                </div>
+                <div className="flex gap-2">
+                  <Typography className="-mb-2" variant="h6">
+                    Author:
+                  </Typography>
+                  <div>{book?.author}</div>
+                </div>
+                { book?.publisher && <div className="flex gap-2">
+                  <Typography className="-mb-2" variant="h6">
+                    Publisher:
+                  </Typography>
+                  <div>{book?.publisher}</div>
+                </div> }
+                <div className="flex gap-2">
+                  <Typography className="-mb-2" variant="h6">
+                    Owner:
+                  </Typography>
+                  <div>{owner?.name}</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className=" w-full h-full flex flex-row gap-4 justify-between">
-            <div className=" flex flex-col gap-4 w-5/6 h-full">
-              <Typography className="-mb-2" variant="h6">
-                Money
-              </Typography>
-              <Input label="Money" size="lg" required />
+            <div className=" w-full h-full flex flex-row gap-4 justify-between">
+              <div className=" flex flex-col gap-4 w-5/6 h-full">
+                {/* <Typography className="-mb-2" variant="h6">
+                  Money
+                </Typography> */}
+                <Input label="Money" size="lg" value={money} onChange={({target}) => setMoney(target.value)} required />
+              </div>
+              <div className=" flex flex-col gap-4 h-full">
+                {/* <Typography className="-mb-2" variant="h6">
+                  Currency
+                </Typography> */}
+                <Input label="Currency" size="lg" value={currency} onChange={({target}) => setCurrency(target.value)} required />
+              </div>
             </div>
-            <div className=" flex flex-col gap-4 h-full">
-              <Typography className="-mb-2" variant="h6">
-                Currency
-              </Typography>
-              <Input label="Currency" size="lg" required />
-            </div>
-          </div>
-          <Typography className="-mb-2" variant="h6">
-            Message
-          </Typography>
-          <Textarea label="Message to owner" />
-          <Button variant="gradient" color="blue" onClick={handleOpen}>
-            Request exchange
-          </Button>
-        </CardBody>
+            {/* <Typography className="-mb-2" variant="h6">
+              Message
+            </Typography> */}
+            <Textarea label="Message to owner" value={message} onChange={({target}) => setMessage(target.value)} />
+            <Button variant="gradient" color="blue" type="submit" >
+              Request exchange
+            </Button>
+          </CardBody>
+        </form>
       </Card>
     </Dialog>
   )

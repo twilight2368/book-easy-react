@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Alert, Input } from '@material-tailwind/react';
+import { useCookies } from 'react-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 const apiUrl = "http://localhost:8080/api/v1";
 
@@ -13,6 +15,8 @@ export const Login = ({showRegisterSuccess}) => {
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
+
+  const [cookies, setCookie] = useCookies(['accessToken', 'user']);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,6 +37,11 @@ export const Login = ({showRegisterSuccess}) => {
       setError(data.message);
       return;
     }
+
+    console.log(data.accessToken);
+    console.log(jwtDecode(data.accessToken));
+    setCookie('accessToken', data.accessToken, { path: '/' } );
+    setCookie('user', jwtDecode(data.accessToken), { path: '/' } );
 
     navigate("/home");
   };
