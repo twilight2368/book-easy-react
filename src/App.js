@@ -37,6 +37,7 @@ function App() {
             <Route path="/setting" element={<SettingPage />} />
             <Route path="/transactions" element={<TransactionHistory />} />
             <Route path="*" element={<Notfound />} />
+            <Route path = "/profile" element = {<UserProfile/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -212,8 +212,8 @@ export const Signup = () => {
                       selected={birthDate}
                       onSelect={date => { setBirthDate(date); setFormData({...formData, birthDate: date.toISOString().slice(0,10)}) }}
                       showOutsideDays
-                      fromYear={1920}
-                      toYear={2030}
+                      fromYear={1930}
+                      toYear={2024}
                       captionLayout="dropdown"
                       className="border-0"
                       classNames={{
@@ -347,6 +347,38 @@ export const Signup = () => {
                   </label>
                 </div>
               </div>
+              <div className="grid grid-cols-2 gap-5">
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select province"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select district"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-5">
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select commune"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+                <input
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Detailed address"
+                />
+              </div>
+
               <button
                 type="submit"
                 class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"

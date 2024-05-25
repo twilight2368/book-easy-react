@@ -21,7 +21,7 @@ export default function WrapBar(props) {
             <div className=" w-5/6 pl-3  pr-3 pt-5 bg-secondary   ">
               <div className=" min-h-screen mb-40 ">{props.children}</div>
               <div>
-                <Footer className="" />
+                
               </div>
             </div>
           </div>
