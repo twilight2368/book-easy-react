@@ -6,7 +6,7 @@ import bookCover from "../../components/books/book-cover-default.png";
 const apiUrl = "http://localhost:8080/api/v1";
 
 const ExchangeMoneyDialog = (props) => {
-  const { book, owner, open, handleOpen } = props;
+  const { book, owner, open, handleOpen, handleSuccess } = props;
 
   const [money, setMoney] = useState();
   const [currency, setCurrency] = useState();
@@ -38,11 +38,17 @@ const ExchangeMoneyDialog = (props) => {
     const data = await response.json();
     console.log(data);
 
+    if (!response.ok) {
+      console.log(data);
+      return;
+    }
+
+    handleOpen();
+    handleSuccess();
+
     setMoney('');
     setCurrency('');
     setMessage('');
-
-    handleOpen();
   }
 
   return (

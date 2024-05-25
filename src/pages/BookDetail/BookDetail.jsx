@@ -10,8 +10,8 @@ import ExchangeMoneyDialog from "../../components/exchange/ExchangeMoneyDialog";
 import WrapBar from "../../components/WrapBar";
 import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
-
-const apiUrl = "http://localhost:8080/api/v1";
+import environment from "../../environment";
+import SuccessMessage from "../../components/SuccessMessage";
 
 const BookDetail = (props) => {
   const { id } = useParams();
@@ -24,16 +24,19 @@ const BookDetail = (props) => {
   const [book, setBook] = useState();
   const [owner, setOwner] = useState();
 
+  const [openOfferSuccessMessage, setOpenOfferSuccessMessage] = useState(false);
+
   const [cookies, setCookie] = useCookies(['accessToken', 'user']);
   console.log(cookies['user']);
 
   const fetchData = async(id) => {
-    const bookResponse = await fetch(`${apiUrl}/books/${id}`);
+    console.log(environment.apiUrl);
+    const bookResponse = await fetch(`${environment.apiUrl}/books/${id}`);
     const bookData = await bookResponse.json();
     setBook(bookData);
     console.log(bookData);
 
-    const userResponse = await fetch(`${apiUrl}/users/${bookData.ownerId}`);
+    const userResponse = await fetch(`${environment.apiUrl}/users/${bookData.ownerId}`);
     const userData = await userResponse.json();
     setOwner(userData);
     console.log(userData);
@@ -80,14 +83,16 @@ const BookDetail = (props) => {
                 <ExchangeBookDialog
                   open={openExchangeBook}
                   handleOpen={handleOpenExchangeBook}
-                  img={Pic}
+                  handleSuccess={() => setOpenOfferSuccessMessage(true)}
+                  book={book}
+                  owner={owner}
                 />
                 <ExchangeMoneyDialog
                   open={openExchangeMoney}
                   handleOpen={handleOpenExchangeMoney}
+                  handleSuccess={() => setOpenOfferSuccessMessage(true)}
                   book={book}
                   owner={owner}
-                  img={Pic}
                 />
               </div>
               <div class="text-3xl text-gray-800 font-bold ">{book?.title}</div>
@@ -121,6 +126,7 @@ const BookDetail = (props) => {
           
         </div>
       </div>
+      <SuccessMessage message='Offer sent successfully!' open={openOfferSuccessMessage} handleClose={() => setOpenOfferSuccessMessage(false)}/>
     </WrapBar>
   );
 };
