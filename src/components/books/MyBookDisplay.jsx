@@ -33,7 +33,7 @@ export default function MyBookDisplay(props) {
             <div className=" text-center">
               <span className=" text-white">The book</span>
               <br />
-              <span className=" text-white">has been borrowed</span>
+              <span className=" text-white">has been exchanged</span>
             </div>
           </div>
         </>

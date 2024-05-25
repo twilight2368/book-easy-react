@@ -3,14 +3,17 @@ import Logo from "../assets/images/books.png";
 import { Button, Input } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProfileMenu from "./profile-menu/ProfileMenu";
 import NotifyMenu from "./notification-menu/NotifyMenu";
 import ChatNavbar from "./chat-navbar/ChatNavbar";
+import { useCookies } from "react-cookie";
 
 export default function MyNavbar() {
   const [searchParam, setSearchParam] = useState("");
   const navigate = useNavigate();
+
+  const [cookies, setCookie] = useCookies(['user']);
 
   return (
     <div className=" w-full bg-white fixed top-0 z-20 h-20">
@@ -54,23 +57,27 @@ export default function MyNavbar() {
           </div>
         </div>
         <div>
-          {false ? (
+          {!cookies['user'] ? (
             <>
               <div className=" flex gap-5 justify-center items-center">
-                <Button
-                  size="md "
-                  variant="outlined"
-                  className=" border-blue-300 text-blue-500 montserrat-font"
-                >
-                  Register
-                </Button>
-                <Button
-                  size="md"
-                  varient="filled"
-                  className=" bg-blue-500 montserrat-font"
-                >
-                  Login
-                </Button>
+                <Link to="/register">
+                  <Button
+                    size="md "
+                    variant="outlined"
+                    className=" border-blue-300 text-blue-500 montserrat-font"
+                  >
+                    Register
+                  </Button>
+                </Link>
+                <Link to="/login">
+                  <Button
+                    size="md"
+                    varient="filled"
+                    className=" bg-blue-500 montserrat-font"
+                  >
+                    Login
+                  </Button>
+                </Link>
               </div>
             </>
           ) : (
