@@ -11,7 +11,7 @@ import {
   
 } from "@material-tailwind/react";
 
-export default function FilterBookExplore({ option, handleOptionChange }) {
+export default function FilterBookExplore({ option, setOption }) {
 
   return (
     <>
@@ -28,7 +28,7 @@ export default function FilterBookExplore({ option, handleOptionChange }) {
                 value="all"
                 name="filter-options" // Nhóm radio button
                 checked={option === 'all'} // Chọn "Tất cả" theo mặc định
-                onChange={event => handleOptionChange(event.target.value)}
+                onChange={event => setOption(event.target.value)}
               />
               <Typography color="blue-gray" className="font-medium">
                 Tất cả
@@ -45,7 +45,7 @@ export default function FilterBookExplore({ option, handleOptionChange }) {
                 value="author"
                 name="filter-options" // Nhóm radio button
                 checked={option === 'author'}
-                onChange={event => handleOptionChange(event.target.value)}
+                onChange={event => setOption(event.target.value)}
               />
               <Typography color="blue-gray" className="font-medium">
                 Theo tác giả

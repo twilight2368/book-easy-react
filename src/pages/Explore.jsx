@@ -14,7 +14,17 @@ export default function Explore() {
   const [option, setOption] = useState('all');
 
   const fetchData = async () => {
-    const url = new URL(`${apiUrl}/books/search`, window.location.origin); // More robust URL construction
+    // const url = new URL(`${apiUrl}/books/search`, window.location.origin); // More robust URL construction
+    let url;
+    if (option === 'author') {
+      url = new URL(`${apiUrl}/books/search-sort-by-author`, window.location.origin); // Call author search API
+    } 
+    else if (option === 'title') {
+      url = new URL(`${apiUrl}/books/search-sort-by-title`, window.location.origin);
+    }
+    else {
+      url = new URL(`${apiUrl}/books/search`, window.location.origin);
+    }
     url.searchParams.append('q', query); // Append query parameter
     url.searchParams.append('page', page); // Append page parameter
     url.searchParams.append('size', size); // Append size parameter
@@ -27,22 +37,8 @@ export default function Explore() {
   
   useEffect(() => {
     fetchData();
-  }, []);
-
-  // const handleFilterChange = (event) => {
-  //   setSelectedFilter(event.target.value);
-  //   if (event.target.value === 'author') {
-  //     fetchData(new URL(`${apiUrl}/books/search-sort-by-author`, window.location.origin)); // Call author search API
-  //   } else if (event.target.value === 'title') {
-  //     fetchData(new URL(`${apiUrl}/books/search-sort-by-title`, window.location.origin));
-  //   }
-  // };
-
-  const handleOptionChange = (value) => {
-    setOption(value);
-    console.log(option);
-  }
-
+  }, [option]);
+  
   const handleSearch = (event) => {
     setQuery(event.target.value);
   };
@@ -83,7 +79,7 @@ export default function Explore() {
           </div>
           <div className="col-span-2 pt-4 pr-4">
           <div className="col-span-2 pt-4 pr-4">
-      <FilterBookExplore option={option} handleOptionChange={handleOptionChange} />
+      <FilterBookExplore option={option} setOption={setOption} />
     </div>
           </div>
         </div>
