@@ -10,7 +10,7 @@ export default function Explore() {
   const [query, setQuery] = useState(''); // Add state for query parameter
   const [page, setPage] = useState(0); // Add state for pagination (default: 0)
   const [size, setSize] = useState(60); // Add state for size (default: 50)
-
+  const [selectedFilter, setSelectedFilter] = useState('all');
 
   const fetchData = async () => {
     const url = new URL(`${apiUrl}/books/search`, window.location.origin); // More robust URL construction
@@ -28,7 +28,14 @@ export default function Explore() {
   useEffect(() => {
     fetchData();
   }, []);
-
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+    if (event.target.value === 'author') {
+      fetchData(new URL(`${apiUrl}/books/search-sort-by-author`, window.location.origin)); // Call author search API
+    } else if (event.target.value === 'title') {
+      fetchData(new URL(`${apiUrl}/books/search-sort-by-title`, window.location.origin));
+    }
+  };
 
 
 
@@ -60,13 +67,20 @@ export default function Explore() {
         <div className="w-full grid grid-cols-10 mt-4">
           <div className="col-span-8 px-10 mt-4">
             <div className="w-full h-full grid grid-cols-4 gap-3 gap-y-10">
-              {searchResult.map((b) => (
+
+              
+               {
+              
+              
+              searchResult.map((b) => (
                 <BookDisplay book={b} key={b.id} /> // Add unique key for each book
               ))}
             </div>
           </div>
           <div className="col-span-2 pt-4 pr-4">
-            <FilterBookExplore />
+          <div className="col-span-2 pt-4 pr-4">
+      <FilterBookExplore onFilterChange={handleFilterChange} />
+    </div>
           </div>
         </div>
       </div>
