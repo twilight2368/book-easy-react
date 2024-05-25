@@ -31,7 +31,7 @@ const ExchangeBookDialog = (props) => {
     const data = await response.json();
     console.log(data);
 
-    setMyBooks(data.content);
+    setMyBooks(data.content.filter(b => b.status === 'AVAILABLE'));
   }
 
   useEffect(() => {
@@ -77,6 +77,7 @@ const ExchangeBookDialog = (props) => {
       return;
     }
 
+    handleOpen();
     handleSuccess();
 
     console.log(data);
