@@ -11,7 +11,7 @@ import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 
-export const Signup = () => {
+const Signup = () => {
   const [date, setDate] = React.useState();
   return (
     <section class="bg-gray-50 dark:bg-gray-900">
@@ -43,7 +43,7 @@ export const Signup = () => {
                   id="email"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
-                  required=""
+                  required
                 />
               </div>
               <div>
@@ -53,7 +53,7 @@ export const Signup = () => {
                   id="password"
                   placeholder="••••••••"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
+                  required
                 />
               </div>
 
@@ -81,7 +81,7 @@ export const Signup = () => {
                 <Popover placement="bottom">
                   <PopoverHandler>
                     <Input
-                      label="Select a Date"
+                      label="Date of birth"
                       onChange={() => null}
                       value={date ? format(date, "PPP") : ""}
                       className="cursor-pointer"
@@ -93,8 +93,8 @@ export const Signup = () => {
                       selected={date}
                       onSelect={setDate}
                       showOutsideDays
-                      fromYear={1920}
-                      toYear={2030}
+                      fromYear={1930}
+                      toYear={2024}
                       captionLayout="dropdown"
                       className="border-0"
                       classNames={{
@@ -139,32 +139,45 @@ export const Signup = () => {
                   </PopoverContent>
                 </Popover>
               </div>
-
-              <div class="flex items-start">
-                <div class="flex items-center h-5">
-                  <input
-                    id="terms"
-                    aria-describedby="terms"
-                    type="checkbox"
-                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    required=""
-                  />
-                </div>
-                <div class="ml-3 text-sm">
-                  <label
-                    for="terms"
-                    class="font-light text-gray-500 dark:text-gray-300"
-                  >
-                    I accept the{" "}
-                    <a
-                      class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                      href="#"
-                    >
-                      Terms and Conditions
-                    </a>
-                  </label>
-                </div>
+              <div>
+                <input
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Phone number"
+                />
               </div>
+              <div className="grid grid-cols-2 gap-5">
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select province"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select district"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-5">
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select commune"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+                <input
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Detailed address"
+                />
+              </div>
+
               <button
                 type="submit"
                 class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"

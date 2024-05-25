@@ -1,8 +1,11 @@
 import { Button, Switch } from "@material-tailwind/react";
 import React from "react";
 import WrapBar from "../../components/WrapBar";
+import ChangeProfile from "../../components/change-profile/ChangeProfile";
 
 export default function SettingPage() {
+  const[openChangeProfile, setOpenChangeProfile] = React.useState(false);
+  const handleOpenChangeProfile = () => setOpenChangeProfile((cur) => !cur);
   return (
     <WrapBar>
       <div className=" pl-5 pt-3 ">
@@ -11,7 +14,11 @@ export default function SettingPage() {
         </div>
         <div className="mb-5">
           <h2 className=" text-2xl font-bold mb-2">Change profile</h2>
-          <Button color="blue">Go to profile</Button>
+          <Button color="blue" onClick={handleOpenChangeProfile}>Go to profile</Button>
+          <ChangeProfile
+          open = {openChangeProfile}
+          handleOpen = {handleOpenChangeProfile}
+          />
         </div>
         <div className="mb-5">
           <h2 className=" text-2xl font-bold mb-2">Change username</h2>
