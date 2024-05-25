@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/images/books.png";
-import {
-  Button,
-  Input,
-} from "@material-tailwind/react";
+import { Button, Input } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 import { useNavigate } from "react-router-dom";
@@ -12,7 +9,7 @@ import NotifyMenu from "./notification-menu/NotifyMenu";
 import ChatNavbar from "./chat-navbar/ChatNavbar";
 
 export default function MyNavbar() {
-  const [searchParam, setSearchParam] = useState('');
+  const [searchParam, setSearchParam] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -27,31 +24,33 @@ export default function MyNavbar() {
         <div></div>
         <div>
           <div className="relative flex w-full max-w-[24rem]">
-            <Input
-              type="text"
-              label="Search"
-              color="blue"
-              className="pr-20 "
-              containerProps={{
-                className: "min-w-0",
-              }}
-              onChange={(e)=>{
-                e.preventDefault()
-                setSearchParam(e.target.value)
-              }}
-            />
-            <Button
-              size="sm"
-              color={true ? "gray" : "blue-gray"}
-              disabled={false}
-              className="!absolute right-1 top-[3px] rounded flex items-center justify-center bg-blue-300"
-              onClick={(e)=>{
-                e.preventDefault();
-                navigate('/search/' + searchParam)
-              }}
-            >
-              <MagnifyingGlassIcon className=" text-lg text-white h-4 w-4 " />
-            </Button>
+              <Input
+                type="text"
+                label="Search"
+                color="blue"
+                className="pr-20 "
+                containerProps={{
+                  className: "min-w-0",
+                }}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setSearchParam(e.target.value);
+                }}
+              />
+              <Button
+                size="sm"
+                color={true ? "gray" : "blue-gray"}
+                disabled={false}
+                className="!absolute right-1 top-[3px] rounded flex items-center justify-center bg-blue-300"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (searchParam.trim().length > 0) {
+                    navigate("/search/" + searchParam.trim());
+                  }
+                }}
+              >
+                <MagnifyingGlassIcon className=" text-lg text-white h-4 w-4 " />
+              </Button>
           </div>
         </div>
         <div>

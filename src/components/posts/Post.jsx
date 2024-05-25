@@ -1,21 +1,17 @@
 import {
-  EllipsisVerticalIcon,
-  HandThumbUpIcon,
   HeartIcon,
-  StarIcon,
 } from "@heroicons/react/24/outline";
 import {
   Avatar,
-  Button,
   Card,
-  CardHeader,
-  IconButton,
 } from "@material-tailwind/react";
 import React from "react";
+import PostMenu from "./PostMenu";
 
-export default function Post() {
+export default function Post(props) {
+  const { title, content } = props;
   return (
-    <div>
+    <div className=" w-2/3">
       <Card className="w-full min-w-96 min-h-96 ">
         <div className=" py-3 px-5 flex gap-2">
           <div className=" flex items-center justify-center">
@@ -29,20 +25,15 @@ export default function Post() {
             <div className=" font-bold text-black">@user_name</div>
             <div className=" text-xs ">1 hour ago</div>
           </div>
-          <div className="flex justify-center items-center ">
-            <IconButton className=" h-10 w-10 " variant="text">
-              <EllipsisVerticalIcon className=" h-5 w-5 text-gray-500 " />
-            </IconButton>
+          <div>
+            <PostMenu />
           </div>
         </div>
+        <div className=" w-full px-5 text-lg font-bold text-pretty mb-2">
+          {title}
+        </div>
         <div className=" h-32 w-full overflow-y-hidden px-5 text-sm text-pretty mb-3 ">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quasi,
-          sequi odio est neque doloremque a veniam quis facilis? Culpa,
-          asperiores facere. Voluptas quia totam similique suscipit! Rem, quos
-          rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Maxime, quos eveniet recusandae ullam dolorum fugit sequi tempora
-          corrupti, sunt nobis provident. Natus libero exercitationem, in hic
-          eligendi quia ullam repellat!
+          {content}
         </div>
         <div className=" h-96 w-full px-5 mb-5">
           <img

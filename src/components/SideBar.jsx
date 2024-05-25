@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemPrefix } from "@material-tailwind/react";
+import { List, ListItem, ListItemPrefix, Button } from "@material-tailwind/react";
 import {
   HomeIcon,
   CalendarDaysIcon,
@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { Link } from "react-router-dom";
-import Home from "../pages/Home";
+
 import { StarIcon } from "@heroicons/react/24/outline";
 
 export function MySidebar() {

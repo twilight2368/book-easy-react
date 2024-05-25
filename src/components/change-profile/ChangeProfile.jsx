@@ -145,16 +145,16 @@ const ChangeProfile = (props) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   label="Select province"
                 >
-                  <Option>BOOK_EXCHANGER</Option>
-                  <Option>BOOKSTORE</Option>
+                  <Option>Ha Noi</Option>
+                  <Option>Ho Chi Minh</Option>
                 </Select>
 
                 <Select
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   label="Select district"
                 >
-                  <Option>BOOK_EXCHANGER</Option>
-                  <Option>BOOKSTORE</Option>
+                  <Option>Quan Hai Ba Trung</Option>
+                  <Option>Quan Hoan Kiem</Option>
                 </Select>
               </div>
               <div className="grid grid-cols-2 gap-5">
@@ -162,8 +162,8 @@ const ChangeProfile = (props) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   label="Select commune"
                 >
-                  <Option>BOOK_EXCHANGER</Option>
-                  <Option>BOOKSTORE</Option>
+                  <Option>Phuong Bach Khoa</Option>
+                  <Option>Phuong Dong Tam</Option>
                 </Select>
                 <input
                   type="text"
