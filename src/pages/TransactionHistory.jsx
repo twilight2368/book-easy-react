@@ -1,8 +1,15 @@
 import { Typography } from "@material-tailwind/react";
 import WrapBar from "../components/WrapBar";
 import TransactionsTable from "../components/transactions/TransactionsTable";
+import { useLocation } from "react-router";
+import SuccessMessage from "../components/SuccessMessage";
+import { useState } from "react";
 
 const TransactionHistory = (props) => {
+    const { state } = useLocation();
+    const { successMessage } = state || {};
+    const [ openSuccessMessage, setOpenSuccessMessage ] = useState(true);
+
     return (
         <>
             <WrapBar>
@@ -13,6 +20,7 @@ const TransactionHistory = (props) => {
                     </div>
                 </div>
             </WrapBar>
+            { successMessage && <SuccessMessage message={successMessage} open={openSuccessMessage} handleClose={() => setOpenSuccessMessage(false)} /> }
         </>
     );
 }

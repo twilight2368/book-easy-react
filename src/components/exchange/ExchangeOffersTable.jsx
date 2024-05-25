@@ -2,43 +2,17 @@ import { Button, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import environment from "../../environment";
 import moment from "moment/moment";
+import { useNavigate } from "react-router";
 
 const ExchangeOffersTable = (props) => {
     const { book } = props;
+    const navigate = useNavigate();
 
     const TABLE_HEAD = ["Time", "User", "Exchange Item", "Message", "Actions"];
- 
-    const TABLE_ROWS = [
-    {
-        name: "John Michael",
-        job: "Manager",
-        date: "23/04/18",
-    },
-    {
-        name: "Alexa Liras",
-        job: "Developer",
-        date: "23/04/18",
-    },
-    {
-        name: "Laurent Perrier",
-        job: "Executive",
-        date: "19/09/17",
-    },
-    {
-        name: "Michael Levi",
-        job: "Developer",
-        date: "24/12/08",
-    },
-    {
-        name: "Richard Gran",
-        job: "Manager",
-        date: "04/10/21",
-    },
-    ];
 
     const [offers, setOffers] = useState([]);
 
-    const fetchOffers = async(id) => {
+    const fetchOffers = async (id) => {
         const response = await fetch(`${environment.apiUrl}/books/${id}/offers`);
         let data = await response.json();
         
@@ -54,6 +28,21 @@ const ExchangeOffersTable = (props) => {
     useEffect(() => {
         fetchOffers(book.id)
     }, []);
+
+    const handleReply = async (id, accept) => {
+      const response = await fetch(`${environment.apiUrl}/books/${book.id}/offers/${id}/${accept ? 'accept' : 'reject'}`, {
+        method: "POST",
+        headers: { "Content-Type" : "application/json" }
+      });
+      const data = await response.json();
+      console.log(data);
+
+      if (accept) {
+        navigate('/transactions', { state: { successMessage: 'Offer accepted successfully! New transaction has been created.' } });
+      } else {
+        fetchOffers(book.id);
+      }
+    } 
 
     return offers.length === 0 ? (
         <Typography className="text-normal text-base">There isn't any offer yet.</Typography>
@@ -105,8 +94,8 @@ const ExchangeOffersTable = (props) => {
                     <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
                       Reject
                     </Typography> */}
-                    <Button size="sm" color="green">Accept</Button>
-                    <Button size="sm" color="red">Reject</Button>
+                    <Button size="sm" color="green" onClick={() => handleReply(id, true)}>Accept</Button>
+                    <Button size="sm" color="red" onClick={() => handleReply(id, false)}>Reject</Button>
                   </td>
                 </tr>
               ))}
