@@ -1,38 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "../components/posts/Post";
 import { Avatar, Button, Card } from "@material-tailwind/react";
 import EventList from "../components/event-list/EventList";
 import { AddPostDiag } from "../components/add-post/AddPostDiag";
 import EventDetailsCover from "../components/event-details/EventDetailsCover";
 import WrapBar from "../components/WrapBar";
+import { useParams } from "react-router";
 
 export default function EventDetails() {
-  const [posts, setPosts] = React.useState([]);
+  const [posts, setPosts] = useState([]);
+  const [event, setEvent] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
-    const fetchedPosts = [
-      {
-        title: "National resentment day",
-        content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quasi,
-        sequi odio est neque doloremque a veniam quis facilis? Culpa,
-        asperiores facere. Voluptas quia totam similique suscipit! Rem, quos
-        rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Maxime, quos eveniet recusandae ullam dolorum fugit sequi tempora
-        corrupti, sunt nobis provident. Natus libero exercitationem, in hic
-        eligendi quia ullam repellat!`
-      },
-      {
-        title: "National resentment day",
-        content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quasi,
-        sequi odio est neque doloremque a veniam quis facilis? Culpa,
-        asperiores facere. Voluptas quia totam similique suscipit! Rem, quos
-        rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Maxime, quos eveniet recusandae ullam dolorum fugit sequi tempora
-        corrupti, sunt nobis provident. Natus libero exercitationem, in hic
-        eligendi quia ullam repellat!`
-      }
-    ]
-    setPosts(fetchedPosts);
+    // const fetchEvent = async () => {
+    //   await fetch(`http://localhost:8080/api/v1/events/${id}`)
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(data => {
+    //     setPosts(data);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
+    // }
+
+    // const fetchPosts = async () => {
+    //   await fetch(`http://localhost:8080/api/v1/posts/find-by-event?id=${id}`)
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(data => {
+    //     console.log(data);
+    //     setPosts(data);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
+    // }
+    
+    // fetchEvent();
+    // fetchPosts();
   }, []);
 
   const postList = posts.map((post) => 
@@ -57,7 +66,7 @@ export default function EventDetails() {
                 />
               </div>
               <div className=" w-full">
-                <AddPostDiag />
+                <AddPostDiag eventId={id} />
               </div>
             </Card>
             

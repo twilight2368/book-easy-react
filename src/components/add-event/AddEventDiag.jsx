@@ -11,18 +11,21 @@ import {
 } from "@material-tailwind/react";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router";
+import { useCookies } from "react-cookie";
 
 export function AddEventDiag() {
   const navigate = useNavigate()
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen((cur) => !cur);
 
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [startDate, setStartDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endDate, setEndDate] = useState('');
   const [endTime, setEndTime] = useState('');
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen((cur) => !cur);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +38,7 @@ export function AddEventDiag() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ownerId: 1,
+        ownerId: cookies['user'].id,
         name: name,
         description: description,
         startTime: start,
@@ -58,14 +61,17 @@ export function AddEventDiag() {
 
   return (
     <>
-      <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
-        <div className="flex justify-center items-center">
-          <PlusIcon className="h-5 w-5 mr-2"/>
-          <div className="font-black">
-            Create new event
+      {
+        cookies['user'] &&
+        <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
+          <div className="flex justify-center items-center">
+            <PlusIcon className="h-5 w-5 mr-2"/>
+            <div className="font-black">
+              Create new event
+            </div>
           </div>
-        </div>
-      </Button>
+        </Button>
+      }
       <Dialog
         size="xl"
         open={open}
