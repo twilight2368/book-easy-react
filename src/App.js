@@ -35,6 +35,7 @@ function App() {
             <Route path="book/:id" element={<BookDetail />} />
             <Route path="/setting" element={<SettingPage />} />
             <Route path="*" element={<Notfound />} />
+            <Route path = "/profile" element = {<UserProfile/>}/>
         </Routes>
       </BrowserRouter>
     </div>
