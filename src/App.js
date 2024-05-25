@@ -14,6 +14,7 @@ import SettingPage from "./pages/setting-user/SettingPage";
 import EventDetails from "./pages/EventDetails";
 import Notfound from "./pages/Notfound/Notfound";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import TransactionHistory from "./pages/TransactionHistory";
 
 function App() {
 
@@ -31,10 +32,12 @@ function App() {
             <Route path="events" element={<Events />} />
             <Route path="/events/:id" element={<EventDetails />} />
             <Route path="interest" element={<InterestBooks />} />
-            <Route path="mybook/:user" element={<MyBooks />} />
+            <Route path="mybook" element={<MyBooks />} />
             <Route path="book/:id" element={<BookDetail />} />
             <Route path="/setting" element={<SettingPage />} />
+            <Route path="/transactions" element={<TransactionHistory />} />
             <Route path="*" element={<Notfound />} />
+            <Route path = "/profile" element = {<UserProfile/>}/>
         </Routes>
       </BrowserRouter>
     </div>

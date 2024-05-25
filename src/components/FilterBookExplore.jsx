@@ -6,136 +6,52 @@ import {
   Card,
   Checkbox,
   Typography,
+  Select,
+  Radio,
+  
 } from "@material-tailwind/react";
-export default function FilterBookExplore() {
+
+export default function FilterBookExplore({ onFilterChange }) {
+  const handleRadioChange = (event) => {
+    console.log(event);
+    onFilterChange(event.target.value); // Gọi hàm được truyền vào với giá trị chọn
+  };
+
   return (
-    <div>
+    <div  onChange={handleRadioChange}>
       <Card className="pb-5">
-        <h2 className=" text-xl font-bold ml-5 mt-5 text-black">Filter:</h2>
+        <h2 className="text-xl font-bold ml-5 mt-5 text-black">Lọc:</h2>
         <List>
           <ListItem className="p-0">
             <label
-              htmlFor="vertical-list-react"
+              htmlFor="filter-all"
               className="flex w-full cursor-pointer items-center px-3 py-2"
             >
-              <ListItemPrefix className="mr-3">
-                <Checkbox
-                  id="vertical-list-react"
-                  ripple={false}
-                  className="hover:before:opacity-0"
-                  color="blue"
-                  containerProps={{
-                    className: "p-0",
-                  }}
-                />
-              </ListItemPrefix>
+              <Radio
+                id="filter-all"
+                value="all"
+                name="filter-options" // Nhóm radio button
+               // onChange={handleRadioChange}
+                checked={true} // Chọn "Tất cả" theo mặc định
+              />
               <Typography color="blue-gray" className="font-medium">
-                Item
+                Tất cả
               </Typography>
             </label>
           </ListItem>
           <ListItem className="p-0">
             <label
-              htmlFor="vertical-list-vue"
+              htmlFor="filter-author"
               className="flex w-full cursor-pointer items-center px-3 py-2"
             >
-              <ListItemPrefix className="mr-3">
-                <Checkbox
-                  id="vertical-list-vue"
-                  ripple={false}
-                  color="blue"
-                  className="hover:before:opacity-0"
-                  containerProps={{
-                    className: "p-0",
-                  }}
-                />
-              </ListItemPrefix>
+              <Radio
+                id="filter-author"
+                value="author"
+                name="filter-options" // Nhóm radio button
+               // onChange={handleRadioChange}
+              />
               <Typography color="blue-gray" className="font-medium">
-                Item
-              </Typography>
-            </label>
-          </ListItem>
-          <ListItem className="p-0">
-            <label
-              htmlFor="vertical-list-svelte"
-              className="flex w-full cursor-pointer items-center px-3 py-2"
-            >
-              <ListItemPrefix className="mr-3">
-                <Checkbox
-                  id="vertical-list-svelte"
-                  ripple={false}
-                  color="blue"
-                  className="hover:before:opacity-0"
-                  containerProps={{
-                    className: "p-0",
-                  }}
-                />
-              </ListItemPrefix>
-              <Typography color="blue-gray" className="font-medium">
-                Item
-              </Typography>
-            </label>
-          </ListItem>
-          <ListItem className="p-0">
-            <label
-              htmlFor="vertical-list-svelte-3"
-              className="flex w-full cursor-pointer items-center px-3 py-2"
-            >
-              <ListItemPrefix className="mr-3">
-                <Checkbox
-                  id="vertical-list-svelte-3"
-                  ripple={false}
-                  color="blue"
-                  className="hover:before:opacity-0"
-                  containerProps={{
-                    className: "p-0",
-                  }}
-                />
-              </ListItemPrefix>
-              <Typography color="blue-gray" className="font-medium">
-                Item
-              </Typography>
-            </label>
-          </ListItem>
-          <ListItem className="p-0">
-            <label
-              htmlFor="vertical-list-svelte-2"
-              className="flex w-full cursor-pointer items-center px-3 py-2"
-            >
-              <ListItemPrefix className="mr-3">
-                <Checkbox
-                  id="vertical-list-svelte-2"
-                  ripple={false}
-                  color="blue"
-                  className="hover:before:opacity-0"
-                  containerProps={{
-                    className: "p-0",
-                  }}
-                />
-              </ListItemPrefix>
-              <Typography color="blue-gray" className="font-medium">
-                Item
-              </Typography>
-            </label>
-          </ListItem>
-          <ListItem className="p-0">
-            <label
-              htmlFor="vertical-list-svelte-1"
-              className="flex w-full cursor-pointer items-center px-3 py-2"
-            >
-              <ListItemPrefix className="mr-3">
-                <Checkbox
-                  id="vertical-list-svelte-1"
-                  ripple={false}
-                  color="blue"
-                  className="hover:before:opacity-0"
-                  containerProps={{
-                    className: "p-0",
-                  }}
-                />
-              </ListItemPrefix>
-              <Typography color="blue-gray" className="font-medium">
-                Item
+                Theo tác giả
               </Typography>
             </label>
           </ListItem>
@@ -144,3 +60,4 @@ export default function FilterBookExplore() {
     </div>
   );
 }
+

@@ -5,13 +5,14 @@ import { IconButton } from "@material-tailwind/react";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 export default function BookDisplay(props) {
+  const book = props.book;
   return (
     <div className=" relative w-11/12 h-full duration-300 hover:scale-105 book-display overflow-hidden rounded-md">
-      <Link to="/book/id">
-        <img src={BookCover} alt="" className=" object-fill h-full w-full" />
+      <Link to={`/book/${book.id}`}>
+        <img src={book.imagePath || BookCover} alt="" className=" object-fill h-full w-full" />
         <div className=" absolute bottom-0 bg-black/75 w-full text-white text-center whitespace-nowrap text-nowrap book-name-display">
-          <div className=" font-black text-base nunito-font mt-1">Book name</div>
-          <div className=" nunito-font mb-0 text-sm">Author</div>
+          <div className=" font-black text-base nunito-font mt-1">{book.title}</div>
+          <div className=" nunito-font mb-0 text-sm">{book.author}</div>
         </div>
       </Link>
       <div className=" absolute top-2 right-2 star-icon-display">

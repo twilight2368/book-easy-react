@@ -4,7 +4,7 @@ import Pic from "./ex.jpg";
 import Pic2 from "./icons8-plus-24.png"
 import Pic3 from"./icons8-heart-24.png";
 import { BookOpenIcon, BanknotesIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
-import { Button } from "@material-tailwind/react"
+import { Button, Typography } from "@material-tailwind/react"
 import ExchangeBookDialog from "../../components/exchange/ExchangeBookDialog";
 import ExchangeMoneyDialog from "../../components/exchange/ExchangeMoneyDialog";
 import WrapBar from "../../components/WrapBar";
@@ -12,6 +12,7 @@ import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
 import environment from "../../environment";
 import SuccessMessage from "../../components/SuccessMessage";
+import ExchangeOffersTable from "../../components/exchange/ExchangeOffersTable";
 
 const BookDetail = (props) => {
   const { id } = useParams();
@@ -28,8 +29,9 @@ const BookDetail = (props) => {
 
   const [cookies, setCookie] = useCookies(['accessToken', 'user']);
   console.log(cookies['user']);
+  const thisUser = cookies['user'];
 
-  const fetchData = async(id) => {
+  const fetchData = async (id) => {
     console.log(environment.apiUrl);
     const bookResponse = await fetch(`${environment.apiUrl}/books/${id}`);
     const bookData = await bookResponse.json();
@@ -66,20 +68,23 @@ const BookDetail = (props) => {
             </div>
             <div class="flex-1 space-y-2">
               <div className="flex space-x-4 mb-10">
-                <Button 
-                  className="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-white text-red-500 w-full justify-center hover:bg-gray-200"
-                  onClick={handleOpenExchangeMoney}
-                >
-                  <BanknotesIcon className="h-6 w-6"/>
-                  <div>Exchange with money</div>
-                </Button>
-                <Button 
-                  className="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-white text-red-500 w-full justify-center hover:bg-gray-200"
-                  onClick={handleOpenExchangeBook}
-                >
-                  <BookOpenIcon className="h-6 w-6"/>
-                  <div>Exchange with another book</div>
-                </Button>
+                { thisUser?.id !== book?.ownerId && (
+                <>
+                  <Button 
+                    className="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-white text-red-500 w-full justify-center hover:bg-gray-200"
+                    onClick={handleOpenExchangeMoney}
+                  >
+                    <BanknotesIcon className="h-6 w-6"/>
+                    <div>Exchange with money</div>
+                  </Button>
+                  <Button 
+                    className="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-white text-red-500 w-full justify-center hover:bg-gray-200"
+                    onClick={handleOpenExchangeBook}
+                  >
+                    <BookOpenIcon className="h-6 w-6"/>
+                    <div>Exchange with another book</div>
+                  </Button>
+                </>)}
                 <ExchangeBookDialog
                   open={openExchangeBook}
                   handleOpen={handleOpenExchangeBook}
@@ -124,6 +129,12 @@ const BookDetail = (props) => {
             </div>
           </div>
           
+          { thisUser?.id === book?.ownerId && book?.status === 'AVAILABLE' && (
+            <div className="flex flex-col gap-5 items-start">
+              <Typography variant="h5" className="text-lg">Exchange Offers</Typography>
+              <ExchangeOffersTable book={book} />
+            </div>
+          ) }
         </div>
       </div>
       <SuccessMessage message='Offer sent successfully!' open={openOfferSuccessMessage} handleClose={() => setOpenOfferSuccessMessage(false)}/>

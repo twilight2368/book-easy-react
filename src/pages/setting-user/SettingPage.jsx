@@ -1,9 +1,14 @@
-import { Button, Switch } from "@material-tailwind/react";
-import React, { useContext } from "react";
+import { Button } from "@material-tailwind/react";
+import React from "react";
 import WrapBar from "../../components/WrapBar";
+import { Link } from "react-router-dom";
+import ChangePassword from "../../components/ChangePassword";
+
 
 
 export default function SettingPage() {
+  const [openChangePassword, setOpenChangePassword] = React.useState(false);
+  const handleOpenChangePassword = () => setOpenChangePassword((cur) => !cur);
 
   return (
     <WrapBar>
@@ -13,19 +18,21 @@ export default function SettingPage() {
         </div>
         <div className="mb-5">
           <h2 className=" text-2xl font-bold mb-2">Change profile</h2>
-          <Button color="blue">Go to profile</Button>
-        </div>
-        <div className="mb-5">
-          <h2 className=" text-2xl font-bold mb-2">Change username</h2>
-          <Button color="blue" variant="outlined">
-            Change username
-          </Button>
+          <Button color="blue" >
+            <Link to = "/profile">
+            Go to profile
+            </Link></Button>
+          
         </div>
         <div className="mb-5">
           <h2 className=" text-2xl font-bold mb-2">Change password</h2>
-          <Button color="blue" variant="outlined">
+          <Button color="blue" variant="outlined" onClick={handleOpenChangePassword}>
             Change password
           </Button>
+          <ChangePassword
+          open = {openChangePassword}
+          handleOpen = {handleOpenChangePassword}
+          />
         </div>
       </div>
     </WrapBar>

@@ -60,6 +60,7 @@ export default function ProfileMenu() {
                 closeMenu();
                 if (isLastItem) {
                   //todo: Logout user
+                  navigate("/login");
                 } else {
                   navigate("/" + link + "/" + 1);
                 }

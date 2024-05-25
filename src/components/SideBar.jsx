@@ -5,6 +5,7 @@ import {
   Cog6ToothIcon,
   Squares2X2Icon,
   BookOpenIcon,
+  CreditCardIcon,
 } from "@heroicons/react/24/outline";
 
 import { Link } from "react-router-dom";
@@ -47,12 +48,20 @@ export function MySidebar() {
             Interest
           </ListItem>
         </Link>
-        <Link to="/mybook/1">
+        <Link to="/mybook">
           <ListItem>
             <ListItemPrefix>
               <BookOpenIcon className="h-5 w-5" />
             </ListItemPrefix>
             My books
+          </ListItem>
+        </Link>
+        <Link to="/transactions">
+          <ListItem>
+            <ListItemPrefix>
+              <CreditCardIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            My transactions
           </ListItem>
         </Link>
         <Link to="/setting">

@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MyBookDisplay from "../components/books/MyBookDisplay";
 import { Checkbox } from "@material-tailwind/react";
 import { AddBookDiag } from "../components/add-book/AddBookDiag";
 import WrapBar from "../components/WrapBar";
+import { useCookies } from "react-cookie";
+import environment from "../environment";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function MyBooks() {
+  const [cookies, setCookie] = useCookies(['user', 'accessToken']);
+  const thisUser = cookies['user'];
+  const navigate = useNavigate();
+  
+  const [books, setBooks] = useState([]);
+
+  const fetchData = async () => {
+    if (!(thisUser?.id)) {
+      window.alert("Your session has expired. Please sign in again.");
+      navigate('/login');
+      return;
+    }
+
+    const response = await fetch(`${environment.apiUrl}/books/find-by-user?id=${thisUser.id}`);
+    const data = await response.json();
+    console.log(data.content);
+
+    setBooks(data.content);
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
   return (
     <>
       <WrapBar>
@@ -26,36 +54,9 @@ export default function MyBooks() {
             </div>
           </div>
           <div className=" w-full grid grid-cols-5 px-3 gap-5 gap-y-8 justify-center items-center">
-            <div>
-              <MyBookDisplay />
-            </div>
-            <div>
-              <MyBookDisplay />
-            </div>
-            <div>
-              <MyBookDisplay />
-            </div>
-            <div>
-              <MyBookDisplay />
-            </div>
-            <div>
-              <MyBookDisplay borrowed={true} />
-            </div>
-            <div>
-              <MyBookDisplay />
-            </div>
-            <div>
-              <MyBookDisplay borrowed={true} />
-            </div>
-            <div>
-              <MyBookDisplay />
-            </div>
-            <div>
-              <MyBookDisplay borrowed={true} />
-            </div>
-            <div>
-              <MyBookDisplay />
-            </div>
+            { books.map(book => (
+              <Link key={book.id} to={`/book/${book.id}`}><MyBookDisplay book={book} /></Link>
+            )) }
           </div>
         </div>
       </WrapBar>
