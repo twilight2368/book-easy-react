@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   List,
   ListItem,
@@ -11,14 +11,10 @@ import {
   
 } from "@material-tailwind/react";
 
-export default function FilterBookExplore({ onFilterChange }) {
-  const handleRadioChange = (event) => {
-    console.log(event);
-    onFilterChange(event.target.value); // Gọi hàm được truyền vào với giá trị chọn
-  };
+export default function FilterBookExplore({ option, handleOptionChange }) {
 
   return (
-    <div  onChange={handleRadioChange}>
+    <>
       <Card className="pb-5">
         <h2 className="text-xl font-bold ml-5 mt-5 text-black">Lọc:</h2>
         <List>
@@ -31,8 +27,8 @@ export default function FilterBookExplore({ onFilterChange }) {
                 id="filter-all"
                 value="all"
                 name="filter-options" // Nhóm radio button
-               // onChange={handleRadioChange}
-                checked={true} // Chọn "Tất cả" theo mặc định
+                checked={option === 'all'} // Chọn "Tất cả" theo mặc định
+                onChange={event => handleOptionChange(event.target.value)}
               />
               <Typography color="blue-gray" className="font-medium">
                 Tất cả
@@ -48,7 +44,8 @@ export default function FilterBookExplore({ onFilterChange }) {
                 id="filter-author"
                 value="author"
                 name="filter-options" // Nhóm radio button
-               // onChange={handleRadioChange}
+                checked={option === 'author'}
+                onChange={event => handleOptionChange(event.target.value)}
               />
               <Typography color="blue-gray" className="font-medium">
                 Theo tác giả
@@ -57,7 +54,7 @@ export default function FilterBookExplore({ onFilterChange }) {
           </ListItem>
         </List>
       </Card>
-    </div>
+    </>
   );
 }
 

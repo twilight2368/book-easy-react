@@ -1,4 +1,5 @@
 
+import { set } from "date-fns";
 import BookDisplay from "../components/books/BookDisplay";
 import FilterBookExplore from "../components/FilterBookExplore";
 import WrapBar from "../components/WrapBar";
@@ -10,7 +11,7 @@ export default function Explore() {
   const [query, setQuery] = useState(''); // Add state for query parameter
   const [page, setPage] = useState(0); // Add state for pagination (default: 0)
   const [size, setSize] = useState(60); // Add state for size (default: 50)
-  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [option, setOption] = useState('all');
 
   const fetchData = async () => {
     const url = new URL(`${apiUrl}/books/search`, window.location.origin); // More robust URL construction
@@ -21,23 +22,26 @@ export default function Explore() {
     const response = await fetch(url.toString());
 
     const data = await response.json();
-    console.log(data);
     setsearchResult(data);
   }
   
   useEffect(() => {
     fetchData();
   }, []);
-  const handleFilterChange = (event) => {
-    setSelectedFilter(event.target.value);
-    if (event.target.value === 'author') {
-      fetchData(new URL(`${apiUrl}/books/search-sort-by-author`, window.location.origin)); // Call author search API
-    } else if (event.target.value === 'title') {
-      fetchData(new URL(`${apiUrl}/books/search-sort-by-title`, window.location.origin));
-    }
-  };
 
+  // const handleFilterChange = (event) => {
+  //   setSelectedFilter(event.target.value);
+  //   if (event.target.value === 'author') {
+  //     fetchData(new URL(`${apiUrl}/books/search-sort-by-author`, window.location.origin)); // Call author search API
+  //   } else if (event.target.value === 'title') {
+  //     fetchData(new URL(`${apiUrl}/books/search-sort-by-title`, window.location.origin));
+  //   }
+  // };
 
+  const handleOptionChange = (value) => {
+    setOption(value);
+    console.log(option);
+  }
 
   const handleSearch = (event) => {
     setQuery(event.target.value);
@@ -79,7 +83,7 @@ export default function Explore() {
           </div>
           <div className="col-span-2 pt-4 pr-4">
           <div className="col-span-2 pt-4 pr-4">
-      <FilterBookExplore onFilterChange={handleFilterChange} />
+      <FilterBookExplore option={option} handleOptionChange={handleOptionChange} />
     </div>
           </div>
         </div>
