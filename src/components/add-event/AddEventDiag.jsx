@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Dialog,
@@ -10,40 +10,50 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router";
+
 export function AddEventDiag() {
-  const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate()
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
+
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [endTime, setEndTime] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const id = 1;
-    const ownerId = 1;
-    const name = event.target[0].value;
-    const description = event.target[5].value;
-    const startTime = `${event.target[1].value}T${event.target[2].value}:00.000Z`;
-    const endTime = `${event.target[3].value}T${event.target[4].value}:00.000Z`;
-    const date = new Date();
-    const created = date.toISOString();
-    const concernedUsersIds = [];
+    const start = `${startDate}T${startTime}:00.000Z`;
+    const end = `${endDate}T${endTime}:00.000Z`;
 
-    const response = await fetch('http://localhost:8080/api/v1/events', {
+    await fetch('http://localhost:8080/api/v1/events', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id,
-        ownerId,
-        name,
-        description,
-        startTime,
-        endTime,
-        created,
-        concernedUsersIds
+        ownerId: 1,
+        name: name,
+        description: description,
+        startTime: start,
+        endTime: end,
+        concernedUserIds: []
       }),
     })
-    console.log(response);
-    return response.json();
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+    })
+    .then(data => {
+      navigate(`/events/${data.id}`);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   return (
@@ -77,10 +87,10 @@ export function AddEventDiag() {
           </div>
           <CardBody className="flex flex-col gap-4 max-h-[500px] mb-4 overflow-y-auto scroll-smooth">
             <form onSubmit={handleSubmit}>
-              <Typography className="-mb-2" variant="h6">
+              <Typography className="mb-2" variant="h6">
                 Name
               </Typography>
-              <Input label="Name" size="lg" required />
+              <Input label="Name" size="lg" required value={name} onChange={(event) => setName(event.target.value)}/>
               <div className=" flex gap-2 w-full">
                 <div className=" h-full w-full">
                   <Typography className="mb-2" variant="h6">
@@ -91,6 +101,8 @@ export function AddEventDiag() {
                     name="startDate"
                     id="startDate"
                     className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
+                    value={startDate} 
+                    onChange={(event) => setStartDate(event.target.value)}
                   />
                 </div>
                 <div className=" h-full w-full">
@@ -102,6 +114,8 @@ export function AddEventDiag() {
                     name="startTime"
                     id="startTime"
                     className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
+                    value={startTime} 
+                    onChange={(event) => setStartTime(event.target.value)}
                   />
                 </div>
               </div>
@@ -115,6 +129,8 @@ export function AddEventDiag() {
                     name="endDate"
                     id="endDate"
                     className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
+                    value={endDate} 
+                    onChange={(event) => setEndDate(event.target.value)}
                   />
                 </div>
                 <div className=" h-full w-full">
@@ -126,10 +142,12 @@ export function AddEventDiag() {
                     name="endTime"
                     id="endTime"
                     className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
+                    value={endTime} 
+                    onChange={(event) => setEndTime(event.target.value)}
                   />
                 </div>
               </div>
-              <Typography className="-mb-2" variant="h6">
+              <Typography className="mb-2" variant="h6" value={description} onChange={(event) => setDescription(event.target.value)}>
                 Description
               </Typography>
               <Textarea label="Description" />
