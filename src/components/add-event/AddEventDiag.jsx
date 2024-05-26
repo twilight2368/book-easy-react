@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
 
 export function AddEventDiag() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const [name, setName] = useState('');

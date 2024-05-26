@@ -1,33 +1,50 @@
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import EventListEvent from './EventListEvent'
 import EventCalendar from '../calendar/EventCalendar';
 import { Button, Card } from "@material-tailwind/react";
+import { useCookies } from 'react-cookie';
 
 const EventList = () => {
-  const [filter, setFilter] = React.useState(1);
-  const [events, setEvents] = React.useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+
+  const [filter, setFilter] = useState(1);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    const fetchedEvents = [
-      {
-        id: 1,
-        title: "Ngày quốc hận",
-        datetime: new Date('April 30, 1975 11:30:00'),
-      },
-      {
-        id: 2,
-        title: "Giải phóng miền Nam",
-        datetime: new Date('April 30, 1975 11:30:00'),
-      }
-    ]
-    setEvents(fetchedEvents);
-  }, []);
+    let url;
+    if (filter == 1) {
+      url = 'http://localhost:8080/api/v1/events/latest'
+    }
+    else if (filter == 2) {
+      url = 'http://localhost:8080/api/v1/events/latest'
+    }
+    else {
+      url = `http://localhost:8080/api/v1/events/find-by-owner?id=${cookies['user'].id}`
+    }
+    const fetchEvent = async () => {
+      await fetch(url)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setEvents(data.content);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+
+    fetchEvent();
+  }, [filter]);
+
+  console.log(events)
 
   const eventList = events.map((event) => 
-    <EventListEvent 
+    <EventListEvent
+      key={event.id}
       id={event.id}
-      title={event.title}
-      datetime={event.datetime}
+      name={event.name}
+      startTime={event.startTime}
     />
   )
 
