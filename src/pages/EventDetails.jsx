@@ -45,7 +45,7 @@ export default function EventDetails() {
     
     fetchEvent();
     fetchPosts();
-  }, []);
+  }, [id]);
 
   const postList = posts.map((post) => 
     <Post 
