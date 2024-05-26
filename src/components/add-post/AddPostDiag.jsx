@@ -51,7 +51,7 @@ export function AddPostDiag(props) {
       }
     })
     .then(data => {
-      navigate(`/events/${data.id}`);
+      navigate(0);
     })
     .catch(err => {
       console.log(err);

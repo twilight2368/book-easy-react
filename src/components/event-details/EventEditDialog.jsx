@@ -11,7 +11,6 @@ const EventEditDialog = (props) => {
   const navigate = useNavigate();
   const start = new Date(event.startTime);
   const end = new Date(event.endTime);
-  console.log(event.id);
 
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const [name, setName] = useState(event.name);

@@ -37,8 +37,6 @@ const EventList = () => {
     fetchEvent();
   }, [filter]);
 
-  console.log(events)
-
   const eventList = events.map((event) => 
     <EventListEvent
       key={event.id}

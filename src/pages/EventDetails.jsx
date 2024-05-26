@@ -22,7 +22,6 @@ export default function EventDetails() {
       })
       .then(data => {
         setEvent(data);
-        console.log(data);
       })
       .catch(err => {
         console.log(err);
@@ -48,7 +47,8 @@ export default function EventDetails() {
   }, [id]);
 
   const postList = posts.map((post) => 
-    <Post 
+    <Post
+      key={post.id}
       title={post.title}
       content={post.content}
     />

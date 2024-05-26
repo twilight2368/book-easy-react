@@ -36,7 +36,7 @@ const EventDeleteDialog = (props) => {
             <Typography variant="h4" color="blue-gray" className="ml-5">
               Delete event?
             </Typography>
-            <Typography variant="p" color="blue-gray" className="ml-5 mt-2">
+            <Typography variant="paragraph" color="blue-gray" className="ml-5 mt-2">
               This action cannot be undone.
               The event will be removed permanently and will no longer be visible to other users.
             </Typography>
