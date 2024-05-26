@@ -7,9 +7,12 @@ import {
 } from "@material-tailwind/react";
 import React from "react";
 import PostMenu from "./PostMenu";
+import { useCookies } from "react-cookie";
 
 export default function Post(props) {
   const { post } = props;
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+
   return (
     <div className=" w-2/3">
       <Card className="w-full min-w-96 min-h-96 ">
@@ -25,9 +28,12 @@ export default function Post(props) {
             <div className=" font-bold text-black">@user_name</div>
             <div className=" text-xs ">1 hour ago</div>
           </div>
-          <div>
-            <PostMenu post={post} />
-          </div>
+          {
+            cookies['user'].id &&
+            <div>
+              <PostMenu post={post} />
+            </div>
+          }
         </div>
         <div className=" w-full px-5 text-lg font-bold text-pretty mb-2">
           {post.title}

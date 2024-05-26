@@ -92,7 +92,7 @@ export function AddPostDiag(props) {
               <Typography className="mb-2" variant="h6">
                 Title
               </Typography>
-              <Input label="Title" size="lg" required title={content} onChange={e => setTitle(e.target.value)} />
+              <Input label="Title" size="lg" required value={title} onChange={e => setTitle(e.target.value)} />
               <Typography className="mb-2" variant="h6">
                 Content
               </Typography>

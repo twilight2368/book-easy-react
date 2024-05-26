@@ -22,6 +22,7 @@ const PostDeleteDialog = (props) => {
       console.log(err);
     })
   }
+  
   return (
     <Dialog
       size="xs"

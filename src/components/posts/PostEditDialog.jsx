@@ -1,9 +1,48 @@
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Button, Card, CardBody, Dialog, Input, Textarea, Typography } from '@material-tailwind/react'
-import React from 'react'
+import React, { useState } from 'react'
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router';
 
 const PostEditDialog = (props) => {
-  const { open, handleOpen } = props;
+  const { open, handleOpen, post } = props;
+  const navigate = useNavigate();
+
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+  const [title, setTitle] = useState(post.title);
+  const [content, setContent] = useState(post.content);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await fetch(`http://localhost:8080/api/v1/posts/${post.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: cookies['user'].id,
+        title: title,
+        content: content,
+        imagePath: post.imagePath,
+        likedUserIds: post.likedUserIds,
+        eventId: post.eventId,
+      }),
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+    })
+    .then(data => {
+      navigate(0);
+      // console.log(data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
   return (
     <Dialog
       size="xl"
@@ -25,17 +64,19 @@ const PostEditDialog = (props) => {
           </div>
         </div>
         <CardBody className="flex flex-col gap-4 max-h-[500px] overflow-y-auto scroll-smooth">
-          <Typography className="-mb-2" variant="h6">
-            Title
-          </Typography>
-          <Input label="Title" size="lg" required />
-          <Typography className="-mb-2" variant="h6">
-            Content
-          </Typography>
-          <Textarea label="Content "/>
-          <Button variant="gradient" color="blue" onClick={handleOpen}>
-            Finish
-          </Button>
+          <form onSubmit={handleSubmit}>
+            <Typography className="-mb-2" variant="h6">
+              Title
+            </Typography>
+            <Input label="Title" size="lg" required value={title} onChange={e => setTitle(e.target.value)} />
+            <Typography className="-mb-2" variant="h6">
+              Content
+            </Typography>
+            <Textarea label="Content" value={content} onChange={e => setContent(e.target.value)} />
+            <Button variant="gradient" color="blue" type="submit">
+              Finish
+            </Button>
+          </form>
         </CardBody>
       </Card>
     </Dialog>
