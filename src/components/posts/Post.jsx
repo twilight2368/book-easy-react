@@ -29,7 +29,7 @@ export default function Post(props) {
             <div className=" text-xs ">1 hour ago</div>
           </div>
           {
-            cookies['user'].id &&
+            cookies['user'] &&
             <div>
               <PostMenu post={post} />
             </div>
