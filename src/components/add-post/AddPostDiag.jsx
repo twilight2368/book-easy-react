@@ -28,8 +28,8 @@ export function AddPostDiag(props) {
     setImage(URL.createObjectURL(e.target.files[0]));
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     await fetch('http://localhost:8080/api/v1/posts', {
       method: "POST",
@@ -51,7 +51,7 @@ export function AddPostDiag(props) {
       }
     })
     .then(data => {
-      navigate(`/events/${data.id}`);
+      navigate(0);
     })
     .catch(err => {
       console.log(err);
@@ -60,17 +60,14 @@ export function AddPostDiag(props) {
 
   return (
     <>
-      {
-        cookies['user'] &&
-        <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
-          <div className="flex justify-center items-center">
-            <PlusIcon className="h-5 w-5 mr-2"/>
-            <div className="font-black">
-              Add post
-            </div>
+      <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
+        <div className="flex justify-center items-center">
+          <PlusIcon className="h-5 w-5 mr-2"/>
+          <div className="font-black">
+            Add post
           </div>
-        </Button>
-      }
+        </div>
+      </Button>
       <Dialog
         size="xl"
         open={open}
@@ -95,11 +92,11 @@ export function AddPostDiag(props) {
               <Typography className="mb-2" variant="h6">
                 Title
               </Typography>
-              <Input label="Title" size="lg" required />
+              <Input label="Title" size="lg" required value={title} onChange={e => setTitle(e.target.value)} />
               <Typography className="mb-2" variant="h6">
                 Content
               </Typography>
-              <Textarea label="Content "/>
+              <Textarea label="Content" value={content} onChange={e => setContent(e.target.value)} />
               <Typography className="mb-2" variant="h6">
                 Image
               </Typography>

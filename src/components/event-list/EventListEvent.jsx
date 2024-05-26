@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import getDateShit from '../../utils/getDateShit'
 
 const EventListEvent = (props) => {
-  const { id, title, datetime } = props;
-  
+  const { id, name, startTime } = props;
 
   return (
     <Link to={`/events/${id}`}>
@@ -23,9 +22,9 @@ const EventListEvent = (props) => {
         <div className=" w-full h-full flex flex-col justify-between gap-2">
           <div>
             <div className="text-md">
-              {getDateShit(datetime)}
+              {getDateShit(startTime)}
             </div>
-            <div className="text-lg font-bold text-black">{title}</div>
+            <div className="text-lg font-bold text-black">{name}</div>
           </div>
           <Button className=" w-full h-10 flex justify-center items-center" color="blue">
             <StarIcon className=" h-5 pr-2"/>

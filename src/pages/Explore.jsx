@@ -29,7 +29,6 @@ export default function Explore() {
     url.searchParams.append('size', size); // Append size parameter
 
     const response = await fetch(url.toString());
-
     const data = await response.json();
     setsearchResult(data.content);
   }

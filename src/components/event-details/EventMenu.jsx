@@ -10,7 +10,8 @@ import React from 'react'
 import EventEditDialog from './EventEditDialog';
 import EventDeleteDialog from './EventDeleteDialog';
 
-const EventMenu = () => {
+const EventMenu = (props) => {
+  const { event } = props;
   const [openEdit, setOpenEdit] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false)
   const handleOpenEdit = () => setOpenEdit((cur) => !cur);
@@ -40,10 +41,12 @@ const EventMenu = () => {
       <EventEditDialog
         open={openEdit}
         handleOpen={handleOpenEdit}
+        event={event}
       />
-      <EventDeleteDialog 
+      <EventDeleteDialog
         open={openDelete}
-        handleOpen={handleOpenDelete} 
+        handleOpen={handleOpenDelete}
+        eventId={event.id}
       />
     </>
   )
