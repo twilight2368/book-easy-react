@@ -1,5 +1,4 @@
 
-import { set } from "date-fns";
 import BookDisplay from "../components/books/BookDisplay";
 import FilterBookExplore from "../components/FilterBookExplore";
 import WrapBar from "../components/WrapBar";
@@ -32,7 +31,7 @@ export default function Explore() {
     const response = await fetch(url.toString());
 
     const data = await response.json();
-    setsearchResult(data);
+    setsearchResult(data.content);
   }
   
   useEffect(() => {
@@ -42,7 +41,6 @@ export default function Explore() {
   const handleSearch = (event) => {
     setQuery(event.target.value);
   };
-
   return (
     <WrapBar>
       <div className="w-full">
@@ -70,10 +68,9 @@ export default function Explore() {
 
               
                {
-              
-              
+                
               searchResult.map((b) => (
-                <BookDisplay book={b} key={b.id} /> // Add unique key for each book
+                <BookDisplay book={b}  /> // Add unique key for each book
               ))}
             </div>
           </div>

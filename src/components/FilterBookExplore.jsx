@@ -16,7 +16,7 @@ export default function FilterBookExplore({ option, setOption }) {
   return (
     <>
       <Card className="pb-5">
-        <h2 className="text-xl font-bold ml-5 mt-5 text-black">Lọc:</h2>
+        <h2 className="text-xl font-bold ml-5 mt-5 text-black">Sắp xếp theo DESC</h2>
         <List>
           <ListItem className="p-0">
             <label
@@ -25,13 +25,13 @@ export default function FilterBookExplore({ option, setOption }) {
             >
               <Radio
                 id="filter-all"
-                value="all"
+                value="title"
                 name="filter-options" // Nhóm radio button
-                checked={option === 'all'} // Chọn "Tất cả" theo mặc định
+                checked={option === 'title'} // Chọn "Tất cả" theo mặc định
                 onChange={event => setOption(event.target.value)}
               />
               <Typography color="blue-gray" className="font-medium">
-                Tất cả
+              Theo tên sách
               </Typography>
             </label>
           </ListItem>
