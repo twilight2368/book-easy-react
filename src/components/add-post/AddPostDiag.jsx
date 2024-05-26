@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Dialog,
@@ -10,9 +10,53 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
-export function AddPostDiag() {
-  const [open, setOpen] = React.useState(false);
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router";
+export function AddPostDiag(props) {
+  const { eventId } = props;
+  const navigate = useNavigate();
+
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [image, setImage] = useState('');
+
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
+
+  const handleChange = (e) => {
+    setImage(URL.createObjectURL(e.target.files[0]));
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await fetch('http://localhost:8080/api/v1/posts', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: cookies['user'].id,
+        title: title,
+        content: content,
+        imagePath: image,
+        likedUserIds: [],
+        eventId: eventId,
+      }),
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+    })
+    .then(data => {
+      navigate(0);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 
   return (
     <>
@@ -44,17 +88,31 @@ export function AddPostDiag() {
             </div>
           </div>
           <CardBody className="flex flex-col gap-4 max-h-[500px] overflow-y-auto scroll-smooth">
-            <Typography className="-mb-2" variant="h6">
-              Title
-            </Typography>
-            <Input label="Title" size="lg" required />
-            <Typography className="-mb-2" variant="h6">
-              Content
-            </Typography>
-            <Textarea label="Content "/>
-            <Button variant="gradient" color="blue" onClick={handleOpen}>
-              Post
-            </Button>
+            <form onSubmit={handleSubmit}>
+              <Typography className="mb-2" variant="h6">
+                Title
+              </Typography>
+              <Input label="Title" size="lg" required value={title} onChange={e => setTitle(e.target.value)} />
+              <Typography className="mb-2" variant="h6">
+                Content
+              </Typography>
+              <Textarea label="Content" value={content} onChange={e => setContent(e.target.value)} />
+              <Typography className="mb-2" variant="h6">
+                Image
+              </Typography>
+              <Input
+                label="Image"
+                size="lg"
+                type="file"
+                accept="image/png, image/jpeg"
+                className=" flex justify-center items-center"
+                onChange={handleChange}
+              />
+              <img src={image} className="w-full mb-2" />
+              <Button variant="gradient" color="blue" type="submit">
+                Post
+              </Button>
+            </form>
           </CardBody>
         </Card>
       </Dialog>

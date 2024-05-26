@@ -17,7 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const apiUrl = "http://localhost:8080/api/v1";
 
-const Signup = () => {
+export const Signup = () => {
   const [birthDate, setBirthDate] = useState();
   const [provinceList, setProvinceList] = useState([]);
   const [districtList, setDistrictList] = useState([]);
@@ -346,6 +346,37 @@ const Signup = () => {
                     </a>
                   </label>
                 </div>
+              </div>
+              <div className="grid grid-cols-2 gap-5">
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select province"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select district"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-5">
+                <Select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  label="Select commune"
+                >
+                  <Option>BOOK_EXCHANGER</Option>
+                  <Option>BOOKSTORE</Option>
+                </Select>
+                <input
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Detailed address"
+                />
               </div>
 
               <button

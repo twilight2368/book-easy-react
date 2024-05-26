@@ -1,30 +1,83 @@
-import React from "react";
+
+import { set } from "date-fns";
 import BookDisplay from "../components/books/BookDisplay";
 import FilterBookExplore from "../components/FilterBookExplore";
 import WrapBar from "../components/WrapBar";
-
+import React, { useEffect, useState } from "react";
+const apiUrl = "http://localhost:8080/api/v1";
 export default function Explore() {
+
+  const [searchResult, setsearchResult] = useState([]);
+  const [query, setQuery] = useState(''); // Add state for query parameter
+  const [page, setPage] = useState(0); // Add state for pagination (default: 0)
+  const [size, setSize] = useState(60); // Add state for size (default: 50)
+  const [option, setOption] = useState('all');
+
+  const fetchData = async () => {
+    // const url = new URL(`${apiUrl}/books/search`, window.location.origin); // More robust URL construction
+    let url;
+    if (option === 'author') {
+      url = new URL(`${apiUrl}/books/search-sort-by-author`, window.location.origin); // Call author search API
+    } 
+    else if (option === 'title') {
+      url = new URL(`${apiUrl}/books/search-sort-by-title`, window.location.origin);
+    }
+    else {
+      url = new URL(`${apiUrl}/books/search`, window.location.origin);
+    }
+    url.searchParams.append('q', query); // Append query parameter
+    url.searchParams.append('page', page); // Append page parameter
+    url.searchParams.append('size', size); // Append size parameter
+
+    const response = await fetch(url.toString());
+    const data = await response.json();
+    setsearchResult(data.content);
+  }
+  
+  useEffect(() => {
+    fetchData();
+  }, [option]);
+  
+  const handleSearch = (event) => {
+    setQuery(event.target.value);
+  };
+
+  console.log(searchResult);
+
   return (
     <WrapBar>
-      <div className=" w-full">
-        <div className=" mt-4 w-full pl-10">
-          <h1 className=" font-black text-lg ">All books ({1000})</h1>
+      <div className="w-full">
+        <div className="mt-4 w-full flex justify-between items-center">
+          <h1 className="font-black text-lg">Search result ({searchResult.length})</h1>
+          <div className="flex items-center">
+            <input
+              type="text"
+              className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              placeholder="Search books..."
+              value={query}
+              onChange={handleSearch}
+            />
+            <button
+              className="ml-2 bg-blue-500 text-white font-bold py-2 px-3 rounded-md hover:bg-blue-700"
+              onClick={fetchData} // Trigger fetch on search button click
+            >
+              Search
+            </button>
+          </div>
         </div>
-        <div className=" w-full grid grid-cols-10 mt-4">
-          <div className=" col-span-8 px-10 mt-4">
-            <div className=" w-full h-full grid grid-cols-4 gap-3 gap-y-10">
-              <BookDisplay />
-              <BookDisplay />
-              <BookDisplay />
-              <BookDisplay />
-              <BookDisplay />
-              <BookDisplay />
-              <BookDisplay />
-              <BookDisplay />
+        <div className="w-full grid grid-cols-10 mt-4">
+          <div className="col-span-8 px-10 mt-4">
+            <div className="w-full h-full grid grid-cols-4 gap-3 gap-y-10">          
+              {
+              searchResult.map((b) => (
+                <BookDisplay book={b} key={b.id} /> // Add unique key for each book
+              ))}
             </div>
           </div>
-          <div className=" col-span-2 pt-4 pr-4">
-            <FilterBookExplore />
+          <div className="col-span-2 pt-4 pr-4">
+          <div className="col-span-2 pt-4 pr-4">
+      <FilterBookExplore option={option} setOption={setOption} />
+    </div>
           </div>
         </div>
       </div>
