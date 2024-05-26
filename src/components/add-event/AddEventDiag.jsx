@@ -61,17 +61,14 @@ export function AddEventDiag() {
 
   return (
     <>
-      {
-        cookies['user'] &&
-        <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
-          <div className="flex justify-center items-center">
-            <PlusIcon className="h-5 w-5 mr-2"/>
-            <div className="font-black">
-              Create new event
-            </div>
+      <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
+        <div className="flex justify-center items-center">
+          <PlusIcon className="h-5 w-5 mr-2"/>
+          <div className="font-black">
+            Create new event
           </div>
-        </Button>
-      }
+        </div>
+      </Button>
       <Dialog
         size="xl"
         open={open}

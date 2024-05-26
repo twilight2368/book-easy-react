@@ -6,8 +6,10 @@ import { AddPostDiag } from "../components/add-post/AddPostDiag";
 import EventDetailsCover from "../components/event-details/EventDetailsCover";
 import WrapBar from "../components/WrapBar";
 import { useParams } from "react-router";
+import { useCookies } from "react-cookie";
 
 export default function EventDetails() {
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const [posts, setPosts] = useState([]);
   const [event, setEvent] = useState({});
   const { id } = useParams();
@@ -57,21 +59,22 @@ export default function EventDetails() {
         <div className=" w-full h-full grid grid-cols-9">
           <EventDetailsCover />
           <div className=" col-span-6 flex flex-col items-center gap-4">
-            <Card className="w-2/3 min-w-96 flex flex-row items-center gap-2 py-3 px-5">
-              <div className=" flex items-center justify-center">
-                <Avatar
-                  className=" h-10 w-10"
-                  src="https://docs.material-tailwind.com/img/face-2.jpg"
-                  alt="avatar"
-                />
-              </div>
-              <div className=" w-full">
-                <AddPostDiag eventId={id} />
-              </div>
-            </Card>
-            
+            {
+              cookies['user'] &&
+              <Card className="w-2/3 min-w-96 flex flex-row items-center gap-2 py-3 px-5">
+                <div className=" flex items-center justify-center">
+                  <Avatar
+                    className=" h-10 w-10"
+                    src="https://docs.material-tailwind.com/img/face-2.jpg"
+                    alt="avatar"
+                  />
+                </div>
+                <div className=" w-full">
+                  <AddPostDiag eventId={id} />
+                </div>
+              </Card>
+            }
             {postList}
-
           </div>
           <EventList />
         </div>

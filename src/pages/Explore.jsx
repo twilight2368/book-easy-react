@@ -30,9 +30,8 @@ export default function Explore() {
     url.searchParams.append('size', size); // Append size parameter
 
     const response = await fetch(url.toString());
-
     const data = await response.json();
-    setsearchResult(data);
+    setsearchResult(data.content);
   }
   
   useEffect(() => {
@@ -42,6 +41,8 @@ export default function Explore() {
   const handleSearch = (event) => {
     setQuery(event.target.value);
   };
+
+  console.log(searchResult);
 
   return (
     <WrapBar>
@@ -66,12 +67,8 @@ export default function Explore() {
         </div>
         <div className="w-full grid grid-cols-10 mt-4">
           <div className="col-span-8 px-10 mt-4">
-            <div className="w-full h-full grid grid-cols-4 gap-3 gap-y-10">
-
-              
-               {
-              
-              
+            <div className="w-full h-full grid grid-cols-4 gap-3 gap-y-10">          
+              {
               searchResult.map((b) => (
                 <BookDisplay book={b} key={b.id} /> // Add unique key for each book
               ))}
