@@ -28,8 +28,8 @@ export function AddPostDiag(props) {
     setImage(URL.createObjectURL(e.target.files[0]));
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     await fetch('http://localhost:8080/api/v1/posts', {
       method: "POST",
@@ -92,11 +92,11 @@ export function AddPostDiag(props) {
               <Typography className="mb-2" variant="h6">
                 Title
               </Typography>
-              <Input label="Title" size="lg" required />
+              <Input label="Title" size="lg" required title={content} onChange={e => setTitle(e.target.value)} />
               <Typography className="mb-2" variant="h6">
                 Content
               </Typography>
-              <Textarea label="Content "/>
+              <Textarea label="Content" value={content} onChange={e => setContent(e.target.value)} />
               <Typography className="mb-2" variant="h6">
                 Image
               </Typography>

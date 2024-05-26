@@ -15,35 +15,36 @@ export default function EventDetails() {
   const { id } = useParams();
 
   useEffect(() => {
-    // const fetchEvent = async () => {
-    //   await fetch(`http://localhost:8080/api/v1/events/${id}`)
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     setPosts(data);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
-    // }
+    const fetchEvent = async () => {
+      await fetch(`http://localhost:8080/api/v1/events/${id}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setEvent(data);
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
 
-    // const fetchPosts = async () => {
-    //   await fetch(`http://localhost:8080/api/v1/posts/find-by-event?id=${id}`)
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     console.log(data);
-    //     setPosts(data);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
-    // }
+    const fetchPosts = async () => {
+      await fetch(`http://localhost:8080/api/v1/posts/find-by-event?id=${id}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setPosts(data.content);
+        console.log(data.content);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
     
-    // fetchEvent();
-    // fetchPosts();
+    fetchEvent();
+    fetchPosts();
   }, []);
 
   const postList = posts.map((post) => 
@@ -57,7 +58,9 @@ export default function EventDetails() {
     <>
       <WrapBar>
         <div className=" w-full h-full grid grid-cols-9">
-          <EventDetailsCover />
+          <EventDetailsCover
+            event={event}
+          />
           <div className=" col-span-6 flex flex-col items-center gap-4">
             {
               cookies['user'] &&

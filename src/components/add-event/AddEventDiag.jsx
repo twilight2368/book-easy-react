@@ -27,8 +27,8 @@ export function AddEventDiag() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const start = `${startDate}T${startTime}:00.000Z`;
     const end = `${endDate}T${endTime}:00.000Z`;
 
@@ -93,7 +93,7 @@ export function AddEventDiag() {
               <Typography className="mb-2" variant="h6">
                 Name
               </Typography>
-              <Input label="Name" size="lg" required value={name} onChange={(event) => setName(event.target.value)}/>
+              <Input label="Name" size="lg" required value={name} onChange={(e) => setName(e.target.value)} />
               <div className=" flex gap-2 w-full">
                 <div className=" h-full w-full">
                   <Typography className="mb-2" variant="h6">
@@ -105,7 +105,7 @@ export function AddEventDiag() {
                     id="startDate"
                     className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
                     value={startDate} 
-                    onChange={(event) => setStartDate(event.target.value)}
+                    onChange={(e) => setStartDate(e.target.value)}
                   />
                 </div>
                 <div className=" h-full w-full">
@@ -118,7 +118,7 @@ export function AddEventDiag() {
                     id="startTime"
                     className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
                     value={startTime} 
-                    onChange={(event) => setStartTime(event.target.value)}
+                    onChange={(e) => setStartTime(e.target.value)}
                   />
                 </div>
               </div>
@@ -133,7 +133,7 @@ export function AddEventDiag() {
                     id="endDate"
                     className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
                     value={endDate} 
-                    onChange={(event) => setEndDate(event.target.value)}
+                    onChange={(e) => setEndDate(e.target.value)}
                   />
                 </div>
                 <div className=" h-full w-full">
@@ -146,11 +146,11 @@ export function AddEventDiag() {
                     id="endTime"
                     className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
                     value={endTime} 
-                    onChange={(event) => setEndTime(event.target.value)}
+                    onChange={(e) => setEndTime(e.target.value)}
                   />
                 </div>
               </div>
-              <Typography className="mb-2" variant="h6" value={description} onChange={(event) => setDescription(event.target.value)}>
+              <Typography className="mb-2" variant="h6" value={description} onChange={(e) => setDescription(e.target.value)}>
                 Description
               </Typography>
               <Textarea label="Description" />
