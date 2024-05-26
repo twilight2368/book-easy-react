@@ -49,8 +49,7 @@ export default function EventDetails() {
   const postList = posts.map((post) => 
     <Post
       key={post.id}
-      title={post.title}
-      content={post.content}
+      post={post}
     />
   )
 
