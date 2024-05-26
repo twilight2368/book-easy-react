@@ -10,7 +10,8 @@ import React from 'react'
 import PostDeleteDialog from './PostDeleteDialog';
 import PostEditDialog from './PostEditDialog';
 
-const PostMenu = () => {
+const PostMenu = (props) => {
+  const { post } = props;
   const [openEdit, setOpenEdit] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false)
   const handleOpenEdit = () => setOpenEdit((cur) => !cur);
@@ -40,10 +41,12 @@ const PostMenu = () => {
       <PostEditDialog 
         open={openEdit}
         handleOpen={handleOpenEdit}
+        post={post}
       />
       <PostDeleteDialog 
         open={openDelete}
-        handleOpen={handleOpenDelete} 
+        handleOpen={handleOpenDelete}
+        postId={post.id}
       />
     </>
   )

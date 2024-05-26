@@ -9,7 +9,7 @@ import React from "react";
 import PostMenu from "./PostMenu";
 
 export default function Post(props) {
-  const { title, content } = props;
+  const { post } = props;
   return (
     <div className=" w-2/3">
       <Card className="w-full min-w-96 min-h-96 ">
@@ -26,14 +26,14 @@ export default function Post(props) {
             <div className=" text-xs ">1 hour ago</div>
           </div>
           <div>
-            <PostMenu />
+            <PostMenu post={post} />
           </div>
         </div>
         <div className=" w-full px-5 text-lg font-bold text-pretty mb-2">
-          {title}
+          {post.title}
         </div>
         <div className=" h-32 w-full overflow-y-hidden px-5 text-sm text-pretty mb-3 ">
-          {content}
+          {post.content}
         </div>
         <div className=" h-96 w-full px-5 mb-5">
           <img

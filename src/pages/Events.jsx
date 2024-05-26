@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "../components/posts/Post";
 import { AddEventDiag } from "../components/add-event/AddEventDiag";
 import { Avatar, Button, Card } from "@material-tailwind/react";
@@ -7,39 +7,24 @@ import WrapBar from "../components/WrapBar";
 import { useCookies } from "react-cookie";
 
 export default function Events() {
-  const [posts, setPosts] = React.useState([]);
+  const [posts, setPosts] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 
   useEffect(() => {
-    const fetchedPosts = [
-      {
-        title: "National resentment day",
-        content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quasi,
-        sequi odio est neque doloremque a veniam quis facilis? Culpa,
-        asperiores facere. Voluptas quia totam similique suscipit! Rem, quos
-        rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Maxime, quos eveniet recusandae ullam dolorum fugit sequi tempora
-        corrupti, sunt nobis provident. Natus libero exercitationem, in hic
-        eligendi quia ullam repellat!`
-      },
-      {
-        title: "National resentment day",
-        content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quasi,
-        sequi odio est neque doloremque a veniam quis facilis? Culpa,
-        asperiores facere. Voluptas quia totam similique suscipit! Rem, quos
-        rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Maxime, quos eveniet recusandae ullam dolorum fugit sequi tempora
-        corrupti, sunt nobis provident. Natus libero exercitationem, in hic
-        eligendi quia ullam repellat!`
-      }
-    ]
-    setPosts(fetchedPosts);
+    const fetchPosts = async () => {
+      fetch('http://localhost:8080/api/v1/posts/latest')
+      .then(response => response.json())
+      .then(data => {
+        setPosts(data.content);
+      })
+    }
+
+    fetchPosts();
   }, []);
 
   const postList = posts.map((post) => 
     <Post 
-      title={post.title}
-      content={post.content}
+      post={post}
     />
   )
 
