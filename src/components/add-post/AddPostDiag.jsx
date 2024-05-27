@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Dialog,
@@ -10,20 +10,8 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router";
-import environment from "../../environment";
-export function AddPostDiag(props) {
-  const { eventId } = props;
-  const navigate = useNavigate();
-
-  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [imagePath, setImagePath] = useState('');
-  const [image, setImage] = useState();
-
-  const [open, setOpen] = useState(false);
+export function AddPostDiag() {
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
   const handleChange = (e) => {
@@ -44,22 +32,23 @@ export function AddPostDiag(props) {
           userId: cookies['user'].id,
           title: title,
           content: content,
-          imagePath: imagePath,
           eventId: eventId,
         }),
       });
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+
+        const formData = new FormData();
+        formData.append("imageFile", image);
+        console.log(image);
+
         const imageResponse = await fetch(`${environment.apiUrl}/${data.id}/upload-image-post`, {
           method: "POST",
-          headers: {
-            "Content-Type": "image/png",
-          },
-          body: image,
+          body: formData,
         });
         if (imageResponse.ok) {
-          const imageData = await response.json();
+          const imageData = await imageResponse.json();
           console.log(imageData);
           navigate(0);
         }
@@ -100,31 +89,17 @@ export function AddPostDiag(props) {
             </div>
           </div>
           <CardBody className="flex flex-col gap-4 max-h-[500px] overflow-y-auto scroll-smooth">
-            <form onSubmit={handleSubmit}>
-              <Typography className="mb-2" variant="h6">
-                Title
-              </Typography>
-              <Input label="Title" size="lg" required value={title} onChange={e => setTitle(e.target.value)} />
-              <Typography className="mb-2" variant="h6">
-                Content
-              </Typography>
-              <Textarea label="Content" value={content} onChange={e => setContent(e.target.value)} />
-              <Typography className="mb-2" variant="h6">
-                Image
-              </Typography>
-              <Input
-                label="Image"
-                size="lg"
-                type="file"
-                accept="image/png, image/jpeg"
-                className=" flex justify-center items-center"
-                onChange={handleChange}
-              />
-              <img src={imagePath} className="w-full mb-2" />
-              <Button variant="gradient" color="blue" type="submit">
-                Post
-              </Button>
-            </form>
+            <Typography className="-mb-2" variant="h6">
+              Title
+            </Typography>
+            <Input label="Title" size="lg" required />
+            <Typography className="-mb-2" variant="h6">
+              Content
+            </Typography>
+            <Textarea label="Content "/>
+            <Button variant="gradient" color="blue" onClick={handleOpen}>
+              Post
+            </Button>
           </CardBody>
         </Card>
       </Dialog>
