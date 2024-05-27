@@ -1,16 +1,20 @@
 import { Button, Card } from '@material-tailwind/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EventMenu from './EventMenu'
 import { useCookies } from 'react-cookie'
 import environment from '../../environment'
 
 const EventDetailsCover = (props) => {
   const { event } = props;
-  console.log(event);
 
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const thisUser = cookies['user'];
-  const [interested, setInterested] = useState(event.concernedUserIds?.includes(thisUser?.id));
+
+  const [interested, setInterested] = useState(false);
+
+  useEffect(() => {
+    setInterested(event.concernedUserIds?.includes(thisUser.id));
+  }, [event])
 
   const addEventToInterest = async () => {
     const response = await fetch(`${environment.apiUrl}/events/${event.id}`, {
