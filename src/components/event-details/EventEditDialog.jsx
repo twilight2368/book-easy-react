@@ -43,7 +43,7 @@ const EventEditDialog = (props) => {
       })
       if (response.ok) {
         const data = await response.json();
-        navigate(`/events/${data.id}`);
+        navigate(0);
       }
     }
     catch(err) {

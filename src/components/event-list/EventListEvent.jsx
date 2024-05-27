@@ -11,7 +11,7 @@ const EventListEvent = (props) => {
   return (
     <Link to={`/events/${id}`}>
       <Card className=" w-full min-h-36 flex flex-row items-center gap-2 p-4 mb-2 duration-150 hover:bg-black/5">
-        <div className=" w-36 h-28">
+        <div className=" w-36 h-24">
           <div className=" w-full h-full rounded-md overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
