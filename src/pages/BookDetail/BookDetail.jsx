@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import bookCover from "../../components/books/book-cover-default.png";
 import Pic from "./ex.jpg";
 import Pic2 from "./icons8-plus-24.png"
@@ -17,8 +17,8 @@ import ExchangeOffersTable from "../../components/exchange/ExchangeOffersTable";
 const BookDetail = (props) => {
   const { id } = useParams();
 
-  const [openExchangeBook, setOpenExchangeBook] = React.useState(false);
-  const [openExchangeMoney, setOpenExchangeMoney] = React.useState(false)
+  const [openExchangeBook, setOpenExchangeBook] = useState(false);
+  const [openExchangeMoney, setOpenExchangeMoney] = useState(false)
   const handleOpenExchangeBook = () => setOpenExchangeBook((cur) => !cur);
   const handleOpenExchangeMoney = () => setOpenExchangeMoney((cur) => !cur);
 
@@ -28,20 +28,56 @@ const BookDetail = (props) => {
   const [openOfferSuccessMessage, setOpenOfferSuccessMessage] = useState(false);
 
   const [cookies, setCookie] = useCookies(['accessToken', 'user']);
-  console.log(cookies['user']);
   const thisUser = cookies['user'];
 
+  const [interested, setInterested] = useState(false);
+
+  const addBookToInterest = async () => {
+    const response = await fetch(`${environment.apiUrl}/books/${id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          ...book,
+          concernedUserIds: [...book.concernedUserIds, thisUser.id]
+        }
+      ),
+    })
+    if (response.ok) {
+      setInterested(true);
+    }
+  }
+
+  const removeBookFromInterest = async () => {
+    const response = await fetch(`${environment.apiUrl}/books/${id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          ...book,
+          concernedUserIds: book.concernedUserIds.filter(userId => userId != thisUser.id)
+        }
+      ),
+    })
+    if (response.ok) {
+      setInterested(false);
+    }
+  }
+
   const fetchData = async (id) => {
-    console.log(environment.apiUrl);
     const bookResponse = await fetch(`${environment.apiUrl}/books/${id}`);
     const bookData = await bookResponse.json();
     setBook(bookData);
+    setInterested(bookData.concernedUserIds.includes(thisUser.id));
     console.log(bookData);
 
     const userResponse = await fetch(`${environment.apiUrl}/users/${bookData.ownerId}`);
     const userData = await userResponse.json();
     setOwner(userData);
-    console.log(userData);
   }
 
   useEffect(() => {
@@ -60,10 +96,22 @@ const BookDetail = (props) => {
                   <ChatBubbleOvalLeftIcon className="h-5 w-5" />
                   <div>Contact</div>
                 </button>
-                <button class="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-pink-100 text-pink-500 w-full h-1/2 justify-center hover:bg-pink-200">
-                  <img class="h-5 w-5" src={Pic3} alt="add-for-wish"/>
-                  <div >Add to interest</div>
-                </button>
+                {!interested ?
+                  <button 
+                    className={`flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-pink-100 text-pink-500 w-full h-1/2 justify-center hover:bg-pink-200`}
+                    onClick={addBookToInterest}  
+                  >
+                    <img class="h-5 w-5" src={Pic3} alt="add-for-wish"/>
+                    <div >Add to interest</div>
+                  </button> :
+                  <button 
+                    className={`flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-pink-200 text-pink-500 w-full h-1/2 justify-center hover:bg-pink-100`}
+                    onClick={removeBookFromInterest}  
+                  >
+                    <img class="h-5 w-5" src={Pic3} alt="add-for-wish"/>
+                    <div >Remove from interest</div>
+                  </button>
+                }
               </div>
             </div>
             <div class="flex-1 space-y-2">

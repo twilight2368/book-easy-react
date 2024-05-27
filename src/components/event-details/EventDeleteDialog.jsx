@@ -7,20 +7,18 @@ const EventDeleteDialog = (props) => {
   const navigate = useNavigate();
 
   const deleteEvent = async () => {
-    await fetch(`http://localhost:8080/api/v1/events/${eventId}`, {
-      method: "DELETE"
-    })
-    .then(response => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/events/${eventId}`, {
+        method: "DELETE"
+      });
       if (response.ok) {
-        return response.json()
+        const data = response.json();
+        navigate('/events');
       }
-    })
-    .then(data => {
-      navigate('/events');
-    })
-    .catch(err => {
+    }
+    catch(err) {
       console.log(err);
-    })
+    }
   }
 
   return (

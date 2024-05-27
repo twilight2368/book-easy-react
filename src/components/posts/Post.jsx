@@ -5,13 +5,72 @@ import {
   Avatar,
   Card,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostMenu from "./PostMenu";
 import { useCookies } from "react-cookie";
+import environment from "../../environment";
+import { getTimeAgo } from "../../utils/getDateShit";
 
 export default function Post(props) {
   const { post } = props;
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+  const thisUser = cookies['user'];
+  const [likes, setLikes] = useState(post.likedUserIds.length);
+  const [liked, setLiked] = useState(post.likedUserIds.includes(thisUser?.id));
+  const [postAuthor, setPostAuthor] = useState('');
+
+  useEffect(() => {
+    const fetchPostAuthor = async () => {
+      try {
+        const response = await fetch(`${environment.apiUrl}/users/${post.userId}`);
+        const data = await response.json();
+        setPostAuthor(data.name);
+      }
+      catch(err) {
+        console.log(err);
+      }
+    }
+
+    fetchPostAuthor();
+  }, []);
+
+  const likePost = async () => {
+    const response = await fetch(`${environment.apiUrl}/posts/${post.id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          ...post,
+          likedUserIds: [...post.likedUserIds, thisUser.id]
+        }
+      ),
+    })
+    if (response.ok) {
+      setLiked(true);
+      setLikes(likes + 1);
+    }
+  }
+
+  const unlikePost = async () => {
+    const response = await fetch(`${environment.apiUrl}/posts/${post.id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          ...post,
+          likedUserIds: post.likedUserIds.filter(userId => userId != thisUser.id)
+        }
+      ),
+    })
+    if (response.ok) {
+      setLiked(false);
+      setLikes(likes - 1);
+    }
+  }
 
   return (
     <div className=" w-2/3">
@@ -25,8 +84,8 @@ export default function Post(props) {
             />
           </div>
           <div className=" w-5/6 pl-1 pt-1 pb-1">
-            <div className=" font-bold text-black">@user_name</div>
-            <div className=" text-xs ">1 hour ago</div>
+            <div className=" font-bold text-black">{postAuthor}</div>
+            <div className=" text-xs ">{getTimeAgo(post.created)}</div>
           </div>
           {
             cookies['user'] &&
@@ -38,7 +97,7 @@ export default function Post(props) {
         <div className=" w-full px-5 text-lg font-bold text-pretty mb-2">
           {post.title}
         </div>
-        <div className=" h-32 w-full overflow-y-hidden px-5 text-sm text-pretty mb-3 ">
+        <div className=" w-full px-5 text-sm text-pretty mb-3 ">
           {post.content}
         </div>
         <div className=" h-96 w-full px-5 mb-5">
@@ -52,11 +111,16 @@ export default function Post(props) {
         <div className=" h-5 mb-5 flex px-5 justify-between items-center text-sm">
           <div className=" pl-2 flex">
             <div className=" flex">
-              <div className=" flex justify-center items-center mr-1">
-                <HeartIcon className=" h-5 w-5 duration-200 hover:fill-red-400 hover:scale-125 hover:text-red-400 active:scale-95 " />
-              </div>
+              {!liked ?
+                <div className=" flex justify-center items-center mr-1" onClick={likePost}>
+                  <HeartIcon className=" h-5 w-5 duration-200 hover:fill-red-400 hover:scale-125 hover:text-red-400 active:scale-95 cursor-pointer" />
+                </div> :
+                <div className=" flex justify-center items-center mr-1" onClick={unlikePost}>
+                  <HeartIcon className=" h-5 w-5 duration-200 fill-red-400 hover:scale-125 text-red-400 active:scale-95 cursor-pointer" />
+                </div>
+              }
               <div className=" flex justify-center items-center">
-                <span>{1000}</span>
+                <span>{likes}</span>
               </div>
             </div>
           </div>
