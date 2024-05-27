@@ -30,7 +30,6 @@ const EventList = () => {
       catch(err) {
         console.log(err);
       }
-      await fetch(url)
     }
 
     fetchEvent();
@@ -40,6 +39,7 @@ const EventList = () => {
     <EventListEvent
       key={event.id}
       id={event.id}
+      ownerId={event.ownerId}
       name={event.name}
       startTime={event.startTime}
     />
