@@ -44,7 +44,6 @@ export function AddPostDiag(props) {
           userId: cookies['user'].id,
           title: title,
           content: content,
-      
           eventId: eventId,
         }),
       });
