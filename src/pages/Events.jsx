@@ -5,6 +5,7 @@ import { Avatar, Button, Card } from "@material-tailwind/react";
 import EventList from "../components/event-list/EventList";
 import WrapBar from "../components/WrapBar";
 import { useCookies } from "react-cookie";
+import environment from "../environment";
 
 export default function Events() {
   const [posts, setPosts] = useState([]);
@@ -12,11 +13,16 @@ export default function Events() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      fetch('http://localhost:8080/api/v1/posts/latest')
-      .then(response => response.json())
-      .then(data => {
-        setPosts(data.content);
-      })
+      try {
+        const response = await fetch(`${environment.apiUrl}/posts/latest`)
+        if (response.ok) {
+          const data = await response.json();
+          setPosts(data.content);
+        }
+      }
+      catch (err) {
+        console.log(err);
+      }
     }
 
     fetchPosts();

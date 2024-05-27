@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Dialog,
@@ -11,8 +11,19 @@ import {
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 export function AddBookDiag() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
+
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [publisher, setPublisher] = useState('');
+  const [publishYear, setPublishYear] = useState(0);
+  const [language, setLanguage] = useState('');
+  const [weight, setWeight] = useState('');
+  const [size, setSize] = useState('');
+  const [pages, setPages] = useState(0);
+  const [layout, setLayout] = useState('');
+  const [description, setDescription] = useState('');
 
   return (
     <>
@@ -40,45 +51,45 @@ export function AddBookDiag() {
           </div>
           <CardBody className="flex flex-col gap-4 max-h-[500px] mb-4 overflow-y-auto scroll-smooth">
             <Typography className="-mb-2" variant="h6">
-              Name
+              Title
             </Typography>
-            <Input label="Name" size="lg" required />
+            <Input label="Name" size="lg" required value={title} onChange={e => setTitle(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Author
             </Typography>
-            <Input label="Author" size="lg" required />
+            <Input label="Author" size="lg" required value={author} onChange={e => setAuthor(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Publisher
             </Typography>
-            <Input label="Publisher" size="lg" />
+            <Input label="Publisher" size="lg" value={publisher} onChange={e => setPublisher(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Publish Year
             </Typography>
-            <Input label="Publish  Year" size="lg" />
+            <Input label="Publish Year" size="lg" value={publishYear} onChange={e => setPublishYear(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Language
             </Typography>
-            <Input label="Language" size="lg" />
+            <Input label="Language" size="lg" value={language} onChange={e => setLanguage(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Weight
             </Typography>
-            <Input label=" Weight" size="lg" />
+            <Input label=" Weight" size="lg" value={weight} onChange={e => setWeight(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Size
             </Typography>
-            <Input label="Size" size="lg" />
+            <Input label="Size" size="lg" value={size} onChange={e => setSize(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Pages
             </Typography>
-            <Input label="Pages" size="lg" />
+            <Input label="Pages" size="lg" value={pages} onChange={e => setPages(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Layout
             </Typography>
-            <Input label="Layout" size="lg" />
+            <Input label="Layout" size="lg" value={layout} onChange={e => setLayout(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Description
             </Typography>
-            <Textarea label="Description" />
+            <Textarea label="Description" value={description} onChange={e => setDescription(e.target.value)}/>
             <Typography className="-mb-2" variant="h6">
               Cover image
             </Typography>

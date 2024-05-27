@@ -7,6 +7,7 @@ import EventDetailsCover from "../components/event-details/EventDetailsCover";
 import WrapBar from "../components/WrapBar";
 import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
+import environment from "../environment";
 
 export default function EventDetails() {
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
@@ -16,32 +17,31 @@ export default function EventDetails() {
 
   useEffect(() => {
     const fetchEvent = async () => {
-      await fetch(`http://localhost:8080/api/v1/events/${id}`)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setEvent(data);
-      })
-      .catch(err => {
+      try {
+        const response = await fetch(`${environment.apiUrl}/events/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setEvent(data);
+        }
+      }
+      catch (err) {
         console.log(err);
-      })
+      }
     }
 
     const fetchPosts = async () => {
-      await fetch(`http://localhost:8080/api/v1/posts/find-by-event?id=${id}`)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setPosts(data.content);
-        console.log(data.content);
-      })
-      .catch(err => {
+      try {
+        const response = await fetch(`${environment.apiUrl}/posts/find-by-event?id=${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setPosts(data.content);
+        }
+      }
+      catch (err) {
         console.log(err);
-      })
+      }
     }
-    
+
     fetchEvent();
     fetchPosts();
   }, [id]);
