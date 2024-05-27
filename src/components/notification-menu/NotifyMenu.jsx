@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Typography,
   Button,
@@ -16,34 +16,44 @@ import {
 } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/solid";
 import "./Notify.css";
-
-const NotificationMenuItems = [
-  {
-    label: "Someone offered your book",
-    icon: InformationCircleIcon,
-    type: "information",
-  },
-  {
-    label: "Transaction success",
-    icon: CheckCircleIcon,
-    type: "success",
-  },
-  {
-    label: "Somethings went wrong",
-    icon: XCircleIcon,
-    type: "error",
-  },
-  {
-    label: "Warning",
-    icon: ExclamationTriangleIcon,
-    type: "warning",
-  },
-];
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router";
+import environment from "../../environment";
+import NotifyItem from "./NotifyItem";
 
 export default function NotifyMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  const [notifications, setNotifications] = useState([]);
+  const [cookies, setCookie] = useCookies(['user', 'accessToken']);
+  const thisUser = cookies['user'];
+
+  const navigate = useNavigate();
+
+  const fetchData = async () => {
+    if (!thisUser) {
+      window.alert("Your session has expired. Please sign in again.");
+      navigate('/login');
+      return;
+    }
+
+    const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}/notifications`);
+    const data = await response.json();
+    console.log(data);
+
+    if (!response.ok) {
+      console.log(data.message);
+      return;
+    }
+
+    setNotifications(data.content);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom">
@@ -59,23 +69,11 @@ export default function NotifyMenu() {
         </MenuHandler>
       </Badge>
       <MenuList className="p-2 w-[500px] overflow-y-auto overflow-x-clip">
-        {NotificationMenuItems.map(({ label, icon, type }) => {
-          return (
-            <MenuItem
-              key={label}
-              onClick={closeMenu}
-              className={`flex items-center gap-2 h-12 rounded`}
-            >
-              {React.createElement(icon, {
-                className: `h-5 w-5 ${type}`,
-                strokeWidth: 2,
-              })}
-              <Typography as="span" variant="small" className="font-normal">
-                {label}
-              </Typography>
-            </MenuItem>
-          );
-        })}
+        { notifications.length == 0 ? (
+          <Typography>No notifications.</Typography>
+        ) : notifications.map((notification) => (
+            <NotifyItem key={notification.id} notification={notification} />
+        ))}
       </MenuList>
     </Menu>
   );
