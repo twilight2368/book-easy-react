@@ -5,13 +5,35 @@ import {
   Avatar,
   Card,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useState } from "react";
 import PostMenu from "./PostMenu";
 import { useCookies } from "react-cookie";
+import environment from "../../environment";
 
 export default function Post(props) {
   const { post } = props;
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+  const [likes, setLikes] = useState(post.likedUserIds.length);
+
+  const likePost = async () => {
+    const response = await fetch(`${environment.apiUrl}/posts/${post.id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: cookies['user'].id,
+        title: post.title,
+        content: post.content,
+        imagePath: post.imagePath,
+        likedUserIds: [...post.likedUserIds, cookies['user'].id],
+        eventId: post.eventId,
+      }),
+    })
+    if (response.ok) {
+      setLikes(post.likedUserIds.length);
+    }
+  }
 
   return (
     <div className=" w-2/3">
@@ -52,11 +74,11 @@ export default function Post(props) {
         <div className=" h-5 mb-5 flex px-5 justify-between items-center text-sm">
           <div className=" pl-2 flex">
             <div className=" flex">
-              <div className=" flex justify-center items-center mr-1">
+              <div className=" flex justify-center items-center mr-1" onClick={likePost}>
                 <HeartIcon className=" h-5 w-5 duration-200 hover:fill-red-400 hover:scale-125 hover:text-red-400 active:scale-95 " />
               </div>
               <div className=" flex justify-center items-center">
-                <span>{1000}</span>
+                <span>{likes}</span>
               </div>
             </div>
           </div>

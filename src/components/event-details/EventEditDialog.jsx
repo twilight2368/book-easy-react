@@ -43,7 +43,6 @@ const EventEditDialog = (props) => {
       })
       if (response.ok) {
         const data = await response.json();
-        setBooks(data.content);
         navigate(`/events/${data.id}`);
       }
     }
