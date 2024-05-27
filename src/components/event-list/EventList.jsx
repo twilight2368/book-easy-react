@@ -16,22 +16,21 @@ const EventList = () => {
       url = 'http://localhost:8080/api/v1/events/latest'
     }
     else if (filter == 2) {
-      url = 'http://localhost:8080/api/v1/events/latest'
+      url = `http://localhost:8080/api/v1/events/filter-event-that-user-concert?id=${cookies['user'].id}`
     }
     else {
       url = `http://localhost:8080/api/v1/events/find-by-owner?id=${cookies['user'].id}`
     }
     const fetchEvent = async () => {
-      await fetch(url)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
         setEvents(data.content);
-      })
-      .catch(err => {
+      }
+      catch(err) {
         console.log(err);
-      })
+      }
+      await fetch(url)
     }
 
     fetchEvent();

@@ -15,32 +15,30 @@ const PostEditDialog = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch(`http://localhost:8080/api/v1/posts/${post.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: cookies['user'].id,
-        title: title,
-        content: content,
-        imagePath: post.imagePath,
-        likedUserIds: post.likedUserIds,
-        eventId: post.eventId,
-      }),
-    })
-    .then(response => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/posts/${post.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: cookies['user'].id,
+          title: title,
+          content: content,
+          imagePath: post.imagePath,
+          likedUserIds: post.likedUserIds,
+          eventId: post.eventId,
+        }),
+      })
       if (response.ok) {
-        return response.json()
+        const data = await response.json();
+        setBooks(data.content);
+        navigate(`/events/${data.id}`);
       }
-    })
-    .then(data => {
-      navigate(0);
-      // console.log(data);
-    })
-    .catch(err => {
+    }
+    catch(err) {
       console.log(err);
-    })
+    }
   }
 
   return (
