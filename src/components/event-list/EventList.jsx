@@ -3,6 +3,7 @@ import EventListEvent from './EventListEvent'
 import EventCalendar from '../calendar/EventCalendar';
 import { Button, Card } from "@material-tailwind/react";
 import { useCookies } from 'react-cookie';
+import environment from '../../environment';
 
 const EventList = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
@@ -13,13 +14,13 @@ const EventList = () => {
   useEffect(() => {
     let url;
     if (filter == 1) {
-      url = 'http://localhost:8080/api/v1/events/latest'
+      url = `${environment.apiUrl}/events/latest`
     }
     else if (filter == 2) {
-      url = `http://localhost:8080/api/v1/events/filter-event-that-user-concert?id=${cookies['user'].id}`
+      url = `${environment.apiUrl}/events/filter-event-that-user-concern?id=${cookies['user'].id}`
     }
     else {
-      url = `http://localhost:8080/api/v1/events/find-by-owner?id=${cookies['user'].id}`
+      url = `${environment.apiUrl}/events/find-by-owner?id=${cookies['user'].id}`
     }
     const fetchEvent = async () => {
       try {
@@ -30,7 +31,6 @@ const EventList = () => {
       catch(err) {
         console.log(err);
       }
-      await fetch(url)
     }
 
     fetchEvent();
@@ -40,6 +40,7 @@ const EventList = () => {
     <EventListEvent
       key={event.id}
       id={event.id}
+      ownerId={event.ownerId}
       name={event.name}
       startTime={event.startTime}
     />

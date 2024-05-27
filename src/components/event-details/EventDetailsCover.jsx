@@ -1,13 +1,53 @@
-import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
-import { Button, Card, IconButton, Typography } from '@material-tailwind/react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Button, Card } from '@material-tailwind/react'
+import React, { useState } from 'react'
 import EventMenu from './EventMenu'
 import { useCookies } from 'react-cookie'
+import environment from '../../environment'
 
 const EventDetailsCover = (props) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const { event } = props;
+  console.log(event);
+
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+  const thisUser = cookies['user'];
+  const [interested, setInterested] = useState(event.concernedUserIds?.includes(thisUser?.id));
+
+  const addEventToInterest = async () => {
+    const response = await fetch(`${environment.apiUrl}/events/${event.id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          ...event,
+          concernedUserIds: [...event.concernedUserIds, thisUser.id]
+        }
+      ),
+    })
+    if (response.ok) {
+      setInterested(true);
+    }
+  }
+
+  const removeEventFromInterest = async () => {
+    const response = await fetch(`${environment.apiUrl}/events/${event.id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        {
+          ...event,
+          concernedUserIds: event.concernedUserIds.filter(userId => userId != thisUser.id)
+        }
+      ),
+    })
+    if (response.ok) {
+      setInterested(false);
+    }
+  }
+
   return (
     <div className=" relative -top-5 max-h-72 w-full col-span-8 col-start-2 pr-4 overflow-hidden">
       <Card className=" w-full h-full flex flex-col rounded-md">
@@ -26,9 +66,15 @@ const EventDetailsCover = (props) => {
             </div>
           </div>
           <div className=" w-1/4 flex flex-row justify-center items-center gap-2">
-            <Button className=" bg-white text-black duration-150 hover:scale-90 ">
-              Interested
-            </Button>
+            {
+              !interested ?
+              <Button variant='filled' color='blue' className=" text-white duration-150 hover:scale-90" onClick={addEventToInterest}>
+                Interested
+              </Button> :
+              <Button color='blue' className="bg-white text-black duration-150 hover:scale-90" onClick={removeEventFromInterest}>
+                Uninterested
+              </Button>
+            }
             {
               cookies['user'].id === event.ownerId && <EventMenu event={event} />
             }

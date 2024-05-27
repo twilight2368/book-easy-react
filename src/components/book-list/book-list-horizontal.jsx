@@ -17,7 +17,7 @@ export default function BookListHorizontal(props) {
       <Carousel className="rounded-xl w-full h-96 gap-10 pt-10 pb-12 pr-5 pl-5 ">
       {
         groups.map(g => (
-          <div className=" flex flex-row gap-14 h-full">
+          <div className=" flex flex-row gap-8 h-full">
             { g.map(b => <BookDisplaySmall book={b} />) }
         </div>
         ))
