@@ -57,7 +57,6 @@ export function AddEventDiag() {
     }
   }
 
-
   return (
     <>
       <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
