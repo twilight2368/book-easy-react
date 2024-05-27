@@ -4,11 +4,12 @@ import { Button } from "@material-tailwind/react";
 import ChangeProfile from "../../components/change-profile/ChangeProfile";
 import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
-const [cookies, setCookie] = useCookies(['accessToken', 'user']);
-console.log(cookies['user']);
+
 export default function UserProfile() {
   const[openChangeProfile, setOpenChangeProfile] = React.useState(false);
   const handleOpenChangeProfile = () => setOpenChangeProfile((cur) => !cur);
+  const [cookies, setCookie] = useCookies(['accessToken', 'user']);
+console.log(cookies['user']);
   return (
     <WrapBar>
       <div class="flex flex-col justify-center items-center h-[100vh]">
