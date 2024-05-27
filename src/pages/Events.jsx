@@ -16,7 +16,7 @@ export default function Events() {
       try {
         const response = await fetch(`${environment.apiUrl}/posts/latest`)
         if (response.ok) {
-          const data = response.json();
+          const data = await response.json();
           setPosts(data.content);
         }
       }
