@@ -56,7 +56,6 @@ export function AddPostDiag(props) {
           body: formData,
         });
         if (imageResponse.ok) {
-          const imageData = await imageResponse.json();
           navigate(0);
         }
       }
