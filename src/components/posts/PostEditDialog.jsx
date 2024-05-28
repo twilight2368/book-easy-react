@@ -7,10 +7,7 @@ import { useNavigate } from 'react-router';
 const PostEditDialog = (props) => {
   const { open, handleOpen, post } = props;
   const navigate = useNavigate();
-
-  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
-  const [title, setTitle] = useState(post.title);
-  const [content, setContent] = useState(post.content);
+  const [postData, setPostData] = useState(post);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,18 +18,11 @@ const PostEditDialog = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          userId: cookies['user'].id,
-          title: title,
-          content: content,
-          imagePath: post.imagePath,
-          likedUserIds: post.likedUserIds,
-          eventId: post.eventId,
-        }),
+        body: JSON.stringify(postData),
       })
       if (response.ok) {
         const data = await response.json();
-        navigate(`/events/${data.id}`);
+        navigate(0);
       }
     }
     catch(err) {
@@ -65,11 +55,19 @@ const PostEditDialog = (props) => {
             <Typography className="-mb-2" variant="h6">
               Title
             </Typography>
-            <Input label="Title" size="lg" required value={title} onChange={e => setTitle(e.target.value)} />
+            <Input 
+              label="Title"
+              size="lg"
+              required
+              value={postData.title}
+              onChange={e => setPostData({ ...postData, title: e.target.value })} />
             <Typography className="-mb-2" variant="h6">
               Content
             </Typography>
-            <Textarea label="Content" value={content} onChange={e => setContent(e.target.value)} />
+            <Textarea 
+              label="Content" 
+              value={postData.content} 
+              onChange={e => setPostData({ ...postData, content: e.target.value })} />
             <Button variant="gradient" color="blue" type="submit">
               Finish
             </Button>
