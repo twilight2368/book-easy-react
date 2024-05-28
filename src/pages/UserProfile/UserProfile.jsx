@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import WrapBar from "../../components/WrapBar";
 import { Button } from "@material-tailwind/react";
 import ChangeProfile from "../../components/change-profile/ChangeProfile";
-import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
+import environment from "../../environment";
+import { useNavigate } from "react-router";
+
 
 export default function UserProfile() {
   const[openChangeProfile, setOpenChangeProfile] = React.useState(false);
   const handleOpenChangeProfile = () => setOpenChangeProfile((cur) => !cur);
-  const [cookies, setCookie] = useCookies(['accessToken', 'user']);
-console.log(cookies['user']);
+
+  const [cookies, setCookie] = useCookies(['user', 'accessToken']);
+  const thisUser = cookies['user'];
+
+  const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = useState();
+
+  const fetchData = async () => {
+    if (!thisUser) {
+      window.alert("Your session has expired. Please sign in again.");
+      navigate('/login');
+      return;
+    }
+
+    const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}`);
+    const data = await response.json();
+
+    console.log(data);
+    setUserInfo(data);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [] );
+
   return (
     <WrapBar>
       <div class="flex flex-col justify-center items-center h-[100vh]">
@@ -22,7 +48,7 @@ console.log(cookies['user']);
           <div className="relative mb-4">
             <img
               className="w-24 h-24 rounded-full border-4 border-gray-600"
-              src="https://via.placeholder.com/96"
+              src={userInfo?.pictureUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/768px-User-avatar.svg.png'}
               alt="avatar"
             />
             <label
@@ -42,7 +68,7 @@ console.log(cookies['user']);
             <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p class="text-sm text-gray-600">Name</p>
               <p class="text-base font-medium text-navy-700 dark:text-white">
-                Nguyen Van A
+                {userInfo?.name}
               </p>
             </div>
 

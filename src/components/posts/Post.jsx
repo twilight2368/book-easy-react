@@ -103,8 +103,7 @@ export default function Post(props) {
         <div className=" h-96 w-full px-5 mb-5">
           <img
             className="h-96 w-full rounded-lg object-cover object-center"
-            src={post.imagePath || "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"}
-            alt="nature image"
+            src={post.imagePath}
           />
         </div>
 

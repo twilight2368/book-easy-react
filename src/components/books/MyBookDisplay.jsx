@@ -10,7 +10,7 @@ export default function MyBookDisplay(props) {
   const { book } = props;
   return (
     <div className=" relative w-11/12 h-full duration-300 hover:scale-105 book-display overflow-hidden rounded-md">
-      <img src={BookCover} alt="" className=" object-fill h-full w-full" />
+      <img src={book.imagePath || BookCover} alt="" className=" object-fill h-full w-full" />
       <div className=" absolute bottom-0 bg-black/75 w-full text-white text-center whitespace-nowrap text-nowrap book-name-display">
         <div className=" font-black text-sm nunito-font mt-2 mb-0.5">
           {book.title}

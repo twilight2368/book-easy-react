@@ -50,12 +50,12 @@ export function AddPostDiag(props) {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        const imageResponse = await fetch(`${environment.apiUrl}/posts/${data.id}/upload-image-post`, {
+        const imageResponse = await fetch(`${environment.apiUrl}/${data.id}/upload-image-post`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
-          body: JSON.stringify({imageFile: image}),
+          body: formData
         });
         if (imageResponse.ok) {
           const imageData = await response.json();
