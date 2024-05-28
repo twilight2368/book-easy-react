@@ -13,6 +13,7 @@ import { useCookies } from "react-cookie";
 import environment from "../../environment";
 import SuccessMessage from "../../components/SuccessMessage";
 import ExchangeOffersTable from "../../components/exchange/ExchangeOffersTable";
+import ChatMain from "../../components/chat/ChatMain";
 
 const BookDetail = (props) => {
   const { id } = useParams();
@@ -84,17 +85,22 @@ const BookDetail = (props) => {
     fetchData(id);
   }, []);
 
+  const [openChat, setOpenChat] = useState(false);
+
   return (
     <WrapBar>
-      <div class="space-y-5">
-        <div class="max-w-6xl mx-auto px-5 space-y-5">
-          <div class="flex space-x-10">
+      <div className="space-y-5">
+        <div className="max-w-6xl mx-auto px-5 space-y-5">
+          <div className="flex space-x-10">
             <div className="flex flex-col space-y-2">
-              <div><img class="w-72 h-96 rounded-lg  shadow-lg" src= {book?.imagePath || bookCover} alt="book"/></div>
+              <div><img className="w-72 h-96 rounded-lg  shadow-lg" src= {book?.imagePath || bookCover} alt="book"/></div>
               <div className="flex flex-col space-y-2">
-                <button class="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-blue-100 text-blue-500 w-full h-1/2 justify-center hover:bg-blue-200">
+                <button 
+                  className="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-blue-100 text-blue-500 w-full h-1/2 justify-center hover:bg-blue-200"
+                  onClick={() => setOpenChat(true)}  
+                >
                   <ChatBubbleOvalLeftIcon className="h-5 w-5" />
-                  <div>Contact</div>
+                  <div>Contact owner</div>
                 </button>
                 {!interested ?
                   <button 
@@ -186,6 +192,7 @@ const BookDetail = (props) => {
         </div>
       </div>
       <SuccessMessage message='Offer sent successfully!' open={openOfferSuccessMessage} handleClose={() => setOpenOfferSuccessMessage(false)}/>
+      { openChat && <ChatMain open={openChat} handleClose={() => setOpenChat(false)} partnerId={book?.ownerId} />}
     </WrapBar>
   );
 };
