@@ -13,7 +13,7 @@ const PostDeleteDialog = (props) => {
       });
       if (response.ok) {
         const data = response.json();
-        navigate('/events');
+        navigate(0);
       }
     }
     catch(err) {
