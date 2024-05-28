@@ -17,6 +17,7 @@ export default function UserProfile() {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState();
+  const [imagePath, setImagePath] = useState('');
 
   const fetchData = async () => {
     if (!thisUser) {
@@ -30,11 +31,32 @@ export default function UserProfile() {
 
     console.log(data);
     setUserInfo(data);
+    setImagePath(data.pictureUrl);
   }
 
   useEffect(() => {
     fetchData();
   }, [] );
+
+  const handleChange = async (e) => {
+    setImagePath(URL.createObjectURL(e.target.files[0]));
+
+    const formData = new FormData();
+    formData.append("imageFile", e.target.files[0]);
+
+    try {
+      const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}/upload-avatar`, {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        return;
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <WrapBar>
@@ -47,8 +69,8 @@ export default function UserProfile() {
           </div>
           <div className="relative mb-4">
             <img
-              className="w-24 h-24 rounded-full border-4 border-gray-600"
-              src={userInfo?.pictureUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/768px-User-avatar.svg.png'}
+              className="object-fit w-24 h-24 rounded-full border-4 border-gray-600"
+              src={imagePath || 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/768px-User-avatar.svg.png'}
               alt="avatar"
             />
             <label
@@ -62,6 +84,7 @@ export default function UserProfile() {
               id="upload-file"
               className="hidden"
               accept="image/png, image/jpeg"
+              onChange={handleChange}
             />
           </div>
           <div class="grid grid-cols-2 gap-4 px-2 w-full">
