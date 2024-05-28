@@ -116,7 +116,7 @@ const BookDetail = (props) => {
             </div>
             <div class="flex-1 space-y-2">
               <div className="flex space-x-4 mb-10">
-                { thisUser?.id !== book?.ownerId && (
+                { thisUser?.id !== book?.ownerId && book?.status === 'AVAILABLE' && (
                 <>
                   <Button 
                     className="flex items-center font-serif text-nowrap space-x-2 p-4 rounded-lg bg-white text-red-500 w-full justify-center hover:bg-gray-200"
