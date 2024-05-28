@@ -28,15 +28,12 @@ const ChangeProfile = (props) => {
     
         const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}`);
         const data = await response.json();
-        console.log(data);
         setFormData(data);
       }
 
     useEffect(() => {
         fetchData();
     }, [] );
-
-    console.log(formData);
 
     const [provinceList, setProvinceList] = useState([]);
     const [districtList, setDistrictList] = useState([]);
@@ -141,7 +138,7 @@ const ChangeProfile = (props) => {
                         <Select
                             className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             label="Select role *"
-                            value={formData.roles[0]}
+                            value={formData.roles?.length > 0 ? formData.roles[0] : ''}
                             onChange={(val) => setFormData({...formData, roles: [val]}) }
                             required
                         >
