@@ -63,7 +63,6 @@ export function AddBookDiag() {
           layout: layout,
           description: description,
           imagePath: imagePath,
-          categories: [],
         }),
       });
       if (response.ok) {
