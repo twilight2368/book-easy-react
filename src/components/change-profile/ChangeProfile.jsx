@@ -87,6 +87,7 @@ const ChangeProfile = (props) => {
         console.log(formData);
     
         if (!response.ok) {
+            navigate(0);
           return;
         }
     };
