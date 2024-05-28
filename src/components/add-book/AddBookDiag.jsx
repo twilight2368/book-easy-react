@@ -63,23 +63,18 @@ export function AddBookDiag() {
           layout: layout,
           description: description,
           imagePath: imagePath,
-          categories: [],
         }),
       });
       if (response.ok) {
         const data = await response.json();
         const formData = new FormData();
         formData.append('imageFile', image);
-        const imageResponse = await fetch(`${environment.apiUrl}/${data.id}/upload-image-book`, {
+        const imageResponse = await fetch(`${environment.apiUrl}/books/${data.id}/upload-image-book`, {
           method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
           body: formData
         });
-        navigate(`/book/${data.id}`);
         if (imageResponse.ok) {
-          const imageData = await response.json();
+          navigate(`/book/${data.id}`);
         }
       }
     }

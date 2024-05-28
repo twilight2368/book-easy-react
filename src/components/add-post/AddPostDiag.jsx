@@ -30,10 +30,8 @@ export function AddPostDiag(props) {
     setImagePath(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
   }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(`${environment.apiUrl}/posts`, {
         method: "POST",
@@ -44,22 +42,20 @@ export function AddPostDiag(props) {
           userId: cookies['user'].id,
           title: title,
           content: content,
+          imagePath: imagePath,
           eventId: eventId,
         }),
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        const imageResponse = await fetch(`${environment.apiUrl}/${data.id}/upload-image-post`, {
+        const formData = new FormData();
+        formData.append("imageFile", image);
+
+        const imageResponse = await fetch(`${environment.apiUrl}/posts/${data.id}/upload-image-post`, {
           method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: formData
+          body: formData,
         });
         if (imageResponse.ok) {
-          const imageData = await response.json();
-          console.log(imageData);
           navigate(0);
         }
       }
@@ -68,7 +64,6 @@ export function AddPostDiag(props) {
       console.log(err);
     }
   }
-
   return (
     <>
       <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">

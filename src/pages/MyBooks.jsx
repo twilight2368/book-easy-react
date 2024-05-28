@@ -55,7 +55,7 @@ export default function MyBooks() {
           </div>
           <div className=" w-full grid grid-cols-5 px-3 gap-5 gap-y-8 justify-center items-center">
             { books.map(book => (
-              <Link key={book.id} to={`/book/${book.id}`}><MyBookDisplay book={book} /></Link>
+              <MyBookDisplay book={book} />
             )) }
           </div>
         </div>

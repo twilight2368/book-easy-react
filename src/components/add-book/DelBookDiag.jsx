@@ -8,11 +8,29 @@ import {
 } from "@material-tailwind/react";
 import { IconButton } from "@material-tailwind/react";
 import { Alert } from "@material-tailwind/react";
+import { useNavigate } from "react-router";
 
 export function DelBookDiag(props) {
+  const { bookId } = props;
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleOpen = () => setOpen(!open);
+
+  const deleteBook = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/books/${bookId}`, {
+        method: "DELETE"
+      });
+      if (response.ok) {
+        const data = response.json();
+        navigate(0);
+      }
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
   return (
     <>
@@ -38,7 +56,7 @@ export function DelBookDiag(props) {
           >
             <span>Cancel</span>
           </Button>
-          <Button variant="text" color="blue" onClick={handleOpen}>
+          <Button variant="text" color="blue" onClick={deleteBook}>
             <span>Confirm</span>
           </Button>
         </DialogFooter>
