@@ -33,12 +33,12 @@ const ChangeProfile = (props) => {
 
     useEffect(() => {
         fetchData();
-        console.log(formData);
     }, [] );
 
     const [provinceList, setProvinceList] = useState([]);
     const [districtList, setDistrictList] = useState([]);
     const [communeList, setCommuneList] = useState([]);
+
     const fetchProvinceList = async () => {
         const response = await fetch(`${environment.apiUrl}/address/provinces`);
         const data = await response.json();
@@ -62,12 +62,12 @@ const ChangeProfile = (props) => {
     }, []);
 
     useEffect(() => {
-        if (formData.provinceId) fetchDistrictList(formData.provinceId);
-    }, [formData.provinceId]);
+        if (formData.province?.id) fetchDistrictList(formData.province.id);
+    }, [formData.province]);
     
     useEffect(() => {
-        if (formData.districtId) fetchCommuneList(formData.districtId);
-    }, [formData.districtId]);
+        if (formData.district?.id) fetchCommuneList(formData.district.id);
+    }, [formData.district]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -84,6 +84,7 @@ const ChangeProfile = (props) => {
         console.log(formData);
     
         if (!response.ok) {
+            navigate(0);
           return;
         }
     };
@@ -137,12 +138,12 @@ const ChangeProfile = (props) => {
                         <Select
                             className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             label="Select role *"
-                            value={formData.roles}
+                            value={formData.roles?.length > 0 ? formData.roles[0] : ''}
                             onChange={(val) => setFormData({...formData, roles: [val]}) }
                             required
                         >
-                        <Option value="BOOK_EXCHANGER">Book exchanger</Option>
-                        <Option value="BOOKSTORE">Bookstore</Option>
+                            <Option value="BOOK_EXCHANGER">Book exchanger</Option>
+                            <Option value="BOOKSTORE">Bookstore</Option>
                         </Select>
                     </div>
 
@@ -171,40 +172,58 @@ const ChangeProfile = (props) => {
                     </div>
                     <div>
                         <Select
-                            className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             label="City / Province"
-                            value={formData.provinceId}
-                            onChange={(val) => setFormData({...formData, provinceId: val})}
+                            value={formData.province?.name || ''}
                         >
-                            {provinceList.map(p => <Option key={p.id} value={p.id}>{p.name}</Option>)}
+                            {provinceList.map(p => 
+                                <Option 
+                                    key={p.id} 
+                                    value={p.id} 
+                                    onClick={() => setFormData({...formData, province: { id: p.id, name: p.name }})}
+                                >
+                                    {p.name}
+                                </Option>
+                            )}
                         </Select>
                     </div>
-                    {
-                        formData.provinceId &&
+                    {/* {
+                        formData.provinceId && */}
                         <div>
                             <Select
-                                className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 label="District"
-                                // value={formData.districtId}
-                                onChange={(val) => setFormData({...formData, districtId: val})}
+                                value={formData.district?.name || ''}
                             >
-                                {districtList.map(d => <Option key={d.id} value={d.id}>{d.name}</Option>)}
+                                {districtList.map(d => 
+                                    <Option 
+                                        key={d.id} 
+                                        value={d.id} 
+                                        onClick={() => setFormData({...formData, district: { id: d.id, name: d.name }})}
+                                    >
+                                        {d.name}
+                                    </Option>
+                                )}
                             </Select>
                         </div>
-                    }
+                    {/* }
                     {
-                        formData.districtId &&
+                        formData.districtId && */}
                         <div>
                             <Select
-                                className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                label="Ward / Commune"
-                                // value={formData.communeId}
-                                onChange={(val) => setFormData({...formData, communeId: val})}
+                                label="Commune"
+                                value={formData.commune?.name || ''}
                             >
-                                {communeList.map(c => <Option key={c.id} value={c.id}>{c.name}</Option>)}
+                                {communeList.map(c => 
+                                    <Option 
+                                        key={c.id} 
+                                        value={c.id} 
+                                        onClick={() => setFormData({...formData, commune: { id: c.id, name: c.name }})}
+                                    >
+                                        {c.name}
+                                    </Option>
+                                )}
                             </Select>
                         </div>
-                    }
+                    {/* } */}
                     <div>
                         <Input
                             type="text"
