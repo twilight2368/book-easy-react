@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Button, Card, CardBody, Dialog, Input, Textarea, Typography } from '@material-tailwind/react'
 import bookCover from "../../components/books/book-cover-default.png";
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router';
 
 const apiUrl = "http://localhost:8080/api/v1";
 
@@ -12,14 +14,24 @@ const ExchangeMoneyDialog = (props) => {
   const [currency, setCurrency] = useState();
   const [message, setMessage] = useState();
 
+  const [cookies, setCookie] = useCookies(['user', 'accessToken']);
+  const thisUser = cookies['user'];
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     console.log(book, owner);
 
+    if (!thisUser) {
+      window.alert("Your session has expired. Please sign in again.");
+      navigate('/login');
+      return;
+    }
+
     const body = {
       bookId: book.id,
-      userId: book.ownerId,
+      userId: thisUser.id,
       exchangeItemType: 'MONEY',
       moneyItem: {
         amount: money,

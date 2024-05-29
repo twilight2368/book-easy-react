@@ -48,7 +48,7 @@ export default function NotifyMenu() {
       return;
     }
 
-    const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}/notifications`);
+    const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}/notifications?size=10`);
     const data = await response.json();
     console.log(data);
 
@@ -74,7 +74,7 @@ export default function NotifyMenu() {
     const mySocketFactory = () => new SockJS('http://localhost:8080/ws');
     const stompClient = Stomp.over(mySocketFactory);
 
-    stompClient.connect({}, onConnect);  // Provide your credentials if needed
+    stompClient.connect({}, onConnect);
 
     function onConnect() {
       stompClient.subscribe(`/user/${thisUser.id}/notification`, onNotificationReceived);
