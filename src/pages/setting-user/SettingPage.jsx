@@ -30,8 +30,8 @@ export default function SettingPage() {
             Change password
           </Button>
           <ChangePassword
-          open = {openChangePassword}
-          handleOpen = {handleOpenChangePassword}
+            open = {openChangePassword}
+            handleOpen = {handleOpenChangePassword}
           />
         </div>
       </div>

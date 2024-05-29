@@ -1,14 +1,94 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Button, Card, CardBody, Dialog, Typography, Select, Option, Popover, Input, PopoverHandler, PopoverContent } from '@material-tailwind/react';
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router";
+import { useCookies } from "react-cookie";
+import environment from "../../environment";
+import { Link } from "react-router-dom";
 
 const ChangeProfile = (props) => {
     const { open, handleOpen } = props;
-    const [date, setDate] = React.useState();
-  
+    const [birthDate, setBirthDate] = useState();
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({});
+
+    const [cookies, setCookie, removeCookie] = useCookies(['user', 'token']);
+    const thisUser = cookies['user'];
+
+    const fetchData = async () => {
+        if (!thisUser) {
+            window.alert("Your session has expired. Please sign in again.");
+            navigate('/login');
+            return;
+        }
+    
+        const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}`);
+        const data = await response.json();
+        setFormData(data);
+      }
+
+    useEffect(() => {
+        fetchData();
+    }, [] );
+
+    const [provinceList, setProvinceList] = useState([]);
+    const [districtList, setDistrictList] = useState([]);
+    const [communeList, setCommuneList] = useState([]);
+
+    const fetchProvinceList = async () => {
+        const response = await fetch(`${environment.apiUrl}/address/provinces`);
+        const data = await response.json();
+        setProvinceList(data);
+    }
+
+    const fetchDistrictList = async (province) => {
+        const response = await fetch(`${environment.apiUrl}/address/districts?province-id=${province}`);
+        const data = await response.json();
+        setDistrictList(data);
+    }
+
+    const fetchCommuneList = async (district) => {
+        const response = await fetch(`${environment.apiUrl}/address/communes?district-id=${district}`);
+        const data = await response.json();
+        setCommuneList(data);
+    }
+
+    useEffect(() => {
+        fetchProvinceList();
+    }, []);
+
+    useEffect(() => {
+        if (formData.province?.id) fetchDistrictList(formData.province.id);
+    }, [formData.province]);
+    
+    useEffect(() => {
+        if (formData.district?.id) fetchCommuneList(formData.district.id);
+    }, [formData.district]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}`, {
+            method: "PUT",
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(formData)
+        });
+    
+        const data = await response.json();
+        console.log(formData);
+    
+        if (response.ok) {
+            navigate(0);
+          return;
+        }
+    };
+
     return (
         <Dialog
             size="xl"
@@ -20,7 +100,7 @@ const ChangeProfile = (props) => {
                 <div className="flex flex-row items-center">
                     <div className="w-11/12">
                         <Typography variant="h4" color="blue-gray" className="ml-5">
-                            Change Profile
+                            Edit Profile
                         </Typography>
                     </div>
                     <div>
@@ -30,140 +110,140 @@ const ChangeProfile = (props) => {
                     </div>
                 </div>
                 <CardBody className="flex flex-col gap-4 max-h-[500px] overflow-y-auto scroll-smooth">
+                <form class="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
                     <div>
-                        <div className="flex flex-col gap-2">
-                            <div>
-                                <Typography className="grid grid-cols-2 gap-5">
-                                    <input
-                                        type="text"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="First name"
-                                        
-                                    />
-                                    <input
-                                        type="text"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Last name"
-                                        
-                                    />
-                                </Typography>
-                            </div>
-                            
-                            <div>
-                                <Typography>
-                                    <label>Gender</label>
-                                    <Select
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        label="Select gender"
-                                    >
-                                        <Option>Male</Option>
-                                        <Option>Female</Option>
-                                        <Option>Other</Option>
-                                    </Select>
-                                </Typography>
-                            </div>
-                            <div>
-                                <Typography>
-                                    <label>Roles</label>
-                                    <Select
-                                        required
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        label="Select role"
-                                    >
-                                        <Option>BOOK_EXCHANGER</Option>
-                                        <Option>BOOKSTORE</Option>
-                                    </Select>
-                                </Typography>
-                            </div>
-                            <div>
-                                <label>Date of Birth</label>
-                                <Popover placement="bottom">
-                                    <PopoverHandler>
-                                        <Input
-                                            label="Select a Date"
-                                            onChange={() => null}
-                                            value={date ? format(date, "PPP") : ""}
-                                            className="cursor-pointer"
-                                        />
-                                    </PopoverHandler>
-                                    <PopoverContent className="p-2 shadow-lg rounded-md z-[9999]">
-                                        <DayPicker
-                                            mode="single"
-                                            selected={date}
-                                            onSelect={setDate}
-                                            showOutsideDays
-                                            fromYear={1920}
-                                            toYear={2030}
-                                            captionLayout="dropdown"
-                                            className="border-0"
-                                            classNames={{
-                                                caption: "flex justify-between items-center py-2 mb-4 relative",
-                                                caption_label: "text-sm font-medium text-gray-900",
-                                                nav: "flex items-center",
-                                                nav_button: "h-6 w-6 bg-transparent hover:bg-blue-gray-50 p-1 rounded-md transition-colors duration-300",
-                                                nav_button_previous: "absolute left-1.5",
-                                                nav_button_next: "absolute right-1.5",
-                                                table: "w-full border-collapse",
-                                                head_row: "flex font-medium text-gray-900",
-                                                head_cell: "m-0.5 w-9 font-normal text-sm",
-                                                row: "flex w-full mt-2",
-                                                cell: "text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
-                                                day: "h-9 w-9 p-0 font-normal",
-                                                day_range_end: "day-range-end",
-                                                day_selected: "rounded-md bg-gray-900 text-white hover:bg-gray-900 hover:text-white focus:bg-gray-900 focus:text-white",
-                                                day_today: "rounded-md bg-gray-200 text-gray-900",
-                                                day_outside: "day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10",
-                                                day_disabled: "text-gray-500 opacity-50",
-                                                day_hidden: "invisible",
-                                            }}
-                                            components={{
-                                                IconLeft: ({ ...props }) => (
-                                                    <ChevronLeftIcon {...props} className="h-4 w-4 stroke-2" />
-                                                ),
-                                                IconRight: ({ ...props }) => (
-                                                    <ChevronRightIcon {...props} className="h-4 w-4 stroke-2" />
-                                                ),
-                                            }}
-                                        />
-                                    </PopoverContent>
-                                </Popover>
-                            </div>
-                            <div className="grid grid-cols-2 gap-5">
-                <Select
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  label="Select province"
-                >
-                  <Option>Ha Noi</Option>
-                  <Option>Ho Chi Minh</Option>
-                </Select>
-
-                <Select
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  label="Select district"
-                >
-                  <Option>Quan Hai Ba Trung</Option>
-                  <Option>Quan Hoan Kiem</Option>
-                </Select>
-              </div>
-              <div className="grid grid-cols-2 gap-5">
-                <Select
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  label="Select commune"
-                >
-                  <Option>Phuong Bach Khoa</Option>
-                  <Option>Phuong Dong Tam</Option>
-                </Select>
-                <input
-                  type="text"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Detailed address"
-                />
-              </div>
-                        </div>
+                        <Input
+                        type="text"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        label="Your Name"
+                        value={formData.name}
+                        onChange={(event) => setFormData({...formData, name: event.target.value})}
+                        required
+                        />
                     </div>
-                    <Button variant="gradient" color="blue" onClick={handleOpen}>
+                    <div>
+                        <Input
+                            type="email"
+                            name="email"
+                            id="email"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            label="Email"
+                            placeholder="name@company.com"
+                            value={formData.email}
+                            onChange={(event) => setFormData({...formData, email: event.target.value})}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <Select
+                            className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            label="Select role *"
+                            value={formData.roles?.length > 0 ? formData.roles[0] : ''}
+                            onChange={(val) => setFormData({...formData, roles: [val]}) }
+                            required
+                        >
+                            <Option value="BOOK_EXCHANGER">Book exchanger</Option>
+                            <Option value="BOOKSTORE">Bookstore</Option>
+                        </Select>
+                    </div>
+
+                    <div>
+                        <Select
+                            className="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            label="Select gender"
+                            value={formData.gender}
+                            onChange={(val) => setFormData({...formData, gender: val.toUpperCase()}) }
+                        >
+                        <Option value="MALE">Male</Option>
+                        <Option value="FEMALE">Female</Option>
+                        <Option value="OTHER">Other</Option>
+                        </Select>
+                    </div>
+
+                    <div>
+                        <input
+                            type="date"
+                            name="startDate"
+                            id="startDate"
+                            className=" h-full w-full p-2.5 border border-[#b0bec5] rounded-md font-roboto text-sm"
+                            value={formData.birthDate} 
+                            onChange={e => setFormData({ ...formData, birthDate: e.target.value })}
+                        />
+                    </div>
+                    <div>
+                        <Select
+                            label="City / Province"
+                            value={formData.province?.name || ''}
+                        >
+                            {provinceList.map(p => 
+                                <Option 
+                                    key={p.id} 
+                                    value={p.id} 
+                                    onClick={() => setFormData({...formData, province: { id: p.id, name: p.name }})}
+                                >
+                                    {p.name}
+                                </Option>
+                            )}
+                        </Select>
+                    </div>
+                    {/* {
+                        formData.provinceId && */}
+                        <div>
+                            <Select
+                                label="District"
+                                value={formData.district?.name || ''}
+                            >
+                                {districtList.map(d => 
+                                    <Option 
+                                        key={d.id} 
+                                        value={d.id} 
+                                        onClick={() => setFormData({...formData, district: { id: d.id, name: d.name }})}
+                                    >
+                                        {d.name}
+                                    </Option>
+                                )}
+                            </Select>
+                        </div>
+                    {/* }
+                    {
+                        formData.districtId && */}
+                        <div>
+                            <Select
+                                label="Commune"
+                                value={formData.commune?.name || ''}
+                            >
+                                {communeList.map(c => 
+                                    <Option 
+                                        key={c.id} 
+                                        value={c.id} 
+                                        onClick={() => setFormData({...formData, commune: { id: c.id, name: c.name }})}
+                                    >
+                                        {c.name}
+                                    </Option>
+                                )}
+                            </Select>
+                        </div>
+                    {/* } */}
+                    <div>
+                        <Input
+                            type="text"
+                            name="detailedAddress"
+                            id="detailedAddress"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            label="Detailed Address"
+                            placeholder="123 Main Street"
+                            value={formData.detailedAddress}
+                            onChange={(event) => setFormData({...formData, detailedAddress: event.target.value})}
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    >
                         Save
-                    </Button>
+                    </button>
+                    </form>
                 </CardBody>
             </Card>
         </Dialog>

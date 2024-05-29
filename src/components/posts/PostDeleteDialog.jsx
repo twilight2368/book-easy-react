@@ -7,20 +7,18 @@ const PostDeleteDialog = (props) => {
   const navigate = useNavigate();
 
   const deletePost = async () => {
-    await fetch(`http://localhost:8080/api/v1/posts/${postId}`, {
-      method: "DELETE"
-    })
-    .then(response => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/posts/${postId}`, {
+        method: "DELETE"
+      });
       if (response.ok) {
-        return response.json()
+        const data = response.json();
+        navigate(0);
       }
-    })
-    .then(data => {
-      navigate(0);
-    })
-    .catch(err => {
+    }
+    catch(err) {
       console.log(err);
-    })
+    }
   }
   
   return (

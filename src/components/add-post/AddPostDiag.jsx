@@ -12,6 +12,7 @@ import {
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
+import environment from "../../environment";
 export function AddPostDiag(props) {
   const { eventId } = props;
   const navigate = useNavigate();
@@ -19,45 +20,50 @@ export function AddPostDiag(props) {
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [image, setImage] = useState('');
+  const [imagePath, setImagePath] = useState('');
+  const [image, setImage] = useState();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
   const handleChange = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    setImagePath(URL.createObjectURL(e.target.files[0]));
+    setImage(e.target.files[0]);
   }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await fetch('http://localhost:8080/api/v1/posts', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: cookies['user'].id,
-        title: title,
-        content: content,
-        imagePath: image,
-        likedUserIds: [],
-        eventId: eventId,
-      }),
-    })
-    .then(response => {
+    try {
+      const response = await fetch(`${environment.apiUrl}/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: cookies['user'].id,
+          title: title,
+          content: content,
+          imagePath: imagePath,
+          eventId: eventId,
+        }),
+      });
       if (response.ok) {
-        return response.json()
-      }
-    })
-    .then(data => {
-      navigate(0);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }
+        const data = await response.json();
+        const formData = new FormData();
+        formData.append("imageFile", image);
 
+        const imageResponse = await fetch(`${environment.apiUrl}/posts/${data.id}/upload-image-post`, {
+          method: "POST",
+          body: formData,
+        });
+        if (imageResponse.ok) {
+          navigate(0);
+        }
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       <Button onClick={handleOpen} className="w-full h-12 bg-blue-500 montserrat-font">
@@ -108,7 +114,7 @@ export function AddPostDiag(props) {
                 className=" flex justify-center items-center"
                 onChange={handleChange}
               />
-              <img src={image} className="w-full mb-2" />
+              <img src={imagePath} className="w-full mb-2" />
               <Button variant="gradient" color="blue" type="submit">
                 Post
               </Button>

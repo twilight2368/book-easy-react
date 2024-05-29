@@ -25,32 +25,30 @@ const EventEditDialog = (props) => {
     const start = `${startDate}T${startTime}:00.000Z`;
     const end = `${endDate}T${endTime}:00.000Z`;
 
-    await fetch(`http://localhost:8080/api/v1/events/${event.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: event.id,
-        ownerId: cookies['user'].id,
-        name: name,
-        description: description,
-        startTime: start,
-        endTime: end,
-        concernedUserIds: []
-      }),
-    })
-    .then(response => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/events/${event.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: event.id,
+          ownerId: cookies['user'].id,
+          name: name,
+          description: description,
+          startTime: start,
+          endTime: end,
+          concernedUserIds: []
+        }),
+      })
       if (response.ok) {
-        return response.json()
+        const data = await response.json();
+        navigate(0);
       }
-    })
-    .then(data => {
-      navigate(0);
-    })
-    .catch(err => {
+    }
+    catch(err) {
       console.log(err);
-    })
+    }
   }
 
   return (

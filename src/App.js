@@ -15,6 +15,10 @@ import EventDetails from "./pages/EventDetails";
 import Notfound from "./pages/Notfound/Notfound";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import TransactionHistory from "./pages/TransactionHistory";
+import Dashboard from "./pages/Dashboard";
+import Books from "./pages/Books";
+import Users from "./pages/Users";
+import Transactions from "./pages/Transactions";
 
 function App() {
 
@@ -36,6 +40,10 @@ function App() {
             <Route path="book/:id" element={<BookDetail />} />
             <Route path="/setting" element={<SettingPage />} />
             <Route path="/transactions" element={<TransactionHistory />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/books-admin" element={<Books />} />
+            <Route path="/users-admin" element={<Users />} />
+            <Route path="/transactions-admin" element={<Transactions />} />
             <Route path="*" element={<Notfound />} />
             <Route path = "/profile" element = {<UserProfile/>}/>
         </Routes>
