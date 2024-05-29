@@ -23,6 +23,11 @@ const profileMenuItems = [
     link: "profile",
   },
   {
+    label: "Edit Profile",
+    icon: Cog6ToothIcon,
+    link: "editprofile",
+  },
+  {
     label: "Sign Out",
     icon: ArrowRightStartOnRectangleIcon,
     link: "logout",
@@ -57,7 +62,7 @@ export default function ProfileMenu() {
                   //todo: Logout user
                   navigate("/login");
                 } else {
-                  navigate("/" + link + "/");
+                  navigate("/" + link);
                 }
               }}
               className={`flex items-center gap-2 rounded ${
