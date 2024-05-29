@@ -109,10 +109,10 @@ const Books = () => {
   };
 
   const filteredBooks = books?.filter(book => 
-    book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    book.publisher.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    book.year.toString().includes(searchQuery)
+    book.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    book.author?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    book.publisher?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    book.publishYear?.toString().includes(searchQuery)
   );
 
   return (
