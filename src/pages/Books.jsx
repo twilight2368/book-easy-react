@@ -27,22 +27,23 @@ const Books = () => {
       },
       body: JSON.stringify(editedBook)
     });
-
-    const data = await response.json();
-
     if (response.ok) {
+      const updatedBooks = books.map((book) =>
+        book.id === selectedBook.id ? editedBook : book
+      );
+      setBooks(updatedBooks);
       return;
     }
   }
 
-  const deleteBook = async (bookId) => {
+  const deleteBook = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/books/${bookId}`, {
+      const response = await fetch(`http://localhost:8080/api/v1/books/${selectedBook.id}`, {
         method: "DELETE"
       });
       if (response.ok) {
         const updatedBooks = books.filter((book) =>
-          book.id !== bookId
+          book.id !== selectedBook.id
         );
         setBooks(updatedBooks);
       }
@@ -83,14 +84,10 @@ const Books = () => {
   };
 
   const handleEditSubmit = () => {
-    const updatedBooks = books.map((book) =>
-      book.id === selectedBook.id ? editedBook : book
-    );
-    setBooks(updatedBooks);
+    updateBook(selectedBook.id);
     setEditModalOpen(false);
     setSelectedBook(null);
     setEditedBook({});
-    updateBook(selectedBook.id);
   };
 
   const handleDeleteConfirm = () => {
