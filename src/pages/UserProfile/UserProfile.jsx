@@ -28,8 +28,6 @@ export default function UserProfile() {
 
     const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}`);
     const data = await response.json();
-
-    console.log(data);
     setUserInfo(data);
     setImagePath(data.pictureUrl);
   }
@@ -57,6 +55,8 @@ export default function UserProfile() {
       console.log(err);
     }
   }
+
+  console.log(userInfo)
 
   return (
     <WrapBar>
@@ -105,7 +105,7 @@ export default function UserProfile() {
             <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p class="text-sm text-gray-600">Role</p>
               <p class="text-base font-medium text-navy-700 dark:text-white">
-                BOOK_EXCHANGER
+                {userInfo?.roles}
               </p>
             </div>
 
@@ -121,14 +121,14 @@ export default function UserProfile() {
             <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p class="text-sm text-gray-600">Address</p>
               <p class="text-base font-medium text-navy-700 dark:text-white">
-                So 3, ngo 234, Phuong A, Quan B, Ha Noi
+                {`${userInfo?.detailedAddress}, ${userInfo?.commune.name}, ${userInfo?.district.name}, ${userInfo?.province.name}`}
               </p>
             </div>
 
             <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p class="text-sm text-gray-600">Birthday</p>
               <p class="text-base font-medium text-navy-700 dark:text-white">
-                20 July 1986
+                {userInfo?.birthDate}
               </p>
             </div>
           </div>
