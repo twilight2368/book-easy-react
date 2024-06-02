@@ -67,7 +67,6 @@ export function AddPostDiag(props) {
             }),
           })
           if (response.ok) {
-            const data = await response.json();
             navigate(0);
           }
         }

@@ -74,7 +74,20 @@ export function AddBookDiag() {
           body: formData
         });
         if (imageResponse.ok) {
-          navigate(`/book/${data.id}`);
+          const imageData = await imageResponse.json();
+          const response = await fetch(`http://localhost:8080/api/v1/books/${data.id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...data,
+              imagePath: imageData.message,
+            }),
+          })
+          if (response.ok) {
+            navigate(`/book/${data.id}`);
+          }
         }
       }
     }
