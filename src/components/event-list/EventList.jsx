@@ -8,6 +8,8 @@ import environment from '../../environment';
 const EventList = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 
+  const today = new Date();
+  const [activeDate, setActiveDate] = useState(today);
   const [filter, setFilter] = useState(1);
   const [events, setEvents] = useState([]);
 
@@ -36,6 +38,24 @@ const EventList = () => {
     fetchEvent();
   }, [filter]);
 
+  useEffect(() => {
+    const fetchEvent = async () => {
+      const date = activeDate.toLocaleDateString("en-CA", {year:"numeric", month: "2-digit", day:"2-digit"});
+      try {
+        const response = await fetch(`${environment.apiUrl}/events/event-by-date?from=${date}&to=${date}`);
+        const data = await response.json();
+        console.log(data);
+        setEvents(data.content);
+      }
+      catch(err) {
+        console.log(err);
+      }
+    }
+
+    fetchEvent();
+  }, [activeDate]);
+  
+
   const eventList = events.map((event) => 
     <EventListEvent
       key={event.id}
@@ -49,7 +69,7 @@ const EventList = () => {
   return (
     <div className=" col-span-3 w-full flex flex-col gap-4">
       <div className=" relative col-span-3 flex flex-col items-center pr-16 ">
-        <EventCalendar />
+        <EventCalendar activeDate={activeDate} setActiveDate={setActiveDate} />
       </div>
       <div className=" relative -left-12 w-full flex items-center">
         <Button

@@ -43,12 +43,29 @@ export default function UserProfile() {
     formData.append("imageFile", e.target.files[0]);
 
     try {
-      const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}/upload-avatar`, {
+      const imageResponse = await fetch(`${environment.apiUrl}/users/${thisUser.id}/upload-avatar`, {
         method: "POST",
         body: formData,
       });
-      if (response.ok) {
-        return;
+      if (imageResponse.ok) {
+        const imageData = imageResponse.json();
+        const response = await fetch(`${environment.apiUrl}/users/${thisUser.id}`, {
+          method: "PUT",
+          headers: { 
+              'Content-Type': 'application/json' 
+          },
+          body: JSON.stringify({
+            ...userInfo,
+            pictureUrl: imageData.message,
+          })
+        });
+    
+        const data = await response.json();
+        console.log(formData);
+    
+        if (response.ok) {
+          return;
+        }
       }
     }
     catch (err) {

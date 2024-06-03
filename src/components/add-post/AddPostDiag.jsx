@@ -42,7 +42,6 @@ export function AddPostDiag(props) {
           userId: cookies['user'].id,
           title: title,
           content: content,
-          imagePath: imagePath,
           eventId: eventId,
         }),
       });
@@ -56,7 +55,20 @@ export function AddPostDiag(props) {
           body: formData,
         });
         if (imageResponse.ok) {
-          navigate(0);
+          const imageData = await imageResponse.json();
+          const response = await fetch(`http://localhost:8080/api/v1/posts/${data.id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...data,
+              imagePath: imageData.message,
+            }),
+          })
+          if (response.ok) {
+            navigate(0);
+          }
         }
       }
     }
