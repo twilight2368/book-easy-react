@@ -81,8 +81,8 @@ const Dashboard = () => {
     fetchWeeklyBooks();
   }, [])
 
-  // console.log(weeklyBooks);
-  // console.log(weeklyTransactions);
+  console.log(weeklyBooks);
+  console.log(weeklyTransactions);
 
   const pieData = {
     labels: ['Confirmed', 'Delivering', 'Completed', 'Cancelled'],
