@@ -61,6 +61,7 @@ const Users = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log(value);
     setEditedUser((prevUser) => ({
       ...prevUser,
       [name]: value,
@@ -153,7 +154,7 @@ const Users = () => {
             />
             <TextField
               label="Phone"
-              name="phone"
+              name="phoneNumber"
               value={editedUser.phoneNumber || ''}
               onChange={handleChange}
               fullWidth
