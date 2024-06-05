@@ -12,6 +12,7 @@ import {
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
+import environment from "../../environment";
 
 export function AddEventDiag() {
   const navigate = useNavigate();
@@ -23,10 +24,46 @@ export function AddEventDiag() {
   const [startTime, setStartTime] = useState('');
   const [endDate, setEndDate] = useState('');
   const [endTime, setEndTime] = useState('');
+  const [imagePath, setImagePath] = useState('');
+  const [image, setImage] = useState();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const start = `${startDate}T${startTime}:00.000Z`;
+  //   const end = `${endDate}T${endTime}:00.000Z`;
+
+  //   try {
+  //     const response = await fetch('http://localhost:8080/api/v1/events', {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         ownerId: cookies['user'].id,
+  //         name: name,
+  //         description: description,
+  //         startTime: start,
+  //         endTime: end,
+  //         concernedUserIds: []
+  //       }),
+  //     })
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       navigate(`/events/${data.id}`);
+  //     }
+  //   }
+  //   catch(err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  const handleChange = (e) => {
+    setImagePath(URL.createObjectURL(e.target.files[0]));
+    setImage(e.target.files[0]);
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     const start = `${startDate}T${startTime}:00.000Z`;
@@ -46,13 +83,35 @@ export function AddEventDiag() {
           endTime: end,
           concernedUserIds: []
         }),
-      })
+      });
       if (response.ok) {
         const data = await response.json();
-        navigate(`/events/${data.id}`);
+        const formData = new FormData();
+        formData.append("imageFile", image);
+
+        const imageResponse = await fetch(`${environment.apiUrl}/events/${data.id}/upload-image-event`, {
+          method: "POST",
+          body: formData,
+        });
+        if (imageResponse.ok) {
+          const imageData = await imageResponse.json();
+          const response = await fetch(`http://localhost:8080/api/v1/events/${data.id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...data,
+              imagePath: imageData.message,
+            }),
+          })
+          if (response.ok) {
+            navigate(`/events/${data.id}`);
+          }
+        }
       }
     }
-    catch(err) {
+    catch (err) {
       console.log(err);
     }
   }
@@ -152,7 +211,7 @@ export function AddEventDiag() {
                 Description
               </Typography>
               <Textarea label="Description" />
-              {/* <Typography className="-mb-2" variant="h6">
+              <Typography className="mb-2" variant="h6">
                 Cover image
               </Typography>
               <Input
@@ -161,8 +220,9 @@ export function AddEventDiag() {
                 type="file"
                 accept="image/png, image/jpeg"
                 className=" flex justify-center items-center"
-                required
-              /> */}
+                onChange={handleChange}
+              />
+              <img src={imagePath} className="w-full mb-2" />
               <Button variant="gradient" color="blue" type="submit">
                 Create event
               </Button>
