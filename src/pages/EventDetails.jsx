@@ -22,6 +22,7 @@ export default function EventDetails() {
         if (response.ok) {
           const data = await response.json();
           setEvent(data);
+          console.log(data);
         }
       }
       catch (err) {

@@ -59,10 +59,7 @@ const EventList = () => {
   const eventList = events.map((event) => 
     <EventListEvent
       key={event.id}
-      id={event.id}
-      ownerId={event.ownerId}
-      name={event.name}
-      startTime={event.startTime}
+      event={event}
     />
   )
 
